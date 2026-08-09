@@ -1,0 +1,284 @@
+/* ==========================================================
+   ELA DAYCARE — Emanuel's Little Angels Family Group Daycare
+   Paleta de marca en :root. Fotos: busca "FOTO:" en el HTML.
+   Datos por confirmar: botón "Qué falta llenar" arriba.
+   ========================================================== */
+:root{
+  --sky:#8EC5F6; --sky-dk:#2f73b5; --sky-sf:#e9f3fd;
+  --teal:#7CCDBE; --teal-dk:#3a8f7e; --teal-sf:#e8f6f3;
+  --yellow:#FFD166; --yellow-dk:#a87b16; --yellow-sf:#fff6e2;
+  --coral:#FFB5A7; --coral-dk:#cf5d47; --coral-sf:#ffeeea;
+  --cream:#F6F2E9; --cream-2:#fbf8f1; --card:#ffffff;
+  --ink:#25405c; --ink-2:#556b83; --ink-3:#8b9cad;
+  --line:#e4e8ee;
+  --r:18px; --r-lg:30px;
+  --shadow:0 2px 4px rgba(37,64,92,.04), 0 12px 32px rgba(37,64,92,.07);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--cream);color:var(--ink);
+  font:16.5px/1.68 "Nunito",ui-rounded,"Segoe UI",system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3,h4,.brandname,.stat-n,.step-n,.price,.sig{font-family:"Baloo 2","Nunito",ui-rounded,system-ui,sans-serif;font-weight:800}
+.wrap{max-width:1120px;margin:0 auto;padding:0 22px}
+img{max-width:100%;display:block}
+a{color:var(--sky-dk)}
+
+/* marcador de datos por confirmar */
+.fill{border-bottom:2px dotted transparent}
+body.review .fill{background:#fff3bf;border-bottom-color:var(--yellow-dk);border-radius:3px;padding:0 2px}
+
+/* botones */
+.btn{display:inline-flex;align-items:center;gap:8px;border:none;cursor:pointer;white-space:nowrap;
+  font:inherit;font-weight:800;padding:14px 25px;border-radius:99px;text-decoration:none;
+  transition:transform .15s, box-shadow .15s}
+.btn:hover{transform:translateY(-2px)}
+.btn-1{background:var(--sky-dk);color:#fff;box-shadow:0 5px 0 #235a90}
+.btn-1:active{transform:translateY(3px);box-shadow:0 2px 0 #235a90}
+.btn-2{background:#fff;color:var(--sky-dk);border:2px solid var(--sky);box-shadow:0 4px 0 rgba(142,197,246,.5)}
+.btn-3{background:var(--yellow);color:#4a3608;box-shadow:0 5px 0 #d5a83c}
+.btn-sm{padding:10px 18px;font-size:14.5px}
+
+/* barra utilitaria */
+.util{background:var(--ink);color:#dce6f0;font-size:13.5px}
+.util .wrap{display:flex;gap:16px;align-items:center;justify-content:space-between;padding:9px 22px;flex-wrap:wrap}
+.util a{color:#fff;text-decoration:none;font-weight:800}
+.util .lic{color:#9db2c8}
+.util .right{display:flex;gap:10px;align-items:center}
+.revbtn{background:rgba(255,255,255,.14);border:none;color:#dce6f0;font:inherit;font-size:12px;
+  font-weight:800;padding:5px 12px;border-radius:99px;cursor:pointer}
+.revbtn[aria-pressed="true"]{background:var(--yellow);color:#4a3608}
+.langsw{display:flex;background:rgba(255,255,255,.14);border-radius:99px;padding:2px}
+.langsw button{border:none;background:none;color:#dce6f0;font:inherit;font-weight:800;
+  padding:4px 13px;border-radius:99px;cursor:pointer;font-size:12.5px}
+.langsw button[aria-pressed="true"]{background:var(--sky);color:#123a60}
+
+/* nav */
+nav.main{position:sticky;top:0;z-index:60;background:rgba(246,242,233,.94);
+  backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav.main .wrap{display:flex;align-items:center;gap:12px;padding:10px 22px;flex-wrap:nowrap}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+.brandname{font-size:21px;line-height:1.05;letter-spacing:-.01em}
+.brandname b{color:var(--sky-dk)}
+.brandname i{font-style:normal;color:var(--teal-dk)}
+.brandname small{display:block;font-family:"Nunito";font-size:9.5px;font-weight:800;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);line-height:1;margin-top:3px}
+.navlinks{display:flex;gap:2px;margin-left:auto;flex-wrap:nowrap}
+.navlinks a{font-size:14px;font-weight:800;color:var(--ink-2);text-decoration:none;
+  padding:8px 10px;border-radius:99px;white-space:nowrap}
+.navlinks a:hover{background:var(--sky-sf);color:var(--sky-dk)}
+.burger{display:none;margin-left:auto;background:none;border:2px solid var(--line);
+  border-radius:12px;padding:7px 11px;cursor:pointer;font-size:18px;line-height:1;color:var(--ink)}
+
+/* hero */
+.hero{padding:52px 0 26px}
+.hero .grid{display:grid;grid-template-columns:1.16fr .84fr;gap:42px;align-items:center}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;background:var(--teal-sf);color:var(--teal-dk);
+  font-size:12.5px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;
+  padding:7px 15px;border-radius:99px;margin-bottom:20px}
+.hero h1{font-size:clamp(33px,4.4vw,49px);line-height:1.07;letter-spacing:-.02em;margin:0 0 18px;text-wrap:balance}
+.hero h1 .hi{color:var(--sky-dk);position:relative;white-space:nowrap}
+.hero h1 .hi svg{position:absolute;left:0;bottom:-10px;width:100%;height:13px}
+.hero p.lede{font-size:19px;color:var(--ink-2);margin:0 0 26px;max-width:46ch}
+.cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:22px}
+.motto{display:flex;align-items:center;gap:9px;font-size:12.5px;font-weight:800;
+  letter-spacing:.14em;text-transform:uppercase;margin-bottom:14px}
+.motto .d{width:6px;height:6px;border-radius:99px;background:var(--yellow)}
+.motto .a{color:var(--sky-dk)}.motto .b{color:var(--teal-dk)}.motto .c{color:var(--coral-dk)}
+.trust{display:flex;align-items:center;gap:11px;font-size:14px;color:var(--ink-2);font-weight:700}
+.stars{color:var(--yellow);font-size:17px;letter-spacing:1px}
+
+/* marco de foto */
+.frame{position:relative;border-radius:var(--r-lg);overflow:hidden;
+  background:linear-gradient(148deg,#dceafb 0%,#e9f6f3 48%,#fff2ea 100%);
+  box-shadow:var(--shadow);aspect-ratio:4/3}
+.frame.tall{aspect-ratio:3/4}.frame.sq{aspect-ratio:1/1}
+.frame > img{width:100%;height:100%;object-fit:cover}
+.frame .ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;gap:12px;text-align:center;padding:20px}
+.frame .ph span{font-size:11.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+  color:#7d93aa;background:rgba(255,255,255,.75);padding:5px 12px;border-radius:99px}
+.hero-art{position:relative}
+.hero-art .badge{position:absolute;bottom:-18px;left:-18px;background:var(--card);
+  border:2px solid var(--line);border-radius:20px;padding:14px 19px;box-shadow:var(--shadow);
+  display:flex;align-items:center;gap:12px;max-width:92%}
+.hero-art .badge b{display:block;font-size:15px;line-height:1.25}
+.hero-art .badge small{color:var(--ink-3);font-size:12.5px;font-weight:700}
+
+/* divisores */
+.sep{display:block;width:100%;height:50px;margin-bottom:-1px}
+.band{background:var(--cream-2)}
+.band-sky{background:var(--sky-sf)}
+.band-teal{background:var(--teal-sf)}
+.band-white{background:var(--card)}
+
+section{padding:62px 0;scroll-margin-top:76px}
+.sec-head{max-width:60ch;margin:0 0 32px}
+h2{font-size:clamp(26px,3.5vw,39px);line-height:1.14;letter-spacing:-.02em;margin:0 0 12px}
+h2 em{font-style:normal;color:var(--sky-dk)}
+h2 .tl{color:var(--teal-dk)}
+.sec-head p{font-size:17.5px;color:var(--ink-2);margin:0}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.stat{background:var(--card);border:2px solid var(--line);border-radius:var(--r);padding:22px 18px;text-align:center}
+.stat-n{display:block;font-size:36px;line-height:1;color:var(--sky-dk);letter-spacing:-.02em}
+.stat-l{font-size:13.5px;font-weight:800;color:var(--ink-2);margin-top:8px;line-height:1.35}
+
+/* por qué casa */
+.why{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.wcard{background:var(--card);border:2px solid var(--line);border-radius:var(--r);padding:26px}
+.wcard .ico{width:48px;height:48px;border-radius:16px;display:flex;align-items:center;
+  justify-content:center;margin-bottom:15px}
+.wcard h3{font-size:18px;margin:0 0 7px}
+.wcard p{font-size:15px;color:var(--ink-2);margin:0}
+
+/* vacantes */
+.vac{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.vcard{background:var(--card);border:2px solid var(--line);border-radius:var(--r);padding:20px}
+.vcard h3{font-size:17px;margin:0 0 2px}
+.vcard .age{font-size:13px;color:var(--ink-3);font-weight:700;margin-bottom:14px}
+.pill{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:800;padding:6px 13px;border-radius:99px}
+.pill.open{background:var(--teal-sf);color:var(--teal-dk)}
+.pill.few{background:var(--yellow-sf);color:var(--yellow-dk)}
+.pill.wait{background:var(--coral-sf);color:var(--coral-dk)}
+.dot{width:8px;height:8px;border-radius:99px;background:currentColor;flex:none}
+.vac-note{margin-top:16px;font-size:14px;color:var(--ink-3);font-weight:700}
+
+/* pestañas */
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}
+.tabs button{font:inherit;font-weight:800;font-size:14.5px;background:var(--card);
+  border:2px solid var(--line);color:var(--ink-2);padding:11px 19px;border-radius:99px;cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--sky-dk);border-color:var(--sky-dk);color:#fff}
+.panel{display:none;background:var(--card);border:2px solid var(--line);border-radius:var(--r-lg);overflow:hidden}
+.panel[data-on="1"]{display:grid;grid-template-columns:1fr 1fr}
+.panel .txt{padding:34px}
+.panel h3{font-size:24px;margin:0 0 10px;letter-spacing:-.02em}
+.panel .ratio{display:inline-block;background:var(--sky-sf);color:var(--sky-dk);font-size:13px;
+  font-weight:800;padding:6px 13px;border-radius:99px;margin-bottom:16px}
+.panel ul{margin:0;padding-left:20px;color:var(--ink-2)}
+.panel li{margin-bottom:8px}
+
+/* precios */
+.pricegrid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:20px}
+.pcard{background:var(--card);border:2px solid var(--line);border-radius:var(--r);padding:24px}
+.pcard.hl{border-color:var(--teal);box-shadow:0 5px 0 rgba(124,205,190,.4)}
+.pcard h3{font-size:17px;margin:0 0 4px}
+.price{font-size:30px;letter-spacing:-.02em;line-height:1.1;margin:10px 0 2px}
+.price small{font-size:14px;font-weight:800;color:var(--ink-3);font-family:"Nunito"}
+.pcard .note{font-size:13.5px;color:var(--ink-3);font-weight:700}
+.disc{background:var(--teal-sf);border-radius:var(--r);padding:24px 26px}
+.disc h3{margin:0 0 14px;font-size:19px;color:var(--teal-dk)}
+.disc ul{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.disc li{display:flex;gap:10px;font-size:15px;align-items:flex-start}
+.disc li b{color:var(--teal-dk);flex:none}
+
+/* ayuda NYC */
+.nyc{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.ncard{background:var(--card);border:2px solid var(--line);border-radius:var(--r);padding:24px}
+.ncard .k{display:inline-block;font-family:"Baloo 2";font-size:19px;font-weight:800;
+  background:var(--yellow);color:#4a3608;padding:3px 14px;border-radius:99px;margin-bottom:13px}
+.ncard h3{font-size:16.5px;margin:0 0 8px}
+.ncard p{font-size:14.5px;color:var(--ink-2);margin:0}
+
+/* día */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:center}
+.sched{list-style:none;margin:0;padding:0}
+.sched li{display:flex;gap:16px;padding:12px 0;border-bottom:1px dashed var(--line)}
+.sched li:last-child{border:none}
+.sched time{font-weight:800;color:var(--sky-dk);flex:none;width:78px;font-variant-numeric:tabular-nums}
+.foodicons{display:flex;gap:9px;flex-wrap:wrap;margin-top:16px}
+.foodicons span{background:var(--card);border:2px solid var(--line);border-radius:99px;
+  padding:7px 14px;font-size:13.5px;font-weight:800;color:var(--ink-2)}
+
+/* equipo */
+.owner{background:var(--card);border:2px solid var(--line);border-radius:var(--r-lg);
+  padding:30px;display:grid;grid-template-columns:190px 1fr;gap:28px;align-items:center;margin-bottom:18px}
+.owner .sig{font-size:21px;color:var(--coral-dk);margin-top:10px}
+.team{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.tcard{background:var(--card);border:2px solid var(--line);border-radius:var(--r);overflow:hidden;padding-bottom:18px}
+.tcard .frame{border-radius:0;aspect-ratio:1/1;box-shadow:none}
+.tcard .tx{padding:16px 18px 0}
+.tcard h3{font-size:16.5px;margin:0}
+.tcard .role{font-size:13px;font-weight:800;color:var(--sky-dk);margin-bottom:8px}
+.tcard .fun{font-size:13.5px;color:var(--ink-2);line-height:1.5}
+
+/* testimonios */
+.tests{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.tst{background:var(--card);border:2px solid var(--line);border-radius:var(--r);padding:24px}
+.tst p{font-size:15.5px;margin:10px 0 14px}
+.tst .who{font-size:13.5px;font-weight:800;color:var(--ink-2)}
+.tst .since{font-size:12.5px;color:var(--ink-3);font-weight:700}
+
+/* pasos */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px}
+.step{background:var(--card);border:2px solid var(--line);border-radius:var(--r);padding:22px}
+.step-n{display:flex;align-items:center;justify-content:center;width:40px;height:40px;
+  border-radius:99px;background:var(--sky-dk);color:#fff;font-size:20px;margin-bottom:13px}
+.step h3{font-size:16px;margin:0 0 6px}
+.step p{font-size:14px;color:var(--ink-2);margin:0}
+.magnet{background:var(--ink);color:#dce6f0;border-radius:var(--r-lg);padding:30px 32px;
+  display:flex;gap:26px;align-items:center;flex-wrap:wrap}
+.magnet h3{margin:0 0 6px;font-size:22px;color:#fff}
+.magnet p{margin:0;color:#a9bccf;font-size:15.5px;max-width:52ch}
+
+/* formulario */
+.formbox{background:var(--card);border:2px solid var(--line);border-radius:var(--r-lg);
+  padding:34px;display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:start}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.fields label{display:block;font-size:13px;font-weight:800;color:var(--ink-2);margin-bottom:5px}
+.fields .full{grid-column:1/-1}
+input,select{width:100%;font:inherit;padding:12px 14px;border:2px solid var(--line);
+  border-radius:12px;background:var(--cream);color:var(--ink)}
+input:focus,select:focus{outline:none;border-color:var(--sky);background:#fff}
+.consent{font-size:12.5px;color:var(--ink-3);grid-column:1/-1;line-height:1.5}
+.urgency{background:var(--yellow-sf);border-radius:14px;padding:15px 17px;font-size:14.5px;
+  font-weight:700;color:#7a5a10;margin-top:16px}
+
+/* faq */
+.faq{max-width:820px}
+details{background:var(--card);border:2px solid var(--line);border-radius:var(--r);padding:18px 22px;margin-bottom:11px}
+details[open]{border-color:var(--sky)}
+summary{font-weight:800;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:16px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";color:var(--sky-dk);font-size:22px;line-height:1;flex:none}
+details[open] summary::after{content:"–"}
+details p{margin:12px 0 0;color:var(--ink-2);font-size:15.5px}
+
+/* cta final + footer */
+.finalcta{background:var(--sky);color:#123a60;text-align:center;padding:64px 0}
+.finalcta h2{color:#123a60;margin-bottom:12px}
+.finalcta p{color:#28527a;font-size:18px;max-width:52ch;margin:0 auto 26px}
+.finalcta .btn-1{background:#fff;color:var(--sky-dk);box-shadow:0 5px 0 rgba(18,58,96,.25)}
+footer{background:var(--ink);color:#b9c9d9;padding:52px 0 26px;font-size:14.5px}
+footer h4{color:#fff;font-size:13.5px;letter-spacing:.09em;text-transform:uppercase;margin:0 0 13px;font-family:"Nunito"}
+.fgrid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:30px;margin-bottom:32px}
+footer a{color:#b9c9d9;text-decoration:none;display:block;margin-bottom:7px}
+footer a:hover{color:#fff}
+.badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.badges span{border:1.5px solid #3d5a78;border-radius:99px;padding:5px 12px;font-size:11.5px;
+  font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:#9db2c8}
+.fbot{border-top:1px solid #3d5a78;padding-top:20px;font-size:13px;color:#8b9cad;
+  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+@media(max-width:940px){
+  .stats,.vac,.why,.nyc,.steps,.team{grid-template-columns:repeat(2,1fr)}
+  .pricegrid,.tests{grid-template-columns:1fr}
+  .hero .grid,.two,.panel[data-on="1"],.formbox,.owner{grid-template-columns:1fr}
+  .owner{text-align:center}.owner .frame{max-width:210px;margin:0 auto}
+  .disc ul{grid-template-columns:1fr}
+  .fgrid{grid-template-columns:1fr 1fr}
+  .navlinks{display:none}
+  .navlinks.open{display:flex;flex-direction:column;position:absolute;top:100%;left:0;right:0;
+    background:var(--cream);border-bottom:1px solid var(--line);padding:12px 22px}
+  .burger{display:block}
+  nav.main .wrap{position:relative}
+  nav.main .btn{display:none}
+}
+@media(max-width:560px){
+  section{padding:44px 0}
+  .stats,.vac,.why,.nyc,.steps,.team,.fgrid{grid-template-columns:1fr}
+  .fields{grid-template-columns:1fr}
+  .hero{padding-top:30px}
+  .util .wrap{justify-content:center;text-align:center}
+}

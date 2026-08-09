@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<title>ELA Daycare — Emanuel's Little Angels Family Group Daycare, Queens NY</title>
+<meta name="description" content="Emanuel's Little Angels: group family daycare licenciado en Queens. Solo 12 niños, de 6 semanas a 12 años. Aceptamos 3-K y vales de ACS/HRA. Bilingüe español e inglés.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ====== LOGOTIPO (definición reutilizable) ====== -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<symbol id="ela" viewBox="0 0 200 178">
+  <ellipse cx="100" cy="16" rx="27" ry="8" fill="none" stroke="#FFD166" stroke-width="7"/>
+  <path d="M36 48l3.4 6.9 7.6.9-5.5 5.3 1.4 7.5-6.9-3.7-6.9 3.7 1.4-7.5-5.5-5.3 7.6-.9z" fill="#FFD166"/>
+  <path d="M166 58l2.7 5.5 6 .7-4.4 4.2 1.1 6-5.4-2.9-5.4 2.9 1.1-6-4.4-4.2 6-.7z" fill="#7CCDBE"/>
+  <circle cx="152" cy="36" r="5" fill="#FFB5A7"/>
+  <g fill="#C9E1F8">
+    <path d="M62 72C46 60 22 58 9 69c8 4 15 8 19 13-8-2-17 1-22 8 9 3 17 6 22 11-8 0-16 5-18 13 18 5 38-3 48-18 5-8 6-18 4-24Z"/>
+    <path d="M138 72C154 60 178 58 191 69c-8 4-15 8-19 13 8-2 17 1 22 8-9 3-17 6-22 11 8 0 16 5 18 13-18 5-38-3-48-18-5-8-6-18-4-24Z"/>
+  </g>
+  <g stroke="#7CCDBE" stroke-width="8" stroke-linecap="round" fill="none">
+    <path d="M89 100 74 82"/><path d="M111 100 126 82"/>
+  </g>
+  <path d="M52 74 100 34 148 74" fill="none" stroke="#8EC5F6" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M60 72V110" stroke="#8EC5F6" stroke-width="10" stroke-linecap="round"/>
+  <path d="M140 72V110" stroke="#8EC5F6" stroke-width="10" stroke-linecap="round"/>
+  <g fill="#FFD166">
+    <rect x="88" y="49" width="9" height="9" rx="2.4"/><rect x="102" y="49" width="9" height="9" rx="2.4"/>
+    <rect x="88" y="62" width="9" height="9" rx="2.4"/><rect x="102" y="62" width="9" height="9" rx="2.4"/>
+  </g>
+  <circle cx="100" cy="88" r="10.5" fill="#7CCDBE"/>
+  <path d="M100 100c-8 0-13 5.5-13 13v6h26v-6c0-7.5-5-13-13-13Z" fill="#7CCDBE"/>
+  <path d="M100 152c-11.5-8.5-21-14.5-21-24 0-6.6 5.3-11.5 11.5-11.5 4.3 0 7.6 2.1 9.5 5.4 1.9-3.3 5.2-5.4 9.5-5.4 6.2 0 11.5 4.9 11.5 11.5 0 9.5-9.5 15.5-21 24Z" fill="#FFB5A7"/>
+</symbol>
+</svg>
+
+<!-- ====== BARRA UTILITARIA ====== -->
+<div class="util">
+  <div class="wrap">
+    <div>
+      <a href="tel:+17185550142">📞 <span class="fill">(718) 555-0142</span></a>
+      <span class="lic" style="margin-left:14px" data-es="Licencia OCFS de NY #" data-en="NY OCFS License #">Licencia OCFS de NY #</span><span class="lic fill">000000</span>
+      <span class="lic" data-es=" · Lun a Vie 7:00am–6:00pm" data-en=" · Mon–Fri 7:00am–6:00pm"> · Lun a Vie 7:00am–6:00pm</span>
+    </div>
+    <div class="right">
+      <button class="revbtn" id="revb" aria-pressed="false" onclick="review()" data-es="Qué falta llenar" data-en="What's still missing">Qué falta llenar</button>
+      <div class="langsw" role="group" aria-label="Idioma / Language">
+        <button onclick="setLang('es')" aria-pressed="true" id="b-es">Español</button>
+        <button onclick="setLang('en')" aria-pressed="false" id="b-en">English</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== NAV ====== -->
+<nav class="main">
+  <div class="wrap">
+    <a class="brand" href="#top">
+      <svg width="46" height="41" viewBox="0 0 200 178" aria-hidden="true"><use href="#ela"/></svg>
+      <span class="brandname"><b>ELA</b> <i>Daycare</i>
+        <small data-es="Emanuel's Little Angels" data-en="Emanuel's Little Angels">Emanuel's Little Angels</small>
+      </span>
+    </a>
+    <button class="burger" onclick="document.querySelector('.navlinks').classList.toggle('open')" aria-label="Menú">☰</button>
+    <div class="navlinks">
+      <a href="#porque" data-es="Por qué una casa" data-en="Why a home">Por qué una casa</a>
+      <a href="#grupos" data-es="Grupos" data-en="Groups">Grupos</a>
+      <a href="#vacantes" data-es="Vacantes" data-en="Openings">Vacantes</a>
+      <a href="#precios" data-es="Precios" data-en="Tuition">Precios</a>
+      <a href="#ayuda" data-es="3-K y vales" data-en="3-K &amp; vouchers">3-K y vales</a>
+      <a href="#visita" data-es="Inscripción" data-en="Enroll">Inscripción</a>
+    </div>
+    <a class="btn btn-1 btn-sm" href="#visita" style="margin-left:14px" data-es="Agendar visita" data-en="Book a tour">Agendar visita</a>
+  </div>
+</nav>
+
+<!-- ====== HERO ====== -->
+<header class="hero" id="top">
+  <div class="wrap">
+    <div class="grid">
+      <div>
+        <span class="eyebrow" data-es="✦ Cupos abiertos para otoño 2026" data-en="✦ Now enrolling for Fall 2026">✦ Cupos abiertos para otoño 2026</span>
+        <h1>
+          <span data-es="Los cuidamos" data-en="We care for them">Los cuidamos</span>
+          <span class="hi"><span data-es="como en casa" data-en="like family">como en casa</span>
+            <svg viewBox="0 0 200 13" preserveAspectRatio="none" aria-hidden="true"><path d="M2 8c40-6 90-7 196-3" stroke="#FFD166" stroke-width="5" fill="none" stroke-linecap="round"/></svg>
+          </span>
+          <span data-es="— porque es una casa." data-en="— because it is a home.">— porque es una casa.</span>
+        </h1>
+        <p class="lede"><span data-es="Emanuel's Little Angels es un group family daycare con licencia del estado en" data-en="Emanuel's Little Angels is a state-licensed group family daycare in">Emanuel's Little Angels es un group family daycare con licencia del estado en</span> <b class="fill">Jackson Heights</b><span data-es=", Queens. Máximo 12 niños, de 6 semanas a 12 años, con las mismas dos personas cada día. Bilingüe, y sí, publicamos nuestros precios." data-en=", Queens. A maximum of 12 children, ages 6 weeks to 12 years, with the same two people every day. Bilingual, and yes, we publish our prices.">, Queens. Máximo 12 niños, de 6 semanas a 12 años, con las mismas dos personas cada día. Bilingüe, y sí, publicamos nuestros precios.</span></p>
+        <div class="cta-row">
+          <a class="btn btn-1" href="#visita" data-es="Ver vacantes y precios" data-en="See openings &amp; pricing">Ver vacantes y precios</a>
+          <a class="btn btn-2" href="#dia" data-es="Mira un día con nosotros" data-en="See a day with us">Mira un día con nosotros</a>
+        </div>
+        <div class="motto">
+          <span class="a" data-es="Cuidar" data-en="Nurture">Cuidar</span><i class="d"></i>
+          <span class="b" data-es="Proteger" data-en="Protect">Proteger</span><i class="d"></i>
+          <span class="c" data-es="Crecer" data-en="Grow">Crecer</span>
+        </div>
+        <div class="trust">
+          <span class="stars">★★★★★</span>
+          <span data-es="4.9 en Google · 34 reseñas de familias del barrio" data-en="4.9 on Google · 34 reviews from local families"><span class="fill">4.9 en Google · 34 reseñas</span> de familias del barrio</span>
+        </div>
+      </div>
+      <div class="hero-art">
+        <!-- FOTO: la sala principal de la casa, con niños jugando -->
+        <div class="frame">
+          <div class="ph">
+            <svg width="150" height="133" viewBox="0 0 200 178" aria-hidden="true" style="opacity:.5"><use href="#ela"/></svg>
+            <span data-es="Foto de la sala principal" data-en="Photo of the main room">Foto de la sala principal</span>
+          </div>
+        </div>
+        <div class="badge">
+          <svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true">
+            <circle cx="17" cy="17" r="17" fill="#e8f6f3"/>
+            <path d="M10 17.5l4.5 4.5L24 12.5" stroke="#3a8f7e" stroke-width="3.2" fill="none" stroke-linecap="round"/>
+          </svg>
+          <div>
+            <b data-es="Una cuidadora por cada 2 bebés" data-en="One caregiver for every 2 babies">Una cuidadora por cada 2 bebés</b>
+            <small data-es="Como lo exige la licencia del estado" data-en="As required by the state license">Como lo exige la licencia del estado</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<svg class="sep" viewBox="0 0 1440 50" preserveAspectRatio="none" aria-hidden="true">
+  <path fill="#fbf8f1" d="M0 30a70 25 0 0 1 120 0a70 25 0 0 1 120 0a70 25 0 0 1 120 0a70 25 0 0 1 120 0a70 25 0 0 1 120 0a70 25 0 0 1 120 0a70 25 0 0 1 120 0a70 25 0 0 1 120 0a70 25 0 0 1 120 0a70 25 0 0 1 120 0a70 25 0 0 1 120 0a70 25 0 0 1 120 0V50H0Z"/>
+</svg>
+
+<!-- ====== ESTADÍSTICAS ====== -->
+<section class="band" style="padding:50px 0">
+  <div class="wrap">
+    <div class="stats">
+      <div class="stat"><span class="stat-n">12</span><span class="stat-l" data-es="niños como máximo, nunca más" data-en="children maximum, never more">niños como máximo, nunca más</span></div>
+      <div class="stat"><span class="stat-n">2</span><span class="stat-l" data-es="adultos presentes todo el día" data-en="adults present all day">adultos presentes todo el día</span></div>
+      <div class="stat"><span class="stat-n">6 <small style="font-size:19px">sem</small></span><span class="stat-l" data-es="la edad más chiquita que recibimos" data-en="the youngest age we take">la edad más chiquita que recibimos</span></div>
+      <div class="stat"><span class="stat-n fill">9</span><span class="stat-l" data-es="años cuidando niños en Queens" data-en="years caring for children in Queens">años cuidando niños en Queens</span></div>
+    </div>
+    <p style="text-align:center;margin:20px auto 0;max-width:58ch;color:var(--ink-2);font-weight:700" data-es="Un centro grande tiene 60 niños y personal que rota. Aquí son doce, siempre los mismos doce, y tu hijo puede quedarse con nosotros desde bebé hasta la escuela primaria." data-en="A big center has 60 children and staff that rotates. Here there are twelve, always the same twelve, and your child can stay with us from baby all the way through elementary school.">Un centro grande tiene 60 niños y personal que rota. Aquí son doce, siempre los mismos doce, y tu hijo puede quedarse con nosotros desde bebé hasta la escuela primaria.</p>
+  </div>
+</section>
+
+<!-- ====== POR QUÉ UNA CASA ====== -->
+<section id="porque">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow" data-es="Casa, no centro" data-en="A home, not a center">Casa, no centro</span>
+      <h2><span data-es="Lo que un centro grande" data-en="What a big center">Lo que un centro grande</span> <em data-es="no te puede dar" data-en="cannot give you">no te puede dar</em></h2>
+      <p data-es="Ser pequeños no es nuestra limitación: es exactamente la razón por la que las familias nos eligen." data-en="Being small isn't our limitation — it's exactly why families choose us.">Ser pequeños no es nuestra limitación: es exactamente la razón por la que las familias nos eligen.</p>
+    </div>
+    <div class="why">
+      <div class="wcard">
+        <div class="ico" style="background:var(--sky-sf)">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2f73b5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.4"/><path d="M3 20c0-3.3 2.7-5 6-5s6 1.7 6 5"/><path d="M15.5 20c0-2.4 1.6-3.6 3.6-3.6s2.9 1.2 2.9 3.6"/></svg>
+        </div>
+        <h3 data-es="Los hermanos se quedan juntos" data-en="Siblings stay together">Los hermanos se quedan juntos</h3>
+        <p data-es="Un bebé de 8 meses y su hermana de 6 años pasan el día en la misma casa, con las mismas personas. No hay dos rutas de transporte ni dos facturas de dos lugares distintos." data-en="An 8-month-old and his 6-year-old sister spend the day in the same house, with the same people. No two drop-offs, no two bills from two different places.">Un bebé de 8 meses y su hermana de 6 años pasan el día en la misma casa, con las mismas personas. No hay dos rutas de transporte ni dos facturas de dos lugares distintos.</p>
+      </div>
+      <div class="wcard">
+        <div class="ico" style="background:var(--teal-sf)">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#3a8f7e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.3-7-9.5A4.5 4.5 0 0 1 12 8a4.5 4.5 0 0 1 7 3.5C19 16.7 12 21 12 21Z"/></svg>
+        </div>
+        <h3 data-es="La misma cara por años" data-en="The same face for years">La misma cara por años</h3>
+        <p data-es="En un centro, cada septiembre le toca maestra nueva. Aquí tu hijo se apega a una sola persona y se queda con ella hasta que entra a la escuela. Para un niño chiquito eso vale más que cualquier currículo." data-en="At a center, every September means a new teacher. Here your child bonds with one person and stays with her until school starts. For a little one that matters more than any curriculum.">En un centro, cada septiembre le toca maestra nueva. Aquí tu hijo se apega a una sola persona y se queda con ella hasta que entra a la escuela. Para un niño chiquito eso vale más que cualquier currículo.</p>
+      </div>
+      <div class="wcard">
+        <div class="ico" style="background:var(--coral-sf)">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#cf5d47" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5.5 9.5V20h13V9.5"/><path d="M10 20v-5h4v5"/></svg>
+        </div>
+        <h3 data-es="Ritmo de casa, no de escuela" data-en="A home's rhythm, not a school's">Ritmo de casa, no de escuela</h3>
+        <p data-es="Se come en la mesa de la cocina, se duerme cuando da sueño y si un niño está de mal día se le carga. No hay campana que suene ni fila que hacer." data-en="They eat at the kitchen table, sleep when they're sleepy, and if a child is having a rough day, someone picks him up. No bells, no lining up.">Se come en la mesa de la cocina, se duerme cuando da sueño y si un niño está de mal día se le carga. No hay campana que suene ni fila que hacer.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== VACANTES ====== -->
+<section class="band-sky" id="vacantes">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow" style="background:#fff;color:var(--sky-dk)" data-es="Actualizado cada lunes" data-en="Updated every Monday">Actualizado cada lunes</span>
+      <h2><span data-es="Cupos reales," data-en="Real openings,">Cupos reales,</span> <em data-es="sin llamar a nadie" data-en="without calling anyone">sin llamar a nadie</em></h2>
+      <p data-es="Con doce lugares, cada cupo cuenta. Aquí ves exactamente cuáles están libres hoy, y si hay lista de espera te decimos cuántas familias van antes que tú." data-en="With twelve spots, every one counts. Here you see exactly which are open today, and if there's a waitlist we tell you how many families are ahead of you.">Con doce lugares, cada cupo cuenta. Aquí ves exactamente cuáles están libres hoy, y si hay lista de espera te decimos cuántas familias van antes que tú.</p>
+    </div>
+    <div class="vac">
+      <div class="vcard"><h3 data-es="Bebés" data-en="Babies">Bebés</h3>
+        <div class="age" data-es="6 semanas – 18 meses" data-en="6 weeks – 18 months">6 semanas – 18 meses</div>
+        <span class="pill wait"><i class="dot"></i><span class="fill" data-es="Lleno · 2 en espera" data-en="Full · 2 waiting">Lleno · 2 en espera</span></span></div>
+      <div class="vcard"><h3 data-es="Caminadores" data-en="Toddlers">Caminadores</h3>
+        <div class="age" data-es="18 meses – 3 años" data-en="18 months – 3 years">18 meses – 3 años</div>
+        <span class="pill few"><i class="dot"></i><span class="fill" data-es="1 cupo" data-en="1 spot left">1 cupo</span></span></div>
+      <div class="vcard"><h3 data-es="Angelitos" data-en="Little Angels">Angelitos</h3>
+        <div class="age" data-es="3 – 5 años · 3-K" data-en="3 – 5 years · 3-K">3 – 5 años · 3-K</div>
+        <span class="pill open"><i class="dot"></i><span class="fill" data-es="3 cupos" data-en="3 spots open">3 cupos</span></span></div>
+      <div class="vcard"><h3 data-es="Después de escuela" data-en="After school">Después de escuela</h3>
+        <div class="age" data-es="5 – 12 años" data-en="5 – 12 years">5 – 12 años</div>
+        <span class="pill open"><i class="dot"></i><span class="fill" data-es="4 cupos" data-en="4 spots open">4 cupos</span></span></div>
+    </div>
+    <p class="vac-note"><span data-es="Última actualización:" data-en="Last updated:">Última actualización:</span> <span class="fill" data-es="lunes 3 de agosto de 2026" data-en="Monday, August 3, 2026">lunes 3 de agosto de 2026</span>. <span data-es="Nuestra licencia permite hasta 12 niños de 6 semanas a 12 años, más cuatro niños de edad escolar." data-en="Our license allows up to 12 children ages 6 weeks to 12 years, plus four additional school-age children.">Nuestra licencia permite hasta 12 niños de 6 semanas a 12 años, más cuatro niños de edad escolar.</span></p>
+  </div>
+</section>
+
+<!-- ====== GRUPOS POR EDAD ====== -->
+<section id="grupos">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow" data-es="Cuatro edades, una sola casa" data-en="Four ages, one house">Cuatro edades, una sola casa</span>
+      <h2><span data-es="Cómo pasa el día" data-en="How the day goes for">Cómo pasa el día</span> <em data-es="cada edad" data-en="each age">cada edad</em></h2>
+      <p data-es="No tenemos salones separados: tenemos rincones, rutinas y ritmos distintos dentro de la misma casa. Los grandes ayudan a los chiquitos, y eso también se aprende." data-en="We don't have separate classrooms: we have different corners, routines and rhythms inside the same house. The big ones help the little ones, and that's learning too.">No tenemos salones separados: tenemos rincones, rutinas y ritmos distintos dentro de la misma casa. Los grandes ayudan a los chiquitos, y eso también se aprende.</p>
+    </div>
+    <div class="tabs" role="tablist">
+      <button role="tab" aria-selected="true" onclick="tab(0)" data-es="Bebés" data-en="Babies">Bebés</button>
+      <button role="tab" aria-selected="false" onclick="tab(1)" data-es="Caminadores" data-en="Toddlers">Caminadores</button>
+      <button role="tab" aria-selected="false" onclick="tab(2)" data-es="Angelitos · 3-K" data-en="Little Angels · 3-K">Angelitos · 3-K</button>
+      <button role="tab" aria-selected="false" onclick="tab(3)" data-es="Después de escuela" data-en="After school">Después de escuela</button>
+    </div>
+
+    <div class="panel" data-on="1">
+      <div class="txt">
+        <h3 data-es="Bebés · 6 semanas a 18 meses" data-en="Babies · 6 weeks to 18 months">Bebés · 6 semanas a 18 meses</h3>
+        <span class="ratio" data-es="1 adulto por cada 2 bebés" data-en="1 adult for every 2 babies">1 adulto por cada 2 bebés</span>
+        <ul>
+          <li data-es="Cada bebé sigue su propio horario de siesta y de comida, no el nuestro." data-en="Each baby follows their own nap and feeding schedule, not ours.">Cada bebé sigue su propio horario de siesta y de comida, no el nuestro.</li>
+          <li data-es="Te mandamos foto y reporte del día por mensaje: cuánto comió, cuánto durmió, cuántos pañales." data-en="We text you a photo and daily report: how much they ate, slept, and how many diapers.">Te mandamos foto y reporte del día por mensaje: cuánto comió, cuánto durmió, cuántos pañales.</li>
+          <li data-es="Guardamos leche materna en el refrigerador y hay un sillón tranquilo si quieres venir a amamantar." data-en="We store breast milk in the fridge, and there's a quiet chair if you want to come nurse.">Guardamos leche materna en el refrigerador y hay un sillón tranquilo si quieres venir a amamantar.</li>
+          <li data-es="Canciones y arrullos en español e inglés desde la primera semana." data-en="Songs and lullabies in Spanish and English from the very first week.">Canciones y arrullos en español e inglés desde la primera semana.</li>
+        </ul>
+      </div>
+      <!-- FOTO: rincón de bebés -->
+      <div class="frame"><div class="ph"><span data-es="Foto: el rincón de los bebés" data-en="Photo: the babies' corner">Foto: el rincón de los bebés</span></div></div>
+    </div>
+
+    <div class="panel">
+      <div class="txt">
+        <h3 data-es="Caminadores · 18 meses a 3 años" data-en="Toddlers · 18 months to 3 years">Caminadores · 18 meses a 3 años</h3>
+        <span class="ratio" data-es="Grupo pequeño, siempre a la vista" data-en="Small group, always in sight">Grupo pequeño, siempre a la vista</span>
+        <ul>
+          <li data-es="Acompañamos el proceso de dejar el pañal al ritmo del niño y coordinado con la casa." data-en="We support potty training at the child's pace, coordinated with home.">Acompañamos el proceso de dejar el pañal al ritmo del niño y coordinado con la casa.</li>
+          <li data-es="Primeras palabras en los dos idiomas. No corregimos si mezcla: así se aprende." data-en="First words in both languages. We don't correct mixing — that's how it works.">Primeras palabras en los dos idiomas. No corregimos si mezcla: así se aprende.</li>
+          <li data-es="Agua, arena y masa todos los días. Trae ropa de cambio, se van a ensuciar." data-en="Water, sand and dough every day. Bring a change of clothes — they will get messy.">Agua, arena y masa todos los días. Trae ropa de cambio, se van a ensuciar.</li>
+          <li data-es="Salimos al parque del barrio dos veces al día cuando el clima ayuda." data-en="We walk to the neighborhood park twice a day when the weather allows.">Salimos al parque del barrio dos veces al día cuando el clima ayuda.</li>
+        </ul>
+      </div>
+      <div class="frame"><div class="ph"><span data-es="Foto: caminadores jugando" data-en="Photo: toddlers playing">Foto: caminadores jugando</span></div></div>
+    </div>
+
+    <div class="panel">
+      <div class="txt">
+        <h3 data-es="Angelitos · 3 a 5 años · programa 3-K" data-en="Little Angels · 3 to 5 years · 3-K program">Angelitos · 3 a 5 años · programa 3-K</h3>
+        <span class="ratio fill" data-es="Programa 3-K en cuidado infantil familiar" data-en="3-K in Family Child Care program">Programa 3-K en cuidado infantil familiar</span>
+        <ul>
+          <li data-es="3-K en casas de cuidado familiar es gratis: 6 horas 20 minutos al día, 176 días, de septiembre a junio." data-en="3-K in family child care is free: 6 hours 20 minutes a day, 176 days, September through June.">3-K en casas de cuidado familiar es gratis: 6 horas 20 minutos al día, 176 días, de septiembre a junio.</li>
+          <li data-es="Se busca en myschools.nyc filtrando por tipo «Family Child Care». Nosotros te ayudamos a hacerlo." data-en="You search myschools.nyc filtering by type “Family Child Care.” We help you do it.">Se busca en myschools.nyc filtrando por tipo «Family Child Care». Nosotros te ayudamos a hacerlo.</li>
+          <li data-es="Proyectos de un mes: el mercado, los trenes, las plantas del patio. Nada de hojas de trabajo." data-en="Month-long projects: the market, the trains, the plants in the yard. No worksheets.">Proyectos de un mes: el mercado, los trenes, las plantas del patio. Nada de hojas de trabajo.</li>
+          <li data-es="Preparación real para kínder y te acompañamos con la solicitud de MySchools, en español." data-en="Real kindergarten readiness, and we walk you through the MySchools application in Spanish.">Preparación real para kínder y te acompañamos con la solicitud de MySchools, en español.</li>
+        </ul>
+      </div>
+      <div class="frame"><div class="ph"><span data-es="Foto: proyecto de los angelitos" data-en="Photo: the Little Angels' project">Foto: proyecto de los angelitos</span></div></div>
+    </div>
+
+    <div class="panel">
+      <div class="txt">
+        <h3 data-es="Después de escuela · 5 a 12 años" data-en="After school · 5 to 12 years">Después de escuela · 5 a 12 años</h3>
+        <span class="ratio" data-es="Hasta 4 niños de edad escolar adicionales" data-en="Up to 4 additional school-age children">Hasta 4 niños de edad escolar adicionales</span>
+        <ul>
+          <li data-es="Los recogemos caminando de la escuela si queda cerca. Pregúntanos por tu escuela." data-en="We walk over to pick them up from school if it's nearby. Ask us about your school.">Los recogemos caminando de la escuela si queda cerca. Pregúntanos por tu escuela.</li>
+          <li data-es="Merienda, tarea acompañada y después juego libre. La tarea se hace aquí, no en la noche en casa." data-en="Snack, homework with support, then free play. Homework gets done here, not at night at home.">Merienda, tarea acompañada y después juego libre. La tarea se hace aquí, no en la noche en casa.</li>
+          <li data-es="Si tienes un bebé con nosotros, el hermano mayor viene al mismo lugar. Una sola parada." data-en="If you have a baby with us, the older sibling comes to the same place. One single stop.">Si tienes un bebé con nosotros, el hermano mayor viene al mismo lugar. Una sola parada.</li>
+          <li data-es="Días sin clases, medio día y vacaciones escolares: abrimos igual." data-en="No-school days, half days and school breaks: we're open anyway.">Días sin clases, medio día y vacaciones escolares: abrimos igual.</li>
+        </ul>
+      </div>
+      <div class="frame"><div class="ph"><span data-es="Foto: tarea y merienda" data-en="Photo: homework and snack">Foto: tarea y merienda</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== PRECIOS ====== -->
+<section class="band">
+  <div class="wrap" id="precios">
+    <div class="sec-head">
+      <span class="eyebrow" data-es="Sin llamar para preguntar" data-en="No need to call and ask">Sin llamar para preguntar</span>
+      <h2><span data-es="Nuestros precios," data-en="Our prices,">Nuestros precios,</span> <em data-es="aquí escritos" data-en="written right here">aquí escritos</em></h2>
+      <p data-es="Revisamos las guarderías de Queens que tienen página web y ninguna publica lo que cobra. Decidir dónde dejas a tu hijo no debería empezar con una llamada incómoda." data-en="We checked the day cares in Queens that have websites and none of them publish their rates. Choosing where to leave your child shouldn't start with an awkward phone call.">Revisamos las guarderías de Queens que tienen página web y ninguna publica lo que cobra. Decidir dónde dejas a tu hijo no debería empezar con una llamada incómoda.</p>
+    </div>
+    <div class="pricegrid">
+      <div class="pcard">
+        <h3 data-es="Bebés y caminadores" data-en="Babies &amp; toddlers">Bebés y caminadores</h3>
+        <div class="note" data-es="6 semanas – 3 años · tiempo completo" data-en="6 weeks – 3 years · full time">6 semanas – 3 años · tiempo completo</div>
+        <div class="price"><span class="fill">$1,450</span> <small data-es="/ mes" data-en="/ month">/ mes</small></div>
+        <div class="note" data-es="Incluye pañales, comidas y meriendas." data-en="Includes diapers, meals and snacks.">Incluye pañales, comidas y meriendas.</div>
+      </div>
+      <div class="pcard hl">
+        <h3 data-es="Angelitos · 3 a 5 años" data-en="Little Angels · 3 to 5 years">Angelitos · 3 a 5 años</h3>
+        <div class="note" data-es="Con 3-K, si califican" data-en="With 3-K, if eligible">Con 3-K, si califican</div>
+        <div class="price" data-es="Gratis" data-en="Free">Gratis</div>
+        <div class="note"><span data-es="Sin 3-K:" data-en="Without 3-K:">Sin 3-K:</span> <span class="fill">$1,180</span> <span data-es="al mes. Te ayudamos a aplicar." data-en="a month. We help you apply.">al mes. Te ayudamos a aplicar.</span></div>
+      </div>
+      <div class="pcard">
+        <h3 data-es="Después de escuela" data-en="After school">Después de escuela</h3>
+        <div class="note" data-es="5 – 12 años · 3:00 a 6:00pm" data-en="5 – 12 years · 3:00 to 6:00pm">5 – 12 años · 3:00 a 6:00pm</div>
+        <div class="price"><span class="fill">$620</span> <small data-es="/ mes" data-en="/ month">/ mes</small></div>
+        <div class="note" data-es="Días sin escuela y vacaciones incluidos." data-en="No-school days and breaks included.">Días sin escuela y vacaciones incluidos.</div>
+      </div>
+    </div>
+    <div class="disc">
+      <h3 data-es="Descuentos que puedes sumar" data-en="Discounts you can stack">Descuentos que puedes sumar</h3>
+      <ul>
+        <li><b class="fill">$100</b><span data-es="Menos al mes por cada hermano, sin límite de hermanos." data-en="Off per month for each sibling, with no sibling limit.">Menos al mes por cada hermano, sin límite de hermanos.</span></li>
+        <li><b class="fill">10%</b><span data-es="Empleados municipales de NYC, MTA, hospitales y Departamento de Educación." data-en="NYC city, MTA, hospital and Department of Education employees.">Empleados municipales de NYC, MTA, hospitales y Departamento de Educación.</span></li>
+        <li><b class="fill">10%</b><span data-es="Bomberos, policías, paramédicos y militares." data-en="Firefighters, police, paramedics and military.">Bomberos, policías, paramédicos y militares.</span></li>
+        <li><b class="fill">5%</b><span data-es="Si pagas el año completo por adelantado." data-en="If you pay the full year up front.">Si pagas el año completo por adelantado.</span></li>
+      </ul>
+      <p style="margin:16px 0 0;font-size:14.5px;color:var(--teal-dk);font-weight:700" data-es="El pago se hace el día 1 de cada mes. No cobramos cuota de inscripción ni depósito para reservar el cupo." data-en="Payment is due on the 1st of each month. We charge no application fee and no deposit to hold a spot.">El pago se hace el día 1 de cada mes. No cobramos cuota de inscripción ni depósito para reservar el cupo.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ====== AYUDA NYC ====== -->
+<section class="band-teal" id="ayuda">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow" style="background:#fff;color:var(--teal-dk)" data-es="Guía del barrio" data-en="Neighborhood guide">Guía del barrio</span>
+      <h2><span data-es="Cómo pagar la guardería" data-en="How to pay for child care">Cómo pagar la guardería</span> <span class="tl" data-es="en Nueva York" data-en="in New York City">en Nueva York</span></h2>
+      <p data-es="Muchas familias pagan mucho menos de lo que creen, y varias no pagan nada. Aquí están las tres vías, con lo que hay que saber de cada una — aunque al final decidas irte con otra guardería." data-en="Many families pay far less than they expect, and some pay nothing. Here are the three paths and what to know about each — even if you end up choosing another provider.">Muchas familias pagan mucho menos de lo que creen, y varias no pagan nada. Aquí están las tres vías, con lo que hay que saber de cada una — aunque al final decidas irte con otra guardería.</p>
+    </div>
+    <div class="nyc">
+      <div class="ncard">
+        <span class="k">3-K</span>
+        <h3 data-es="Niños de 3 años, en casas como la nuestra" data-en="3-year-olds, in homes like ours">Niños de 3 años, en casas como la nuestra</h3>
+        <p data-es="El Departamento de Educación ofrece 3-K gratis también en cuidado infantil familiar, no solo en escuelas: 6 horas 20 minutos al día, 176 días, de septiembre a junio. En myschools.nyc filtra por «Family Child Care» para encontrarnos." data-en="The Department of Education offers free 3-K in family child care too, not only in schools: 6 hours 20 minutes a day, 176 days, September to June. On myschools.nyc, filter by “Family Child Care” to find us.">El Departamento de Educación ofrece 3-K gratis también en cuidado infantil familiar, no solo en escuelas: 6 horas 20 minutos al día, 176 días, de septiembre a junio. En myschools.nyc filtra por «Family Child Care» para encontrarnos.</p>
+      </div>
+      <div class="ncard">
+        <span class="k" data-es="Vales" data-en="Vouchers">Vales</span>
+        <h3 data-es="ACS y HRA, desde las 6 semanas" data-en="ACS and HRA, from 6 weeks old">ACS y HRA, desde las 6 semanas</h3>
+        <p data-es="Si trabajas, estudias o estás buscando empleo puedes calificar a un vale que cubre casi todo el costo, y sirve desde bebé. Aceptamos vales y llenamos la solicitud contigo, en español." data-en="If you work, study or are job-searching you may qualify for a voucher that covers most of the cost, and it works from infancy. We accept vouchers and fill out the application with you, in Spanish.">Si trabajas, estudias o estás buscando empleo puedes calificar a un vale que cubre casi todo el costo, y sirve desde bebé. Aceptamos vales y llenamos la solicitud contigo, en español.</p>
+      </div>
+      <div class="ncard">
+        <span class="k">Pre-K</span>
+        <h3 data-es="Niños de 4 años" data-en="4-year-olds">Niños de 4 años</h3>
+        <p data-es="Pre-K for All es gratis para todos los niños de 4 años de la ciudad. Se da en escuelas y centros; si tu hijo va a Pre-K por la mañana, nosotros lo cuidamos el resto del día y en las vacaciones." data-en="Pre-K for All is free for every 4-year-old in the city. It runs in schools and centers; if your child goes to Pre-K in the morning, we cover the rest of the day and school breaks.">Pre-K for All es gratis para todos los niños de 4 años de la ciudad. Se da en escuelas y centros; si tu hijo va a Pre-K por la mañana, nosotros lo cuidamos el resto del día y en las vacaciones.</p>
+      </div>
+    </div>
+    <p style="margin-top:22px;font-weight:800;color:var(--teal-dk)" data-es="¿No sabes cuál te toca? Ven, siéntate 20 minutos con nosotros y lo averiguamos juntos. Sin compromiso y sin costo." data-en="Not sure which applies to you? Come sit with us for 20 minutes and we'll figure it out together. No commitment, no charge.">¿No sabes cuál te toca? Ven, siéntate 20 minutos con nosotros y lo averiguamos juntos. Sin compromiso y sin costo.</p>
+  </div>
+</section>
+
+<!-- ====== UN DÍA + COMIDA ====== -->
+<section id="dia">
+  <div class="wrap">
+    <div class="two">
+      <div>
+        <div class="sec-head" style="margin-bottom:20px">
+          <span class="eyebrow" data-es="Un día cualquiera" data-en="An ordinary day">Un día cualquiera</span>
+          <h2><span data-es="Así se ve" data-en="This is what">Así se ve</span> <em data-es="un martes aquí" data-en="a Tuesday looks like">un martes aquí</em></h2>
+        </div>
+        <ul class="sched">
+          <li><time>7:00</time><span data-es="Se abre la puerta. Desayuno en la mesa de la cocina para quien llega temprano." data-en="The door opens. Breakfast at the kitchen table for the early arrivals.">Se abre la puerta. Desayuno en la mesa de la cocina para quien llega temprano.</span></li>
+          <li><time>9:00</time><span data-es="Círculo de la mañana: canciones, el clima y quién vino hoy." data-en="Morning circle: songs, the weather, and who came today.">Círculo de la mañana: canciones, el clima y quién vino hoy.</span></li>
+          <li><time>10:00</time><span data-es="Salimos al patio o caminamos al parque del barrio." data-en="Out to the yard, or a walk to the neighborhood park.">Salimos al patio o caminamos al parque del barrio.</span></li>
+          <li><time>11:30</time><span data-es="Almuerzo caliente, cocinado aquí esa misma mañana." data-en="A hot lunch, cooked right here that morning.">Almuerzo caliente, cocinado aquí esa misma mañana.</span></li>
+          <li><time>12:30</time><span data-es="Siesta, con la luz baja y música suave. Los bebés duermen a su hora." data-en="Nap time, lights low and soft music. Babies sleep on their own schedule.">Siesta, con la luz baja y música suave. Los bebés duermen a su hora.</span></li>
+          <li><time>3:00</time><span data-es="Llegan los grandes de la escuela: merienda y tarea acompañada." data-en="The big kids arrive from school: snack and homework with support.">Llegan los grandes de la escuela: merienda y tarea acompañada.</span></li>
+          <li><time>4:30</time><span data-es="Juego libre todos juntos hasta que llegan por ellos." data-en="Free play, everyone together, until pickup.">Juego libre todos juntos hasta que llegan por ellos.</span></li>
+        </ul>
+      </div>
+      <div>
+        <!-- FOTO: el almuerzo servido en la mesa -->
+        <div class="frame tall" style="max-width:400px;margin-left:auto">
+          <div class="ph"><span data-es="Foto: el almuerzo de hoy" data-en="Photo: today's lunch">Foto: el almuerzo de hoy</span></div>
+        </div>
+        <div style="margin-top:22px">
+          <h3 style="font-size:20px;margin:0 0 8px" data-es="Comida hecha en la cocina de la casa" data-en="Food cooked in the house kitchen">Comida hecha en la cocina de la casa</h3>
+          <p style="color:var(--ink-2);margin:0" data-es="Aquí no llega comida en caja: se cocina cada mañana en la misma cocina donde comen los niños. Publicamos el menú de la semana los viernes y nos adaptamos a alergias y a lo que come tu familia en casa." data-en="No boxed meals arrive here: food is cooked every morning in the same kitchen where the children eat. We post next week's menu on Fridays and we adapt to allergies and to what your family eats at home.">Aquí no llega comida en caja: se cocina cada mañana en la misma cocina donde comen los niños. Publicamos el menú de la semana los viernes y nos adaptamos a alergias y a lo que come tu familia en casa.</p>
+          <div class="foodicons">
+            <span data-es="🥬 Verduras frescas" data-en="🥬 Fresh vegetables">🥬 Verduras frescas</span>
+            <span data-es="🍎 Fruta a diario" data-en="🍎 Fruit daily">🍎 Fruta a diario</span>
+            <span data-es="🌾 Granos integrales" data-en="🌾 Whole grains">🌾 Granos integrales</span>
+            <span data-es="🥛 Sin azúcar añadida" data-en="🥛 No added sugar">🥛 Sin azúcar añadida</span>
+            <span data-es="🚫🥜 Libre de nueces" data-en="🚫🥜 Nut free">🚫🥜 Libre de nueces</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== EQUIPO ====== -->
+<section class="band" id="equipo">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow" data-es="Quiénes te reciben" data-en="Who greets you">Quiénes te reciben</span>
+      <h2><span data-es="Somos dos," data-en="There are two of us,">Somos dos,</span> <em data-es="y siempre las mismas dos" data-en="and always the same two">y siempre las mismas dos</em></h2>
+      <p data-es="En un centro no sabes quién va a cargar a tu bebé hoy. Aquí sí: somos nosotras dos, todos los días." data-en="At a center you don't know who will be holding your baby today. Here you do: it's the two of us, every single day.">En un centro no sabes quién va a cargar a tu bebé hoy. Aquí sí: somos nosotras dos, todos los días.</p>
+    </div>
+
+    <div class="owner">
+      <!-- FOTO: la dueña -->
+      <div class="frame sq"><div class="ph"><span data-es="Foto de la dueña" data-en="Owner photo">Foto de la dueña</span></div></div>
+      <div>
+        <h3 style="font-size:23px;margin:0 0 4px"><span data-es="Hola, soy" data-en="Hi, I'm">Hola, soy</span> <span class="fill">[tu nombre]</span></h3>
+        <div style="color:var(--sky-dk);font-weight:800;font-size:14px;margin-bottom:12px" data-es="Fundadora y cuidadora principal · en la puerta cada mañana" data-en="Founder and lead caregiver · at the door every morning">Fundadora y cuidadora principal · en la puerta cada mañana</div>
+        <p style="color:var(--ink-2);margin:0"><span data-es="Abrí Emanuel's Little Angels en" data-en="I opened Emanuel's Little Angels in">Abrí Emanuel's Little Angels en</span> <span class="fill">2017</span><span data-es=", y le puse el nombre de" data-en=", and named it after">, y le puse el nombre de</span> <span class="fill">mi hijo Emanuel</span><span data-es=". Empecé porque cuando llegué a Queens no encontré un lugar donde le hablaran a mi hijo en español sin tratarlo como un problema. Sigo aquí, en la misma casa, y sigo contestando el teléfono yo misma. Si vienes a visitar, me vas a conocer a mí." data-en=". I started because when I arrived in Queens I couldn't find a place that spoke to my child in Spanish without treating it as a problem. I'm still here, in the same house, and I still answer the phone myself. If you come visit, you'll meet me.">. Empecé porque cuando llegué a Queens no encontré un lugar donde le hablaran a mi hijo en español sin tratarlo como un problema. Sigo aquí, en la misma casa, y sigo contestando el teléfono yo misma. Si vienes a visitar, me vas a conocer a mí.</span></p>
+        <div class="sig">— <span class="fill">[tu nombre]</span></div>
+      </div>
+    </div>
+
+    <div class="team">
+      <div class="tcard">
+        <div class="frame"><div class="ph"><span data-es="Foto" data-en="Photo">Foto</span></div></div>
+        <div class="tx"><h3 class="fill">[nombre de la asistente]</h3>
+          <div class="role" data-es="Asistente · aquí desde 2021" data-en="Assistant · here since 2021">Asistente · aquí desde <span class="fill">2021</span></div>
+          <p class="fun fill" data-es="Un dato personal suyo aquí — algo que los niños cuenten en la casa. Eso es lo que hace que una familia se acuerde de ella." data-en="A personal detail about her here — something the kids tell their parents about. That's what makes a family remember her.">Un dato personal suyo aquí — algo que los niños cuenten en la casa. Eso es lo que hace que una familia se acuerde de ella.</p></div>
+      </div>
+      <div class="tcard">
+        <div class="frame"><div class="ph"><span data-es="Foto" data-en="Photo">Foto</span></div></div>
+        <div class="tx"><h3 data-es="Nuestras certificaciones" data-en="Our certifications">Nuestras certificaciones</h3>
+          <div class="role" data-es="Las dos, al día" data-en="Both of us, current">Las dos, al día</div>
+          <p class="fun" data-es="CPR y primeros auxilios pediátricos, entrenamiento de salud y seguridad del estado, y las 30 horas de capacitación cada dos años que exige la licencia. Te mostramos los certificados si los quieres ver." data-en="Pediatric CPR and first aid, state health and safety training, and the 30 hours of training every two years the license requires. We'll show you the certificates if you want to see them.">CPR y primeros auxilios pediátricos, entrenamiento de salud y seguridad del estado, y las 30 horas de capacitación cada dos años que exige la licencia. Te mostramos los certificados si los quieres ver.</p></div>
+      </div>
+      <div class="tcard">
+        <div class="frame"><div class="ph"><span data-es="Foto" data-en="Photo">Foto</span></div></div>
+        <div class="tx"><h3 data-es="La casa" data-en="The house">La casa</h3>
+          <div class="role" data-es="Inspeccionada y aprobada" data-en="Inspected and approved">Inspeccionada y aprobada</div>
+          <p class="fun" data-es="Detectores de humo y de monóxido, botiquín, cunas certificadas, enchufes tapados y salida de emergencia. El estado nos inspecciona sin avisar, y esa es justamente la idea." data-en="Smoke and carbon-monoxide detectors, first-aid kit, certified cribs, covered outlets and an emergency exit. The state inspects us unannounced — and that's exactly the point.">Detectores de humo y de monóxido, botiquín, cunas certificadas, enchufes tapados y salida de emergencia. El estado nos inspecciona sin avisar, y esa es justamente la idea.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== TESTIMONIOS ====== -->
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow" data-es="Familias del barrio" data-en="Neighborhood families">Familias del barrio</span>
+      <h2><span data-es="Lo que dicen" data-en="What">Lo que dicen</span> <em data-es="las mamás y los papás" data-en="the moms and dads say">las mamás y los papás</em></h2>
+      <p data-es="Reemplaza estos tres por reseñas reales de Google. Pon el nombre y desde qué año son familia: eso es lo que las hace creíbles." data-en="Replace these three with real Google reviews. Include the name and the year they became a family here: that's what makes them believable.">Reemplaza estos tres por reseñas reales de Google. Pon el nombre y desde qué año son familia: eso es lo que las hace creíbles.</p>
+    </div>
+    <div class="tests">
+      <div class="tst"><span class="stars">★★★★★</span>
+        <p class="fill" data-es="«Mi hijo llegó de 10 meses sin hablar y ahora canta en inglés y me cuenta el cuento en español. Y me ayudaron con el papeleo del vale sin cobrarme nada.»" data-en="“My son came at 10 months without speaking and now he sings in English and retells the story to me in Spanish. And they helped me with the voucher paperwork at no charge.”">«Mi hijo llegó de 10 meses sin hablar y ahora canta en inglés y me cuenta el cuento en español. Y me ayudaron con el papeleo del vale sin cobrarme nada.»</p>
+        <div class="who fill">Yesenia M.</div>
+        <div class="since fill" data-es="Familia desde 2023 · Jackson Heights" data-en="Family since 2023 · Jackson Heights">Familia desde 2023 · Jackson Heights</div></div>
+      <div class="tst"><span class="stars">★★★★★</span>
+        <p class="fill" data-es="«Tengo dos: la bebé y el de siete años. Es el único lugar donde los dos están juntos y solo hago una parada en la mañana. Eso me cambió la vida.»" data-en="“I have two: the baby and my seven-year-old. It's the only place where both are together and I make one single stop in the morning. That changed my life.”">«Tengo dos: la bebé y el de siete años. Es el único lugar donde los dos están juntos y solo hago una parada en la mañana. Eso me cambió la vida.»</p>
+        <div class="who fill">Daniel R.</div>
+        <div class="since fill" data-es="Familia desde 2024 · Elmhurst" data-en="Family since 2024 · Elmhurst">Familia desde 2024 · Elmhurst</div></div>
+      <div class="tst"><span class="stars">★★★★★</span>
+        <p class="fill" data-es="«Visité seis guarderías. Fue la única que me dijo el precio de frente, sin que yo preguntara tres veces. Eso me dijo todo lo que necesitaba saber.»" data-en="“I toured six day cares. This was the only one that told me the price straight up, without me asking three times. That told me everything I needed to know.”">«Visité seis guarderías. Fue la única que me dijo el precio de frente, sin que yo preguntara tres veces. Eso me dijo todo lo que necesitaba saber.»</p>
+        <div class="who fill">Rocío V.</div>
+        <div class="since fill" data-es="Familia desde 2022 · Corona" data-en="Family since 2022 · Corona">Familia desde 2022 · Corona</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== PASOS ====== -->
+<section class="band-white">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow" data-es="Sin sorpresas" data-en="No surprises">Sin sorpresas</span>
+      <h2><span data-es="Cuatro pasos y ya" data-en="Four steps and you're done">Cuatro pasos y ya</span></h2>
+      <p data-es="Todo lo que pasa desde que nos escribes hasta el primer día, y cuánto tarda cada paso." data-en="Everything that happens from your first message to the first day, and how long each step takes.">Todo lo que pasa desde que nos escribes hasta el primer día, y cuánto tarda cada paso.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="step-n">1</div>
+        <h3 data-es="Escribes o llamas" data-en="You write or call">Escribes o llamas</h3>
+        <p data-es="Te contestamos el mismo día con los cupos reales de la edad de tu hijo y el precio exacto." data-en="We answer the same day with the real openings for your child's age and the exact price.">Te contestamos el mismo día con los cupos reales de la edad de tu hijo y el precio exacto.</p></div>
+      <div class="step"><div class="step-n">2</div>
+        <h3 data-es="Vienes a la casa" data-en="You come to the house">Vienes a la casa</h3>
+        <p data-es="30 minutos en horario normal, con los niños aquí, para que veas cómo es de verdad. Trae al tuyo." data-en="30 minutes during a normal day, with the children here, so you see what it's really like. Bring yours.">30 minutos en horario normal, con los niños aquí, para que veas cómo es de verdad. Trae al tuyo.</p></div>
+      <div class="step"><div class="step-n">3</div>
+        <h3 data-es="Vemos cómo pagar" data-en="We sort out payment">Vemos cómo pagar</h3>
+        <p data-es="Revisamos juntos si calificas a 3-K o a un vale de ACS. Llenamos la solicitud contigo, en español." data-en="Together we check if you qualify for 3-K or an ACS voucher. We fill out the application with you, in Spanish.">Revisamos juntos si calificas a 3-K o a un vale de ACS. Llenamos la solicitud contigo, en español.</p></div>
+      <div class="step"><div class="step-n">4</div>
+        <h3 data-es="Primer día" data-en="First day">Primer día</h3>
+        <p data-es="Traes vacunas y examen médico. Las dos primeras mañanas te puedes quedar con tu hijo." data-en="Bring immunizations and a physical. You can stay with your child the first two mornings.">Traes vacunas y examen médico. Las dos primeras mañanas te puedes quedar con tu hijo.</p></div>
+    </div>
+    <div class="magnet">
+      <div style="flex:1;min-width:260px">
+        <h3 data-es="Las 12 preguntas que deberías hacer en cualquier visita" data-en="The 12 questions you should ask on any tour">Las 12 preguntas que deberías hacer en cualquier visita</h3>
+        <p data-es="Una hoja para imprimir y llevar contigo. Sirve para visitarnos a nosotros y también para visitar a las demás — de verdad. Está en español y en inglés." data-en="A printable sheet to take with you. Use it to tour us, and to tour the others too — seriously. It's in Spanish and English.">Una hoja para imprimir y llevar contigo. Sirve para visitarnos a nosotros y también para visitar a las demás — de verdad. Está en español y en inglés.</p>
+      </div>
+      <a class="btn btn-3" href="#visita" data-es="Descargar la hoja" data-en="Download the sheet">Descargar la hoja</a>
+    </div>
+  </div>
+</section>
+
+<!-- ====== FORMULARIO ====== -->
+<section id="visita">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow" data-es="Respondemos el mismo día" data-en="We answer the same day">Respondemos el mismo día</span>
+      <h2><span data-es="Ve cupos" data-en="See openings">Ve cupos</span> <em data-es="y precios" data-en="and pricing">y precios</em></h2>
+    </div>
+    <div class="formbox">
+      <form onsubmit="event.preventDefault();this.querySelector('.done').hidden=false;">
+        <div class="fields">
+          <div><label data-es="Tu nombre" data-en="Your first name">Tu nombre</label><input required></div>
+          <div><label data-es="Apellido" data-en="Last name">Apellido</label><input required></div>
+          <div><label data-es="Teléfono" data-en="Phone">Teléfono</label><input type="tel" required></div>
+          <div><label data-es="Correo" data-en="Email">Correo</label><input type="email" required></div>
+          <div class="full"><label data-es="Edad de tu hijo" data-en="Your child's age">Edad de tu hijo</label>
+            <select>
+              <option data-es="6 semanas a 18 meses" data-en="6 weeks to 18 months">6 semanas a 18 meses</option>
+              <option data-es="18 meses a 3 años" data-en="18 months to 3 years">18 meses a 3 años</option>
+              <option data-es="3 a 5 años" data-en="3 to 5 years">3 a 5 años</option>
+              <option data-es="5 a 12 años (después de escuela)" data-en="5 to 12 years (after school)">5 a 12 años (después de escuela)</option>
+              <option data-es="Todavía no nace" data-en="Not born yet">Todavía no nace</option>
+            </select>
+          </div>
+          <div class="full" style="margin-top:6px">
+            <button class="btn btn-1" style="width:100%;justify-content:center" data-es="Ver cupos y precios" data-en="See openings &amp; pricing">Ver cupos y precios</button>
+          </div>
+          <p class="consent" data-es="Te escribimos o llamamos solo sobre tu solicitud. No compartimos tus datos con nadie y no preguntamos por tu estatus migratorio, ni ahora ni nunca." data-en="We'll only contact you about your inquiry. We never share your information, and we don't ask about your immigration status — not now, not ever.">Te escribimos o llamamos solo sobre tu solicitud. No compartimos tus datos con nadie y no preguntamos por tu estatus migratorio, ni ahora ni nunca.</p>
+        </div>
+        <p class="done" hidden style="margin-top:14px;background:var(--teal-sf);border-radius:12px;padding:13px 15px;font-weight:800;color:var(--teal-dk)" data-es="¡Listo! Te contactamos hoy mismo. (Prototipo: falta conectar el formulario a tu correo.)" data-en="Done! We'll be in touch today. (Prototype: the form still needs to be connected to your email.)">¡Listo! Te contactamos hoy mismo. (Prototipo: falta conectar el formulario a tu correo.)</p>
+      </form>
+      <div>
+        <h3 style="font-size:19px;margin:0 0 12px" data-es="O simplemente ven" data-en="Or just come by">O simplemente ven</h3>
+        <p style="color:var(--ink-2);margin:0 0 10px"><span class="fill" data-es="Estamos a una cuadra del tren 7." data-en="We're one block from the 7 train.">Estamos a una cuadra del tren 7.</span> <span data-es="Puedes venir sin cita entre 9:30 y 11:00 de la mañana, de lunes a viernes." data-en="You can drop in without an appointment between 9:30 and 11:00am, Monday to Friday.">Puedes venir sin cita entre 9:30 y 11:00 de la mañana, de lunes a viernes.</span></p>
+        <p style="margin:0 0 6px"><b class="fill">[dirección de la casa]</b><br><span class="fill">Jackson Heights, NY 11372</span></p>
+        <p style="margin:0 0 18px"><a href="tel:+17185550142"><b class="fill">(718) 555-0142</b></a><br><a href="mailto:hola@eladaycare.com" class="fill">hola@eladaycare.com</a></p>
+        <!-- FOTO: mapa o fachada de la casa -->
+        <div class="frame" style="aspect-ratio:16/10"><div class="ph"><span data-es="Mapa o foto de la entrada" data-en="Map or photo of the entrance">Mapa o foto de la entrada</span></div></div>
+        <div class="urgency" data-es="⏳ Si te inscribes dentro de las 48 horas después de tu visita, te descontamos 10% los primeros tres meses." data-en="⏳ Enroll within 48 hours of your visit and we'll take 10% off your first three months.">⏳ Si te inscribes dentro de las 48 horas después de tu visita, te descontamos 10% los primeros tres meses.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== FAQ ====== -->
+<section class="band">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow" data-es="Lo que más nos preguntan" data-en="What we're asked most">Lo que más nos preguntan</span>
+      <h2><span data-es="Preguntas" data-en="Straight">Preguntas</span> <em data-es="sin rodeos" data-en="answers">sin rodeos</em></h2>
+    </div>
+    <div class="faq">
+      <details open>
+        <summary data-es="¿Preguntan por mi estatus migratorio?" data-en="Do you ask about my immigration status?">¿Preguntan por mi estatus migratorio?</summary>
+        <p data-es="No. Nunca lo preguntamos, no lo anotamos en ningún papel y no lo necesitamos para recibir a tu hijo. Los programas 3-K y Pre-K de la ciudad tampoco lo piden." data-en="No. We never ask, we don't record it anywhere, and we don't need it to welcome your child. The city's 3-K and Pre-K programs don't ask either.">No. Nunca lo preguntamos, no lo anotamos en ningún papel y no lo necesitamos para recibir a tu hijo. Los programas 3-K y Pre-K de la ciudad tampoco lo piden.</p>
+      </details>
+      <details>
+        <summary data-es="¿Esto es una casa de familia o una guardería de verdad?" data-en="Is this someone's home or a real day care?">¿Esto es una casa de familia o una guardería de verdad?</summary>
+        <p data-es="Las dos cosas, y por eso funciona. Es una casa, y es un group family daycare con licencia del estado de Nueva York (OCFS): la casa se inspecciona, las cuidadoras se capacitan y se certifican, y hay reglas de capacidad que no se pueden pasar. La diferencia con un centro no es la seriedad, es el tamaño." data-en="Both, and that's why it works. It's a home, and it's a group family daycare licensed by New York State (OCFS): the home gets inspected, the caregivers are trained and certified, and there are capacity rules that can't be exceeded. The difference from a center isn't seriousness — it's size.">Las dos cosas, y por eso funciona. Es una casa, y es un group family daycare con licencia del estado de Nueva York (OCFS): la casa se inspecciona, las cuidadoras se capacitan y se certifican, y hay reglas de capacidad que no se pueden pasar. La diferencia con un centro no es la seriedad, es el tamaño.</p>
+      </details>
+      <details>
+        <summary data-es="¿Cuántos niños hay y de qué edades?" data-en="How many children are there, and what ages?">¿Cuántos niños hay y de qué edades?</summary>
+        <p data-es="Nuestra licencia de group family day care permite hasta 12 niños de 6 semanas a 12 años, más hasta cuatro niños de edad escolar adicionales, con una cuidadora principal y al menos una asistente. Para los menores de 2 años la regla es un adulto por cada dos niños. Nunca recibimos más de lo permitido, ni por un día." data-en="Our group family day care license allows up to 12 children ages 6 weeks to 12 years, plus up to four additional school-age children, with a primary caregiver and at least one assistant. For children under 2 the rule is one adult per two children. We never take more than allowed, not even for a day.">Nuestra licencia de group family day care permite hasta 12 niños de 6 semanas a 12 años, más hasta cuatro niños de edad escolar adicionales, con una cuidadora principal y al menos una asistente. Para los menores de 2 años la regla es un adulto por cada dos niños. Nunca recibimos más de lo permitido, ni por un día.</p>
+      </details>
+      <details>
+        <summary data-es="¿Es bueno que mi bebé esté con niños más grandes?" data-en="Is it good for my baby to be with older children?">¿Es bueno que mi bebé esté con niños más grandes?</summary>
+        <p data-es="Es una de las razones por las que las familias vienen. Los bebés aprenden viendo a los grandes, y los grandes aprenden a cuidar. Los bebés tienen su propio espacio para dormir y comer tranquilos, pero el resto del día es una casa con hermanos, no un salón de doce bebés iguales." data-en="It's one of the reasons families come. Babies learn by watching the older ones, and the older ones learn to care for someone. Babies have their own space to sleep and eat in peace, but the rest of the day it's a house full of siblings, not a room of twelve identical babies.">Es una de las razones por las que las familias vienen. Los bebés aprenden viendo a los grandes, y los grandes aprenden a cuidar. Los bebés tienen su propio espacio para dormir y comer tranquilos, pero el resto del día es una casa con hermanos, no un salón de doce bebés iguales.</p>
+      </details>
+      <details>
+        <summary data-es="¿Qué pasa si te enfermas o cierras un día?" data-en="What if you get sick or close for a day?">¿Qué pasa si te enfermas o cierras un día?</summary>
+        <p data-es="Es la pregunta más justa que le puedes hacer a una guardería en casa, y casi nadie la contesta. Somos dos personas certificadas, así que si una falta la casa abre igual. Te avisamos por mensaje la noche anterior y te decimos los días de cierre del año por adelantado, en enero." data-en="It's the fairest question you can ask a home-based provider, and almost nobody answers it. There are two certified people, so if one is out the house still opens. We text you the night before, and we give you the year's closing days up front, in January.">Es la pregunta más justa que le puedes hacer a una guardería en casa, y casi nadie la contesta. Somos dos personas certificadas, así que si una falta la casa abre igual. Te avisamos por mensaje la noche anterior y te decimos los días de cierre del año por adelantado, en enero.</p>
+      </details>
+      <details>
+        <summary data-es="¿Puedo ver a mi hijo durante el día?" data-en="Can I see my child during the day?">¿Puedo ver a mi hijo durante el día?</summary>
+        <p data-es="Puedes entrar cuando quieras, sin avisar, a cualquier hora. Además te mandamos fotos y el reporte del día por mensaje. No tenemos nada que esconder." data-en="You can walk in whenever you want, unannounced, any time. We also text you photos and the daily report. We have nothing to hide.">Puedes entrar cuando quieras, sin avisar, a cualquier hora. Además te mandamos fotos y el reporte del día por mensaje. No tenemos nada que esconder.</p>
+      </details>
+      <details>
+        <summary data-es="¿Qué pasa si llego tarde a recoger?" data-en="What if I'm late for pickup?">¿Qué pasa si llego tarde a recoger?</summary>
+        <p data-es="Cobramos $1 por minuto después de las 6:00, y lo decimos claro para que nadie se lleve una sorpresa. Pero si se te complicó el tren, llámanos: ningún niño se queda solo y la primera vez no se cobra." data-en="We charge $1 per minute after 6:00, and we say it plainly so nobody is surprised. But if the train held you up, call us: no child is ever left alone, and the first time is free.">Cobramos $1 por minuto después de las 6:00, y lo decimos claro para que nadie se lleve una sorpresa. Pero si se te complicó el tren, llámanos: ningún niño se queda solo y la primera vez no se cobra.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ====== CTA FINAL ====== -->
+<div class="finalcta">
+  <div class="wrap">
+    <svg width="86" height="76" viewBox="0 0 200 178" style="margin:0 auto 14px" aria-hidden="true"><use href="#ela"/></svg>
+    <h2 data-es="Ven a conocer la casa un martes" data-en="Come see the house on a Tuesday">Ven a conocer la casa un martes</h2>
+    <p data-es="Cuando hay ruido, masa en la mesa de la cocina y niños de cinco edades distintas jugando juntos. Así vas a ver cómo somos de verdad." data-en="When it's loud, there's dough on the kitchen table and children of five different ages playing together. That's how you'll see who we really are.">Cuando hay ruido, masa en la mesa de la cocina y niños de cinco edades distintas jugando juntos. Así vas a ver cómo somos de verdad.</p>
+    <a class="btn btn-1" href="#visita" data-es="Agendar mi visita" data-en="Book my visit">Agendar mi visita</a>
+  </div>
+</div>
+
+<!-- ====== FOOTER ====== -->
+<footer>
+  <div class="wrap">
+    <div class="fgrid">
+      <div>
+        <div class="brand" style="margin-bottom:12px">
+          <svg width="44" height="39" viewBox="0 0 200 178" aria-hidden="true"><use href="#ela"/></svg>
+          <span class="brandname" style="color:#fff"><b style="color:#8EC5F6">ELA</b> <i style="color:#7CCDBE">Daycare</i>
+            <small style="color:#8b9cad">Emanuel's Little Angels</small></span>
+        </div>
+        <p style="margin:0 0 4px"><span class="fill">[dirección de la casa]</span><br><span class="fill">Jackson Heights, NY 11372</span></p>
+        <p style="margin:0"><a href="tel:+17185550142" class="fill">(718) 555-0142</a><a href="mailto:hola@eladaycare.com" class="fill">hola@eladaycare.com</a></p>
+        <div class="motto" style="margin-top:16px">
+          <span style="color:#8EC5F6" data-es="Cuidar" data-en="Nurture">Cuidar</span><i class="d"></i>
+          <span style="color:#7CCDBE" data-es="Proteger" data-en="Protect">Proteger</span><i class="d"></i>
+          <span style="color:#FFB5A7" data-es="Crecer" data-en="Grow">Crecer</span>
+        </div>
+        <div class="badges">
+          <span data-es="Licencia OCFS de NY" data-en="NY OCFS licensed">Licencia OCFS de NY</span>
+          <span data-es="Group family day care" data-en="Group family day care">Group family day care</span>
+          <span data-es="Programa 3-K" data-en="3-K program">Programa 3-K</span>
+          <span data-es="Vales ACS / HRA" data-en="ACS / HRA vouchers">Vales ACS / HRA</span>
+          <span data-es="CPR certificado" data-en="CPR certified">CPR certificado</span>
+        </div>
+      </div>
+      <div>
+        <h4 data-es="Grupos" data-en="Groups">Grupos</h4>
+        <a href="#grupos" data-es="Bebés · 6 sem a 18 meses" data-en="Babies · 6 wks to 18 months">Bebés · 6 sem a 18 meses</a>
+        <a href="#grupos" data-es="Caminadores · 18 m a 3 años" data-en="Toddlers · 18 mo to 3 years">Caminadores · 18 m a 3 años</a>
+        <a href="#grupos" data-es="Angelitos · 3 a 5 años" data-en="Little Angels · 3 to 5 years">Angelitos · 3 a 5 años</a>
+        <a href="#grupos" data-es="Después de escuela · 5 a 12" data-en="After school · 5 to 12">Después de escuela · 5 a 12</a>
+      </div>
+      <div>
+        <h4 data-es="Para familias" data-en="For families">Para familias</h4>
+        <a href="#precios" data-es="Precios y descuentos" data-en="Tuition &amp; discounts">Precios y descuentos</a>
+        <a href="#ayuda" data-es="3-K, Pre-K y vales" data-en="3-K, Pre-K &amp; vouchers">3-K, Pre-K y vales</a>
+        <a href="#dia" data-es="Menú de la semana" data-en="This week's menu">Menú de la semana</a>
+        <a href="#visita" data-es="Agendar visita" data-en="Book a visit">Agendar visita</a>
+      </div>
+      <div>
+        <h4 data-es="Horario" data-en="Hours">Horario</h4>
+        <p style="margin:0 0 12px" class="fill" data-es="Lunes a viernes<br>7:00am – 6:00pm<br>Cerrado fines de semana" data-en="Monday to Friday<br>7:00am – 6:00pm<br>Closed weekends">Lunes a viernes<br>7:00am – 6:00pm<br>Cerrado fines de semana</p>
+        <h4 data-es="Síguenos" data-en="Follow us">Síguenos</h4>
+        <a href="#" class="fill">Facebook</a>
+        <a href="#" class="fill">Instagram</a>
+      </div>
+    </div>
+    <div class="fbot">
+      <span>© 2026 Emanuel's Little Angels Family Group Daycare · <span data-es="Licencia OCFS de NY #" data-en="NY OCFS License #">Licencia OCFS de NY #</span><span class="fill">000000</span></span>
+      <span data-es="Prototipo de diseño — contenido de ejemplo" data-en="Design prototype — sample content">Prototipo de diseño — contenido de ejemplo</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
