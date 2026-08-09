@@ -6,4 +6,6 @@ COPY css /usr/share/nginx/html/css
 COPY js /usr/share/nginx/html/js
 COPY img /usr/share/nginx/html/img
 
-EXPOSE 80
+RUN sed -i 's/listen[[:space:]]*80;/listen 82;/' /etc/nginx/conf.d/default.conf
+
+EXPOSE 82
