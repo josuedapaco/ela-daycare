@@ -42,6 +42,12 @@ document.querySelectorAll('.navlinks a').forEach(function(a){
     data.page = location.href;
     data.userAgent = navigator.userAgent;
 
+    // Diálogo de confirmación antes de enviar
+    if (typeof window.__openConfirm === 'function'){
+      var ok = await window.__openConfirm(data);
+      if (!ok) return;
+    }
+
     if (btn){ btn.disabled = true; btn.textContent = lang==='en' ? 'Sending…' : 'Enviando…'; }
     try{
       var r = await fetch('/api/enroll', {
@@ -52,6 +58,7 @@ document.querySelectorAll('.navlinks a').forEach(function(a){
       if (!r.ok) throw new Error('bad status '+r.status);
       done.hidden = false;
       form.reset();
+      done.scrollIntoView({behavior:'smooth', block:'center'});
     } catch(ex){
       err.hidden = false;
     } finally {

@@ -1,0 +1,123 @@
+---
+// Diálogo de confirmación pre-envío. Lo abre main.js llamando window.__openConfirm(data)
+---
+
+<div id="confirm" class="cf" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="cf-title">
+  <div class="cf-back" data-cf-close></div>
+  <div class="cf-box" role="document">
+    <button type="button" class="cf-x" data-cf-close aria-label="Cerrar">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6l-12 12"/></svg>
+    </button>
+    <div class="cf-ico" aria-hidden="true">
+      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#2f73b5" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 6h16v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/>
+        <path d="M4 8l8 5 8-5"/>
+      </svg>
+    </div>
+    <h3 id="cf-title" data-es="Antes de enviar, ¿los datos están bien?" data-en="Before sending — do the details look right?">Antes de enviar, ¿los datos están bien?</h3>
+    <p class="cf-sub" data-es="Te vamos a mandar la confirmación por correo y a nosotros nos llega la solicitud al mismo tiempo." data-en="We'll email you a confirmation and get the inquiry on our end at the same time.">Te vamos a mandar la confirmación por correo y a nosotros nos llega la solicitud al mismo tiempo.</p>
+    <dl class="cf-list" id="cf-list"></dl>
+    <div class="cf-actions">
+      <button type="button" class="btn btn-2" data-cf-close data-es="Editar" data-en="Edit">Editar</button>
+      <button type="button" class="btn btn-1" id="cf-send" data-es="Sí, enviar" data-en="Yes, send">Sí, enviar</button>
+    </div>
+  </div>
+</div>
+
+<style>
+  .cf{position:fixed;inset:0;z-index:250;display:flex;align-items:center;justify-content:center;
+    opacity:0;pointer-events:none;transition:opacity .25s ease;padding:20px}
+  .cf.open{opacity:1;pointer-events:auto}
+  .cf-back{position:absolute;inset:0;background:rgba(37,64,92,.5);backdrop-filter:blur(6px)}
+  .cf-box{position:relative;background:#fff;border-radius:22px;padding:28px 28px 24px;
+    max-width:460px;width:100%;
+    box-shadow:0 30px 60px -20px rgba(37,64,92,.35), 0 12px 30px rgba(37,64,92,.15);
+    transform:translateY(14px) scale(.96);transition:transform .3s cubic-bezier(.2,.9,.3,1.2)}
+  .cf.open .cf-box{transform:none}
+  .cf-x{position:absolute;top:14px;right:14px;width:34px;height:34px;border-radius:50%;
+    border:none;background:rgba(37,64,92,.06);color:#556b83;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;transition:background .18s}
+  .cf-x:hover{background:rgba(37,64,92,.12)}
+  .cf-ico{width:56px;height:56px;border-radius:18px;background:#e9f3fd;
+    display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+  .cf-box h3{margin:0 0 8px;font-size:22px;letter-spacing:-.01em;line-height:1.2;
+    font-family:"Baloo 2","Nunito",system-ui,sans-serif;font-weight:800;color:#25405c}
+  .cf-sub{margin:0 0 18px;font-size:14.5px;color:#556b83;line-height:1.5}
+  .cf-list{margin:0 0 22px;padding:14px 16px;background:#fbf8f1;border-radius:14px;
+    display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:14.5px}
+  .cf-list dt{font-weight:800;color:#556b83}
+  .cf-list dd{margin:0;color:#25405c;overflow-wrap:anywhere}
+  .cf-actions{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap}
+  .cf-actions .btn{padding:12px 22px;font-size:14.5px}
+  #cf-send[disabled]{opacity:.6;pointer-events:none}
+  @media(max-width:480px){
+    .cf-box{padding:24px 20px 20px;border-radius:20px}
+    .cf-box h3{font-size:19px}
+    .cf-actions{flex-direction:column-reverse}
+    .cf-actions .btn{width:100%;justify-content:center}
+  }
+  @media(prefers-reduced-motion:reduce){
+    .cf,.cf-box{transition:none}
+  }
+</style>
+
+<script is:inline>
+  (function(){
+    var el = document.getElementById('confirm');
+    if (!el) return;
+    var list = document.getElementById('cf-list');
+    var sendBtn = document.getElementById('cf-send');
+    var resolver = null;
+
+    function labels(langCode){
+      if (langCode === 'en') return { firstName:'Name', lastName:'Last name', phone:'Phone', email:'Email', childAge:'Child age' };
+      return { firstName:'Nombre', lastName:'Apellido', phone:'Teléfono', email:'Correo', childAge:'Edad del niño' };
+    }
+    function fill(data){
+      var lc = data.lang === 'en' ? 'en' : 'es';
+      var L = labels(lc);
+      var rows = ['firstName','lastName','phone','email','childAge']
+        .filter(function(k){ return data[k]; })
+        .map(function(k){
+          var dt = document.createElement('dt'); dt.textContent = L[k];
+          var dd = document.createElement('dd'); dd.textContent = data[k];
+          return [dt, dd];
+        });
+      list.innerHTML = '';
+      rows.forEach(function(pair){ list.appendChild(pair[0]); list.appendChild(pair[1]); });
+    }
+    function open(){
+      el.classList.add('open');
+      el.setAttribute('aria-hidden','false');
+      document.body.classList.add('mm-open');
+      setTimeout(function(){ sendBtn.focus(); }, 60);
+    }
+    function shut(){
+      el.classList.remove('open');
+      el.setAttribute('aria-hidden','true');
+      document.body.classList.remove('mm-open');
+    }
+    el.querySelectorAll('[data-cf-close]').forEach(function(n){
+      n.addEventListener('click', function(){
+        shut();
+        if (resolver){ resolver(false); resolver = null; }
+      });
+    });
+    sendBtn.addEventListener('click', function(){
+      if (resolver){ resolver(true); resolver = null; }
+      shut();
+    });
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape' && el.classList.contains('open')){
+        shut();
+        if (resolver){ resolver(false); resolver = null; }
+      }
+    });
+
+    window.__openConfirm = function(data){
+      fill(data);
+      open();
+      return new Promise(function(res){ resolver = res; });
+    };
+  })();
+</script>
