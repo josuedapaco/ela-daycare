@@ -43,36 +43,130 @@ const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => (
 
 // ---- plantillas de correo ----
 
+// Layout base tipo email-safe (tables + inline styles, compat Outlook/Gmail/Apple Mail)
+function emailShell({ preheader, bannerTitle, bannerSub, bannerAccent = '#2f73b5', bodyHtml, langCode }) {
+  const isEn = langCode === 'en';
+  const footL = isEn ? 'Jackson Heights, Queens NY 11372' : 'Jackson Heights, Queens NY 11372';
+  const footL2 = isEn ? 'NY OCFS Group Family Daycare License #948701' : 'Licencia de Group Family Daycare NY OCFS #948701';
+  const hours = isEn ? 'Mon–Fri · 7:30am – 5:30pm' : 'Lun–Vie · 7:30am – 5:30pm';
+
+  return `<!DOCTYPE html>
+<html lang="${isEn ? 'en' : 'es'}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>${esc(bannerTitle)}</title>
+</head>
+<body style="margin:0;padding:0;background:#f4efe4;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#25405c;-webkit-font-smoothing:antialiased">
+<div style="display:none;max-height:0;overflow:hidden;color:#f4efe4;opacity:0">${esc(preheader)}</div>
+<table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background:#f4efe4">
+  <tr><td align="center" style="padding:28px 12px">
+    <table role="presentation" width="600" cellspacing="0" cellpadding="0" border="0" style="max-width:600px;width:100%;background:#ffffff;border-radius:20px;overflow:hidden;box-shadow:0 4px 24px rgba(37,64,92,.08)">
+      <!-- BANNER -->
+      <tr><td style="padding:0;background:linear-gradient(135deg,${bannerAccent} 0%,#7CCDBE 100%);background-color:${bannerAccent}">
+        <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
+          <tr><td style="padding:36px 32px 30px 32px">
+            <!-- logo mark -->
+            <table role="presentation" cellspacing="0" cellpadding="0" border="0" style="margin-bottom:16px">
+              <tr>
+                <td style="vertical-align:middle;padding-right:14px">
+                  <div style="width:52px;height:52px;background:rgba(255,255,255,.22);border:2px solid rgba(255,255,255,.55);border-radius:16px;display:inline-block;text-align:center;line-height:52px;font-size:24px">💛</div>
+                </td>
+                <td style="vertical-align:middle">
+                  <div style="font-weight:800;color:#ffffff;font-size:19px;letter-spacing:-.01em;line-height:1.1">ELA Daycare</div>
+                  <div style="color:rgba(255,255,255,.85);font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-top:3px">Emanuel's Little Angels</div>
+                </td>
+              </tr>
+            </table>
+            <div style="color:#ffffff;font-size:26px;font-weight:800;letter-spacing:-.015em;line-height:1.18;margin-bottom:8px">${bannerTitle}</div>
+            ${bannerSub ? `<div style="color:rgba(255,255,255,.9);font-size:15px;line-height:1.55">${bannerSub}</div>` : ''}
+          </td></tr>
+        </table>
+      </td></tr>
+
+      <!-- BODY -->
+      <tr><td style="padding:30px 32px 12px 32px;font-size:15.5px;line-height:1.62;color:#25405c">
+        ${bodyHtml}
+      </td></tr>
+
+      <!-- FOOTER -->
+      <tr><td style="padding:20px 32px 30px 32px">
+        <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="border-top:1px solid #e4e8ee;padding-top:22px">
+          <tr>
+            <td style="font-size:12.5px;color:#8b9cad;line-height:1.6">
+              <b style="color:#556b83">${footL}</b><br>
+              ${hours}<br>
+              ${footL2}
+            </td>
+            <td align="right" style="font-size:12.5px;color:#8b9cad">
+              <a href="tel:+13473690961" style="color:#2f73b5;text-decoration:none;font-weight:800">+1 (347) 369-0961</a>
+            </td>
+          </tr>
+        </table>
+      </td></tr>
+    </table>
+    <div style="max-width:600px;margin:16px auto 0;padding:0 12px;font-size:11px;color:#8b9cad;text-align:center;line-height:1.5">
+      ${isEn ? 'You are receiving this because you submitted an enrollment inquiry on our site.' : 'Recibes este correo porque enviaste una solicitud de inscripción desde nuestro sitio.'}
+    </div>
+  </td></tr>
+</table>
+</body></html>`;
+}
+
+function labeledRow(label, value, isLast = false) {
+  return `<tr><td style="padding:8px 0;${isLast ? '' : 'border-bottom:1px solid #ecece5;'}font-size:14.5px;color:#556b83;font-weight:700;width:38%;vertical-align:top">${esc(label)}</td><td style="padding:8px 0;${isLast ? '' : 'border-bottom:1px solid #ecece5;'}font-size:14.5px;color:#25405c;vertical-align:top">${value}</td></tr>`;
+}
+
 function adminEmail({ firstName, lastName, phone, email, childAge, langCode, page, ip }) {
-  const subject = langCode === 'en'
+  const isEn = langCode === 'en';
+  const subject = isEn
     ? `New enrollment inquiry — ${firstName} ${lastName}`
     : `Nueva solicitud de inscripción — ${firstName} ${lastName}`;
+  const preheader = isEn
+    ? `${firstName} ${lastName} wants to know about openings — reply here to answer.`
+    : `${firstName} ${lastName} pregunta por cupos — responde este correo y le llega directo.`;
+  const bannerTitle = isEn ? '📥 New enrollment inquiry' : '📥 Nueva solicitud de inscripción';
+  const bannerSub = isEn
+    ? `From your website — <b>${esc(firstName)} ${esc(lastName)}</b>`
+    : `De tu sitio web — <b>${esc(firstName)} ${esc(lastName)}</b>`;
 
-  const html = `
-    <div style="font-family:system-ui,Segoe UI,Arial,sans-serif;font-size:15px;color:#25405c;max-width:560px">
-      <h2 style="margin:0 0 12px;color:#2f73b5">${esc(subject)}</h2>
-      <table cellpadding="6" style="border-collapse:collapse;background:#fbf8f1;border-radius:8px;padding:8px">
-        <tr><td><b>Nombre:</b></td><td>${esc(firstName)} ${esc(lastName)}</td></tr>
-        <tr><td><b>Teléfono:</b></td><td><a href="tel:${esc(phone)}" style="color:#2f73b5">${esc(phone)}</a></td></tr>
-        <tr><td><b>Correo:</b></td><td><a href="mailto:${esc(email)}" style="color:#2f73b5">${esc(email)}</a></td></tr>
-        <tr><td><b>Edad del niño:</b></td><td>${esc(childAge)}</td></tr>
-        <tr><td><b>Idioma preferido:</b></td><td>${langCode.toUpperCase()}</td></tr>
-        <tr><td><b>Origen:</b></td><td>${esc(page || '')}</td></tr>
-        <tr><td><b>IP:</b></td><td>${esc(ip)}</td></tr>
+  const rows = [
+    labeledRow(isEn ? 'Name' : 'Nombre', `${esc(firstName)} ${esc(lastName)}`),
+    labeledRow(isEn ? 'Phone' : 'Teléfono', `<a href="tel:${esc(phone)}" style="color:#2f73b5;text-decoration:none;font-weight:800">${esc(phone)}</a>`),
+    labeledRow(isEn ? 'Email' : 'Correo', `<a href="mailto:${esc(email)}" style="color:#2f73b5;text-decoration:none">${esc(email)}</a>`),
+    labeledRow(isEn ? 'Child age' : 'Edad del niño', esc(childAge)),
+    labeledRow(isEn ? 'Preferred language' : 'Idioma preferido', langCode.toUpperCase()),
+    labeledRow(isEn ? 'Source' : 'Origen', `<span style="font-size:12.5px;color:#8b9cad">${esc(page || '')}</span>`),
+    labeledRow(isEn ? 'IP' : 'IP', `<span style="font-size:12.5px;color:#8b9cad">${esc(ip)}</span>`, true),
+  ].join('');
+
+  const cta = isEn
+    ? `<a href="tel:${esc(phone)}" style="display:inline-block;background:#2f73b5;color:#ffffff;text-decoration:none;font-weight:800;padding:14px 28px;border-radius:99px;font-size:15px;letter-spacing:-.01em">📞 Call ${esc(firstName)} now</a>`
+    : `<a href="tel:${esc(phone)}" style="display:inline-block;background:#2f73b5;color:#ffffff;text-decoration:none;font-weight:800;padding:14px 28px;border-radius:99px;font-size:15px;letter-spacing:-.01em">📞 Llamar a ${esc(firstName)} ahora</a>`;
+
+  const bodyHtml = `
+    <div style="background:#fbf8f1;border-radius:14px;padding:6px 20px;margin-bottom:22px">
+      <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
+        ${rows}
       </table>
-      <p style="color:#556b83;font-size:13.5px;margin-top:16px">
-        Responde este correo directamente y le llegará a ${esc(firstName)}.
-      </p>
-    </div>`;
+    </div>
+    <div style="text-align:center;margin:24px 0 18px">${cta}</div>
+    <p style="margin:14px 0 0;font-size:13.5px;color:#8b9cad;text-align:center;line-height:1.55">
+      ${isEn ? 'Or just reply this email — it lands directly in ' : 'O responde este correo directamente — le llegará a '}
+      <b style="color:#556b83">${esc(firstName)}</b>.
+    </p>`;
+
+  const html = emailShell({ preheader, bannerTitle, bannerSub, bannerAccent: '#2f73b5', bodyHtml, langCode });
 
   const text = [
     subject,
-    `Nombre: ${firstName} ${lastName}`,
-    `Teléfono: ${phone}`,
-    `Correo: ${email}`,
-    `Edad del niño: ${childAge}`,
-    `Idioma: ${langCode}`,
-    `Origen: ${page || ''}`,
+    '',
+    `${isEn ? 'Name' : 'Nombre'}: ${firstName} ${lastName}`,
+    `${isEn ? 'Phone' : 'Teléfono'}: ${phone}`,
+    `${isEn ? 'Email' : 'Correo'}: ${email}`,
+    `${isEn ? 'Child age' : 'Edad del niño'}: ${childAge}`,
+    `${isEn ? 'Language' : 'Idioma'}: ${langCode}`,
+    `${isEn ? 'Source' : 'Origen'}: ${page || ''}`,
     `IP: ${ip}`,
   ].join('\n');
 
@@ -80,40 +174,69 @@ function adminEmail({ firstName, lastName, phone, email, childAge, langCode, pag
 }
 
 function confirmationEmail({ firstName, phone, email, childAge, langCode }) {
-  if (langCode === 'en') {
-    const subject = `Thanks ${firstName}! We received your inquiry — ELA Daycare`;
-    const html = `
-      <div style="font-family:system-ui,Segoe UI,Arial,sans-serif;font-size:15.5px;color:#25405c;max-width:560px;line-height:1.55">
-        <h2 style="margin:0 0 14px;color:#2f73b5;font-size:22px">Hi ${esc(firstName)}, we got your message 💛</h2>
-        <p>Thanks so much for reaching out to <b>Emanuel's Little Angels</b>. We usually reply the same day — often within a couple of hours.</p>
-        <p>Here's what you sent us:</p>
-        <table cellpadding="6" style="border-collapse:collapse;background:#fbf8f1;border-radius:8px;font-size:14.5px">
-          <tr><td><b>Phone:</b></td><td>${esc(phone)}</td></tr>
-          <tr><td><b>Email:</b></td><td>${esc(email)}</td></tr>
-          <tr><td><b>Child age:</b></td><td>${esc(childAge)}</td></tr>
-        </table>
-        <p style="margin-top:18px">If it's easier, feel free to call or text us at <a href="tel:+13473690961" style="color:#2f73b5"><b>(347) 369-0961</b></a>.</p>
-        <p style="margin-top:24px">— The ELA Daycare team<br><small style="color:#8b9cad">Jackson Heights, Queens · NY OCFS License #948701</small></p>
-      </div>`;
-    const text = `Hi ${firstName}, we received your inquiry.\n\nPhone: ${phone}\nEmail: ${email}\nChild age: ${childAge}\n\nWe reply the same day. Call or text (347) 369-0961.\n\n— ELA Daycare`;
-    return { subject, html, text };
-  }
+  const isEn = langCode === 'en';
+  const subject = isEn
+    ? `Thanks ${firstName}! We got your message — ELA Daycare`
+    : `¡Gracias ${firstName}! Ya recibimos tu mensaje — ELA Daycare`;
+  const preheader = isEn
+    ? `We reply the same day. Here's a copy of what you sent us.`
+    : `Contestamos el mismo día. Aquí una copia de lo que nos mandaste.`;
+  const bannerTitle = isEn ? `Hi ${firstName}, we got your message` : `Hola ${firstName}, ya nos llegó tu mensaje`;
+  const bannerSub = isEn
+    ? `Thanks for reaching out to <b>Emanuel's Little Angels</b>. We usually reply within a couple of hours during the day.`
+    : `Gracias por escribirle a <b>Emanuel's Little Angels</b>. Normalmente contestamos el mismo día, muchas veces en un par de horas.`;
 
-  const subject = `¡Gracias ${firstName}! Recibimos tu solicitud — ELA Daycare`;
-  const html = `
-    <div style="font-family:system-ui,Segoe UI,Arial,sans-serif;font-size:15.5px;color:#25405c;max-width:560px;line-height:1.55">
-      <h2 style="margin:0 0 14px;color:#2f73b5;font-size:22px">Hola ${esc(firstName)}, ya nos llegó tu mensaje 💛</h2>
-      <p>Gracias por escribirle a <b>Emanuel's Little Angels</b>. Normalmente contestamos el mismo día — muchas veces en un par de horas.</p>
-      <p>Esto es lo que nos mandaste:</p>
-      <table cellpadding="6" style="border-collapse:collapse;background:#fbf8f1;border-radius:8px;font-size:14.5px">
-        <tr><td><b>Teléfono:</b></td><td>${esc(phone)}</td></tr>
-        <tr><td><b>Correo:</b></td><td>${esc(email)}</td></tr>
-        <tr><td><b>Edad del niño:</b></td><td>${esc(childAge)}</td></tr>
+  const rows = [
+    labeledRow(isEn ? 'Phone' : 'Teléfono', esc(phone)),
+    labeledRow(isEn ? 'Email' : 'Correo', esc(email)),
+    labeledRow(isEn ? 'Child age' : 'Edad del niño', esc(childAge), true),
+  ].join('');
+
+  const cta = isEn
+    ? `<a href="tel:+13473690961" style="display:inline-block;background:#2f73b5;color:#ffffff;text-decoration:none;font-weight:800;padding:14px 30px;border-radius:99px;font-size:15px;letter-spacing:-.01em">📞 Call or text (347) 369-0961</a>`
+    : `<a href="tel:+13473690961" style="display:inline-block;background:#2f73b5;color:#ffffff;text-decoration:none;font-weight:800;padding:14px 30px;border-radius:99px;font-size:15px;letter-spacing:-.01em">📞 Llamar o textear al (347) 369-0961</a>`;
+
+  const intro = isEn
+    ? `<p style="margin:0 0 16px">This is a copy of what you sent us:</p>`
+    : `<p style="margin:0 0 16px">Esta es una copia de lo que nos mandaste:</p>`;
+
+  const nextSteps = isEn
+    ? `<p style="margin:22px 0 6px;font-weight:800;font-size:15.5px;color:#25405c">What happens next</p>
+       <ol style="margin:6px 0 0;padding-left:22px;font-size:14.5px;line-height:1.7;color:#556b83">
+         <li>Someone from our team reads your inquiry today.</li>
+         <li>We call or email you back the same day.</li>
+         <li>If we sound like a fit, we schedule a visit.</li>
+       </ol>`
+    : `<p style="margin:22px 0 6px;font-weight:800;font-size:15.5px;color:#25405c">Qué sigue ahora</p>
+       <ol style="margin:6px 0 0;padding-left:22px;font-size:14.5px;line-height:1.7;color:#556b83">
+         <li>Hoy mismo alguien del equipo lee tu solicitud.</li>
+         <li>Te llamamos o escribimos el mismo día.</li>
+         <li>Si te acomoda, agendamos una visita a la casa.</li>
+       </ol>`;
+
+  const closing = isEn
+    ? `<p style="margin:22px 0 0">If it's easier for you, just call or text us directly — we answer during business hours.</p>
+       <p style="margin:18px 0 4px">With warmth,<br><b style="color:#25405c">— The ELA Daycare team</b></p>`
+    : `<p style="margin:22px 0 0">Si prefieres, llámanos o mándanos un texto — respondemos en horario de atención.</p>
+       <p style="margin:18px 0 4px">Con cariño,<br><b style="color:#25405c">— El equipo de ELA Daycare</b></p>`;
+
+  const bodyHtml = `
+    ${intro}
+    <div style="background:#fbf8f1;border-radius:14px;padding:6px 20px;margin-bottom:6px">
+      <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
+        ${rows}
       </table>
-      <p style="margin-top:18px">Si prefieres, llámanos o mándanos un texto al <a href="tel:+13473690961" style="color:#2f73b5"><b>(347) 369-0961</b></a>.</p>
-      <p style="margin-top:24px">— El equipo de ELA Daycare<br><small style="color:#8b9cad">Jackson Heights, Queens · Licencia OCFS de NY #948701</small></p>
-    </div>`;
-  const text = `Hola ${firstName}, recibimos tu solicitud.\n\nTeléfono: ${phone}\nCorreo: ${email}\nEdad del niño: ${childAge}\n\nContestamos el mismo día. Llámanos al (347) 369-0961.\n\n— ELA Daycare`;
+    </div>
+    ${nextSteps}
+    <div style="text-align:center;margin:26px 0 6px">${cta}</div>
+    ${closing}`;
+
+  const html = emailShell({ preheader, bannerTitle, bannerSub, bannerAccent: '#2f73b5', bodyHtml, langCode });
+
+  const text = isEn
+    ? `Hi ${firstName}, we received your inquiry.\n\nPhone: ${phone}\nEmail: ${email}\nChild age: ${childAge}\n\nWhat happens next:\n1) We read your inquiry today.\n2) We call or email you back the same day.\n3) If we sound like a fit, we schedule a visit.\n\nCall or text (347) 369-0961.\n\n— ELA Daycare · Jackson Heights, Queens NY`
+    : `Hola ${firstName}, recibimos tu solicitud.\n\nTeléfono: ${phone}\nCorreo: ${email}\nEdad del niño: ${childAge}\n\nQué sigue:\n1) Hoy leemos tu solicitud.\n2) Te llamamos o escribimos el mismo día.\n3) Si te acomoda, agendamos una visita.\n\nLlámanos al (347) 369-0961.\n\n— ELA Daycare · Jackson Heights, Queens NY`;
+
   return { subject, html, text };
 }
 
