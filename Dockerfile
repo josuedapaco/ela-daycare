@@ -1,11 +1,29 @@
-FROM nginx:alpine
+FROM node:20-alpine AS build
 
-COPY index.html /usr/share/nginx/html/index.html
-COPY favicon.svg /usr/share/nginx/html/favicon.svg
-COPY css /usr/share/nginx/html/css
-COPY js /usr/share/nginx/html/js
-COPY img /usr/share/nginx/html/img
+WORKDIR /app
 
-RUN sed -i 's/listen[[:space:]]*80;/listen 82;/' /etc/nginx/conf.d/default.conf
+COPY package.json package-lock.json* ./
+RUN npm ci --no-audit --no-fund
 
+COPY astro.config.mjs ./
+COPY src ./src
+COPY public ./public
+
+RUN npm run build
+
+
+FROM node:20-alpine AS runtime
+
+WORKDIR /app
+
+COPY package.json package-lock.json* ./
+RUN npm ci --omit=dev --no-audit --no-fund && npm cache clean --force
+
+COPY server.js ./
+COPY --from=build /app/dist ./dist
+
+ENV NODE_ENV=production
+ENV PORT=82
 EXPOSE 82
+
+CMD ["node", "server.js"]

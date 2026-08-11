@@ -1,17 +1,9 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" type="image/svg+xml" href="favicon.svg">
-<title>ELA Daycare — Emanuel's Little Angels Family Group Daycare, Queens NY</title>
-<meta name="description" content="Emanuel's Little Angels: group family daycare licenciado en Queens. Solo 12 niños, de 6 semanas a 12 años. Aceptamos 3-K y vales de ACS/HRA. Bilingüe español e inglés.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css">
-</head>
-<body>
+---
+import Base from '../layouts/Base.astro';
+import HeroThree from '../components/HeroThree.astro';
+import MobileMenu from '../components/MobileMenu.astro';
+---
+<Base>
 
 <!-- ====== LOGOTIPO (definición reutilizable) ====== -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -67,7 +59,9 @@
         <small data-es="Emanuel's Little Angels" data-en="Emanuel's Little Angels">Emanuel's Little Angels</small>
       </span>
     </a>
-    <button class="burger" onclick="document.querySelector('.navlinks').classList.toggle('open')" aria-label="Menú">☰</button>
+    <button class="burger" onclick="window.__openMobileMenu && window.__openMobileMenu()" aria-label="Abrir menú" aria-expanded="false">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
     <div class="navlinks">
       <a href="#porque" data-es="Por qué una casa" data-en="Why a home">Por qué una casa</a>
       <a href="#grupos" data-es="Grupos" data-en="Groups">Grupos</a>
@@ -76,11 +70,16 @@
       <a href="#visita" data-es="Inscripción" data-en="Enroll">Inscripción</a>
     </div>
     <a class="btn btn-1 btn-sm" href="#visita" style="margin-left:14px" data-es="Agendar visita" data-en="Book a tour">Agendar visita</a>
+    <div class="langsw-nav" role="group" aria-label="Idioma / Language">
+      <button onclick="setLang('es')" aria-pressed="true" id="b2-es">ES</button>
+      <button onclick="setLang('en')" aria-pressed="false" id="b2-en">EN</button>
+    </div>
   </div>
 </nav>
 
 <!-- ====== HERO ====== -->
 <header class="hero" id="top">
+  <HeroThree />
   <div class="wrap">
     <div class="grid">
       <div>
@@ -108,12 +107,8 @@
         </div>
       </div>
       <div class="hero-art">
-        <!-- FOTO: la sala principal de la casa, con niños jugando -->
         <div class="frame">
-          <div class="ph">
-            <svg width="150" height="133" viewBox="0 0 200 178" aria-hidden="true" style="opacity:.5"><use href="#ela"/></svg>
-            <span data-es="Foto de la sala principal" data-en="Photo of the main room">Foto de la sala principal</span>
-          </div>
+          <img src="/img/hero/sala-principal.webp" alt="La casa vista desde el patio trasero, con el porche de madera y el área de juegos infantiles" fetchpriority="high">
         </div>
         <div class="badge">
           <svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true">
@@ -130,6 +125,25 @@
   </div>
 </header>
 
+<!-- ====== FRANJA PRUEBA SOCIAL ====== -->
+<section class="social">
+  <div class="social-row">
+    <div class="avatars">
+      <div class="av">M</div>
+      <div class="av">R</div>
+      <div class="av">D</div>
+      <div class="av">+</div>
+    </div>
+    <div class="social-txt">
+      <div class="line1">
+        <span class="stars">★★★★★</span>
+        <b class="fill" data-es="4.9 en Google · 34 familias reseñando" data-en="4.9 on Google · 34 families reviewing">4.9 en Google · 34 familias reseñando</b>
+      </div>
+      <cite data-es="&laquo;Mi hija llegó de 8 meses y salió leyendo. Nos sentimos parte de otra familia.&raquo; — Mariana, mamá en Elmhurst" data-en="&laquo;My daughter arrived at 8 months and left reading. We felt like part of another family.&raquo; — Mariana, mom in Elmhurst">«Mi hija llegó de 8 meses y salió leyendo. Nos sentimos parte de otra familia.» — Mariana, mamá en Elmhurst</cite>
+    </div>
+  </div>
+</section>
+
 <svg class="sep" viewBox="0 0 1440 50" preserveAspectRatio="none" aria-hidden="true">
   <path fill="#fbf8f1" d="M0 30a70 25 0 0 1 120 0a70 25 0 0 1 120 0a70 25 0 0 1 120 0a70 25 0 0 1 120 0a70 25 0 0 1 120 0a70 25 0 0 1 120 0a70 25 0 0 1 120 0a70 25 0 0 1 120 0a70 25 0 0 1 120 0a70 25 0 0 1 120 0a70 25 0 0 1 120 0a70 25 0 0 1 120 0V50H0Z"/>
 </svg>
@@ -144,6 +158,49 @@
       <div class="stat"><span class="stat-n fill">9</span><span class="stat-l" data-es="años cuidando niños en Queens" data-en="years caring for children in Queens">años cuidando niños en Queens</span></div>
     </div>
     <p style="text-align:center;margin:20px auto 0;max-width:58ch;color:var(--ink-2);font-weight:700" data-es="Un centro grande tiene 60 niños y personal que rota. Aquí son doce, siempre los mismos doce, y tu hijo puede quedarse con nosotros desde bebé hasta la escuela primaria." data-en="A big center has 60 children and staff that rotates. Here there are twelve, always the same twelve, and your child can stay with us from baby all the way through elementary school.">Un centro grande tiene 60 niños y personal que rota. Aquí son doce, siempre los mismos doce, y tu hijo puede quedarse con nosotros desde bebé hasta la escuela primaria.</p>
+  </div>
+</section>
+
+<!-- ====== FRANJA DE CREDENCIALES ====== -->
+<section class="creds">
+  <div class="wrap">
+    <div class="creds-grid">
+      <div class="cred">
+        <div class="cred-ico">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2f73b5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6z"/><path d="m9 12 2 2 4-4"/></svg>
+        </div>
+        <b data-es="Licencia OCFS de NY" data-en="NY OCFS License">Licencia OCFS de NY</b>
+        <small class="fill">#948701</small>
+      </div>
+      <div class="cred">
+        <div class="cred-ico">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3a8f7e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.3-7-9.5A4.5 4.5 0 0 1 12 8a4.5 4.5 0 0 1 7 3.5C19 16.7 12 21 12 21Z"/></svg>
+        </div>
+        <b data-es="CPR + primeros auxilios" data-en="CPR + first aid">CPR + primeros auxilios</b>
+        <small data-es="Certificación al día" data-en="Current certification">Certificación al día</small>
+      </div>
+      <div class="cred">
+        <div class="cred-ico">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#cf5d47" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5.5 9.5V20h13V9.5"/><path d="M10 20v-5h4v5"/></svg>
+        </div>
+        <b data-es="Aceptamos ACS · HRA" data-en="Accept ACS · HRA">Aceptamos ACS · HRA</b>
+        <small data-es="Vales del estado" data-en="State vouchers">Vales del estado</small>
+      </div>
+      <div class="cred">
+        <div class="cred-ico">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#a87b16" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M6 21V10l6-4 6 4v11"/><path d="M9 21v-6h6v6"/></svg>
+        </div>
+        <b data-es="Programa 3-K" data-en="3-K program">Programa 3-K</b>
+        <small data-es="Gratis para 3 años" data-en="Free for 3-year-olds">Gratis para 3 años</small>
+      </div>
+      <div class="cred">
+        <div class="cred-ico">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#25405c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a4 4 0 0 1 4 4v3a4 4 0 0 1-8 0V7a4 4 0 0 1 4-4z"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+        </div>
+        <b data-es="Bilingüe ES · EN" data-en="Bilingual EN · ES">Bilingüe ES · EN</b>
+        <small data-es="Nativo, no traducido" data-en="Native, not translated">Nativo, no traducido</small>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -192,16 +249,24 @@
     <div class="vac">
       <div class="vcard"><h3 data-es="Bebés" data-en="Babies">Bebés</h3>
         <div class="age" data-es="6 semanas – 18 meses" data-en="6 weeks – 18 months">6 semanas – 18 meses</div>
-        <span class="pill wait"><i class="dot"></i><span class="fill" data-es="Lleno · 2 en espera" data-en="Full · 2 waiting">Lleno · 2 en espera</span></span></div>
+        <span class="pill wait"><i class="dot"></i><span class="fill" data-es="Lleno · 2 en espera" data-en="Full · 2 waiting">Lleno · 2 en espera</span></span>
+        <div class="cap"><div class="cap-bar"><div class="cap-fill f-full" style="width:100%"></div></div>
+          <div class="cap-txt"><span data-es="2 / 2 llenos" data-en="2 / 2 filled">2 / 2 llenos</span><span data-es="lista +2" data-en="waitlist +2">lista +2</span></div></div></div>
       <div class="vcard"><h3 data-es="Caminadores" data-en="Toddlers">Caminadores</h3>
         <div class="age" data-es="18 meses – 3 años" data-en="18 months – 3 years">18 meses – 3 años</div>
-        <span class="pill few"><i class="dot"></i><span class="fill" data-es="1 cupo" data-en="1 spot left">1 cupo</span></span></div>
+        <span class="pill few"><i class="dot"></i><span class="fill" data-es="1 cupo" data-en="1 spot left">1 cupo</span></span>
+        <div class="cap"><div class="cap-bar"><div class="cap-fill f-few" style="width:66%"></div></div>
+          <div class="cap-txt"><span data-es="2 / 3 llenos" data-en="2 / 3 filled">2 / 3 llenos</span><span data-es="1 disponible" data-en="1 available">1 disponible</span></div></div></div>
       <div class="vcard"><h3 data-es="Angelitos" data-en="Little Angels">Angelitos</h3>
         <div class="age" data-es="3 – 5 años · 3-K" data-en="3 – 5 years · 3-K">3 – 5 años · 3-K</div>
-        <span class="pill open"><i class="dot"></i><span class="fill" data-es="3 cupos" data-en="3 spots open">3 cupos</span></span></div>
+        <span class="pill open"><i class="dot"></i><span class="fill" data-es="3 cupos" data-en="3 spots open">3 cupos</span></span>
+        <div class="cap"><div class="cap-bar"><div class="cap-fill f-open" style="width:25%"></div></div>
+          <div class="cap-txt"><span data-es="1 / 4 lleno" data-en="1 / 4 filled">1 / 4 lleno</span><span data-es="3 disponibles" data-en="3 available">3 disponibles</span></div></div></div>
       <div class="vcard"><h3 data-es="Después de escuela" data-en="After school">Después de escuela</h3>
         <div class="age" data-es="5 – 12 años" data-en="5 – 12 years">5 – 12 años</div>
-        <span class="pill open"><i class="dot"></i><span class="fill" data-es="4 cupos" data-en="4 spots open">4 cupos</span></span></div>
+        <span class="pill open"><i class="dot"></i><span class="fill" data-es="4 cupos" data-en="4 spots open">4 cupos</span></span>
+        <div class="cap"><div class="cap-bar"><div class="cap-fill f-open" style="width:0%"></div></div>
+          <div class="cap-txt"><span data-es="0 / 4 llenos" data-en="0 / 4 filled">0 / 4 llenos</span><span data-es="4 disponibles" data-en="4 available">4 disponibles</span></div></div></div>
     </div>
     <p class="vac-note"><span data-es="Última actualización:" data-en="Last updated:">Última actualización:</span> <span class="fill" data-es="lunes 3 de agosto de 2026" data-en="Monday, August 3, 2026">lunes 3 de agosto de 2026</span>. <span data-es="Nuestra licencia permite hasta 12 niños de 6 semanas a 12 años, más cuatro niños de edad escolar." data-en="Our license allows up to 12 children ages 6 weeks to 12 years, plus four additional school-age children.">Nuestra licencia permite hasta 12 niños de 6 semanas a 12 años, más cuatro niños de edad escolar.</span></p>
   </div>
@@ -233,8 +298,7 @@
           <li data-es="Canciones y arrullos en español e inglés desde la primera semana." data-en="Songs and lullabies in Spanish and English from the very first week.">Canciones y arrullos en español e inglés desde la primera semana.</li>
         </ul>
       </div>
-      <!-- FOTO: rincón de bebés -->
-      <div class="frame"><div class="ph"><span data-es="Foto: el rincón de los bebés" data-en="Photo: the babies' corner">Foto: el rincón de los bebés</span></div></div>
+      <div class="frame"><img src="/img/grupos/bebes.webp" alt="Rincón de bebés: cambiador con letrero 'Baby's'" loading="lazy"></div>
     </div>
 
     <div class="panel">
@@ -248,7 +312,7 @@
           <li data-es="Salimos al parque del barrio dos veces al día cuando el clima ayuda." data-en="We walk to the neighborhood park twice a day when the weather allows.">Salimos al parque del barrio dos veces al día cuando el clima ayuda.</li>
         </ul>
       </div>
-      <div class="frame"><div class="ph"><span data-es="Foto: caminadores jugando" data-en="Photo: toddlers playing">Foto: caminadores jugando</span></div></div>
+      <div class="frame"><img src="/img/grupos/caminadores.webp" alt="Cuidadora jugando en el suelo con una caminadora sobre alfombra didáctica" loading="lazy"></div>
     </div>
 
     <div class="panel">
@@ -262,7 +326,7 @@
           <li data-es="Preparación real para kínder y te acompañamos con la solicitud de MySchools, en español." data-en="Real kindergarten readiness, and we walk you through the MySchools application in Spanish.">Preparación real para kínder y te acompañamos con la solicitud de MySchools, en español.</li>
         </ul>
       </div>
-      <div class="frame"><div class="ph"><span data-es="Foto: proyecto de los angelitos" data-en="Photo: the Little Angels' project">Foto: proyecto de los angelitos</span></div></div>
+      <div class="frame"><img src="/img/grupos/angelitos.webp" alt="Mesa amarilla con sillas de colores y pared con abecedario, área de 3-K" loading="lazy"></div>
     </div>
 
     <div class="panel">
@@ -276,7 +340,7 @@
           <li data-es="Días sin clases, medio día y vacaciones escolares: abrimos igual." data-en="No-school days, half days and school breaks: we're open anyway.">Días sin clases, medio día y vacaciones escolares: abrimos igual.</li>
         </ul>
       </div>
-      <div class="frame"><div class="ph"><span data-es="Foto: tarea y merienda" data-en="Photo: homework and snack">Foto: tarea y merienda</span></div></div>
+      <div class="frame"><img src="/img/grupos/despues-escuela.webp" alt="Sala con TV y alfombra de colores para niños en edad escolar" loading="lazy"></div>
     </div>
   </div>
 </section>
@@ -330,9 +394,8 @@
         </ul>
       </div>
       <div>
-        <!-- FOTO: el almuerzo servido en la mesa -->
         <div class="frame tall" style="max-width:400px;margin-left:auto">
-          <div class="ph"><span data-es="Foto: el almuerzo de hoy" data-en="Photo: today's lunch">Foto: el almuerzo de hoy</span></div>
+          <img src="/img/dia/un-dia.webp" alt="Patio trasero con juegos infantiles, canasta de básquet y césped verde" loading="lazy">
         </div>
         <div style="margin-top:22px">
           <h3 style="font-size:20px;margin:0 0 8px" data-es="Comida hecha en la cocina de la casa" data-en="Food cooked in the house kitchen">Comida hecha en la cocina de la casa</h3>
@@ -360,8 +423,7 @@
     </div>
 
     <div class="owner">
-      <!-- FOTO: la dueña -->
-      <div class="frame sq"><div class="ph"><span data-es="Foto de la dueña" data-en="Owner photo">Foto de la dueña</span></div></div>
+      <div class="frame sq"><img src="/img/equipo/duena.webp" alt="La dueña sonriendo mientras juega con una niña" loading="lazy"></div>
       <div>
         <h3 style="font-size:23px;margin:0 0 4px"><span data-es="Hola, soy" data-en="Hi, I'm">Hola, soy</span> <span class="fill">[tu nombre]</span></h3>
         <div style="color:var(--sky-dk);font-weight:800;font-size:14px;margin-bottom:12px" data-es="Fundadora y cuidadora principal · en la puerta cada mañana" data-en="Founder and lead caregiver · at the door every morning">Fundadora y cuidadora principal · en la puerta cada mañana</div>
@@ -372,19 +434,19 @@
 
     <div class="team">
       <div class="tcard">
-        <div class="frame"><div class="ph"><span data-es="Foto" data-en="Photo">Foto</span></div></div>
+        <div class="frame"><img src="/img/equipo/asistente.webp" alt="Retrato profesional de la asistente con uniforme de ELA Daycare" loading="lazy"></div>
         <div class="tx"><h3 class="fill">[nombre de la asistente]</h3>
           <div class="role" data-es="Asistente · aquí desde 2021" data-en="Assistant · here since 2021">Asistente · aquí desde <span class="fill">2021</span></div>
           <p class="fun fill" data-es="Un dato personal suyo aquí — algo que los niños cuenten en la casa. Eso es lo que hace que una familia se acuerde de ella." data-en="A personal detail about her here — something the kids tell their parents about. That's what makes a family remember her.">Un dato personal suyo aquí — algo que los niños cuenten en la casa. Eso es lo que hace que una familia se acuerde de ella.</p></div>
       </div>
       <div class="tcard">
-        <div class="frame"><div class="ph"><span data-es="Foto" data-en="Photo">Foto</span></div></div>
+        <div class="frame"><img src="/img/equipo/certificaciones.webp" alt="Rincón con la cocina de juguete y letrero de First Aid" loading="lazy"></div>
         <div class="tx"><h3 data-es="Nuestras certificaciones" data-en="Our certifications">Nuestras certificaciones</h3>
           <div class="role" data-es="Las dos, al día" data-en="Both of us, current">Las dos, al día</div>
           <p class="fun" data-es="CPR y primeros auxilios pediátricos, entrenamiento de salud y seguridad del estado, y las 30 horas de capacitación cada dos años que exige la licencia. Te mostramos los certificados si los quieres ver." data-en="Pediatric CPR and first aid, state health and safety training, and the 30 hours of training every two years the license requires. We'll show you the certificates if you want to see them.">CPR y primeros auxilios pediátricos, entrenamiento de salud y seguridad del estado, y las 30 horas de capacitación cada dos años que exige la licencia. Te mostramos los certificados si los quieres ver.</p></div>
       </div>
       <div class="tcard">
-        <div class="frame"><div class="ph"><span data-es="Foto" data-en="Photo">Foto</span></div></div>
+        <div class="frame"><img src="/img/equipo/la-casa.webp" alt="Vista amplia del salón principal con el área de juegos, TV, corralito y sillita alta" loading="lazy"></div>
         <div class="tx"><h3 data-es="La casa" data-en="The house">La casa</h3>
           <div class="role" data-es="Inspeccionada y aprobada" data-en="Inspected and approved">Inspeccionada y aprobada</div>
           <p class="fun" data-es="Detectores de humo y de monóxido, botiquín, cunas certificadas, enchufes tapados y salida de emergencia. El estado nos inspecciona sin avisar, y esa es justamente la idea." data-en="Smoke and carbon-monoxide detectors, first-aid kit, certified cribs, covered outlets and an emergency exit. The state inspects us unannounced — and that's exactly the point.">Detectores de humo y de monóxido, botiquín, cunas certificadas, enchufes tapados y salida de emergencia. El estado nos inspecciona sin avisar, y esa es justamente la idea.</p></div>
@@ -458,14 +520,14 @@
       <h2><span data-es="Ve cupos" data-en="See openings">Ve cupos</span> <em data-es="y precios" data-en="and pricing">y precios</em></h2>
     </div>
     <div class="formbox">
-      <form onsubmit="event.preventDefault();this.querySelector('.done').hidden=false;">
+      <form id="enroll-form" novalidate>
         <div class="fields">
-          <div><label data-es="Tu nombre" data-en="Your first name">Tu nombre</label><input required></div>
-          <div><label data-es="Apellido" data-en="Last name">Apellido</label><input required></div>
-          <div><label data-es="Teléfono" data-en="Phone">Teléfono</label><input type="tel" required></div>
-          <div><label data-es="Correo" data-en="Email">Correo</label><input type="email" required></div>
+          <div><label data-es="Tu nombre" data-en="Your first name">Tu nombre</label><input name="firstName" required autocomplete="given-name"></div>
+          <div><label data-es="Apellido" data-en="Last name">Apellido</label><input name="lastName" required autocomplete="family-name"></div>
+          <div><label data-es="Teléfono" data-en="Phone">Teléfono</label><input name="phone" type="tel" required autocomplete="tel"></div>
+          <div><label data-es="Correo" data-en="Email">Correo</label><input name="email" type="email" required autocomplete="email"></div>
           <div class="full"><label data-es="Edad de tu hijo" data-en="Your child's age">Edad de tu hijo</label>
-            <select>
+            <select name="childAge">
               <option data-es="6 semanas a 18 meses" data-en="6 weeks to 18 months">6 semanas a 18 meses</option>
               <option data-es="18 meses a 3 años" data-en="18 months to 3 years">18 meses a 3 años</option>
               <option data-es="3 a 5 años" data-en="3 to 5 years">3 a 5 años</option>
@@ -473,20 +535,24 @@
               <option data-es="Todavía no nace" data-en="Not born yet">Todavía no nace</option>
             </select>
           </div>
+          <!-- honeypot antispam -->
+          <div style="position:absolute;left:-10000px;height:0;overflow:hidden" aria-hidden="true">
+            <label>Website<input name="website" tabindex="-1" autocomplete="off"></label>
+          </div>
           <div class="full" style="margin-top:6px">
-            <button class="btn btn-1" style="width:100%;justify-content:center" data-es="Ver cupos y precios" data-en="See openings &amp; pricing">Ver cupos y precios</button>
+            <button type="submit" class="btn btn-1" style="width:100%;justify-content:center" data-es="Ver cupos y precios" data-en="See openings &amp; pricing">Ver cupos y precios</button>
           </div>
           <p class="consent" data-es="Te escribimos o llamamos solo sobre tu solicitud. No compartimos tus datos con nadie y no preguntamos por tu estatus migratorio, ni ahora ni nunca." data-en="We'll only contact you about your inquiry. We never share your information, and we don't ask about your immigration status — not now, not ever.">Te escribimos o llamamos solo sobre tu solicitud. No compartimos tus datos con nadie y no preguntamos por tu estatus migratorio, ni ahora ni nunca.</p>
         </div>
-        <p class="done" hidden style="margin-top:14px;background:var(--teal-sf);border-radius:12px;padding:13px 15px;font-weight:800;color:var(--teal-dk)" data-es="¡Listo! Te contactamos hoy mismo. (Prototipo: falta conectar el formulario a tu correo.)" data-en="Done! We'll be in touch today. (Prototype: the form still needs to be connected to your email.)">¡Listo! Te contactamos hoy mismo. (Prototipo: falta conectar el formulario a tu correo.)</p>
+        <p class="done" hidden style="margin-top:14px;background:var(--teal-sf);border-radius:12px;padding:13px 15px;font-weight:800;color:var(--teal-dk)" data-es="¡Listo! Te contactamos hoy mismo — revisa tu correo." data-en="Done! We'll be in touch today — check your email.">¡Listo! Te contactamos hoy mismo — revisa tu correo.</p>
+        <p class="err" hidden style="margin-top:14px;background:var(--coral-sf);border-radius:12px;padding:13px 15px;font-weight:800;color:var(--coral-dk)" data-es="No pudimos enviar tu solicitud. Llámanos al (347) 369-0961 y con gusto te atendemos." data-en="We couldn't send your request. Please call us at (347) 369-0961 and we'll be glad to help.">No pudimos enviar tu solicitud. Llámanos al (347) 369-0961 y con gusto te atendemos.</p>
       </form>
       <div>
         <h3 style="font-size:19px;margin:0 0 12px" data-es="O simplemente ven" data-en="Or just come by">O simplemente ven</h3>
         <p style="color:var(--ink-2);margin:0 0 10px"><span class="fill" data-es="Estamos a una cuadra del tren 7." data-en="We're one block from the 7 train.">Estamos a una cuadra del tren 7.</span> <span data-es="Puedes venir sin cita entre 9:30 y 11:00 de la mañana, de lunes a viernes." data-en="You can drop in without an appointment between 9:30 and 11:00am, Monday to Friday.">Puedes venir sin cita entre 9:30 y 11:00 de la mañana, de lunes a viernes.</span></p>
         <p style="margin:0 0 6px"><b class="fill">[dirección de la casa]</b><br><span class="fill">Jackson Heights, NY 11372</span></p>
         <p style="margin:0 0 18px"><a href="tel:+13473690961"><b class="fill">+1 (347) 369-0961</b></a><br><a href="mailto:hola@eladaycare.com" class="fill">hola@eladaycare.com</a></p>
-        <!-- FOTO: mapa o fachada de la casa -->
-        <div class="frame" style="aspect-ratio:16/10"><div class="ph"><span data-es="Mapa o foto de la entrada" data-en="Map or photo of the entrance">Mapa o foto de la entrada</span></div></div>
+        <div class="frame" style="aspect-ratio:16/10"><img src="/img/lugar/fachada.webp" alt="Vista del patio trasero del daycare con la casa al fondo" loading="lazy"></div>
         <div class="urgency" data-es="⏳ Si te inscribes dentro de las 48 horas después de tu visita, te descontamos 10% los primeros tres meses." data-en="⏳ Enroll within 48 hours of your visit and we'll take 10% off your first three months.">⏳ Si te inscribes dentro de las 48 horas después de tu visita, te descontamos 10% los primeros tres meses.</div>
       </div>
     </div>
@@ -596,6 +662,6 @@
   </div>
 </footer>
 
-<script src="js/main.js"></script>
-</body>
-</html>
+<MobileMenu />
+<script src="/scripts/main.js" defer is:inline></script>
+</Base>

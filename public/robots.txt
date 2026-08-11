@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://eladaycare.com/sitemap-index.xml

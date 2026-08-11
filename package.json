@@ -1,0 +1,27 @@
+{
+  "name": "ela-daycare",
+  "version": "2.0.0",
+  "private": true,
+  "description": "ELA Daycare — sitio Astro con backend Resend",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "start": "node server.js",
+    "start:all": "npm run build && node server.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "astro": "^5.15.0",
+    "express": "^4.19.2",
+    "resend": "^4.0.1",
+    "three": "^0.169.0"
+  },
+  "devDependencies": {
+    "@astrojs/sitemap": "^3.5.1"
+  }
+}

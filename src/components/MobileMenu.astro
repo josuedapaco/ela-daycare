@@ -1,0 +1,132 @@
+---
+// Menú móvil full-screen animado. Se muestra solo en pantallas ≤940px.
+---
+
+<div id="mobile-menu" class="mm" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Menú principal">
+  <div class="mm-bg" aria-hidden="true">
+    <span class="mm-blob b1"></span>
+    <span class="mm-blob b2"></span>
+    <span class="mm-blob b3"></span>
+  </div>
+  <button class="mm-close" id="mm-close" type="button" aria-label="Cerrar menú">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6l-12 12"/></svg>
+  </button>
+  <nav class="mm-nav">
+    <a href="#porque" class="mm-link" data-es="Por qué una casa" data-en="Why a home">Por qué una casa</a>
+    <a href="#grupos" class="mm-link" data-es="Grupos" data-en="Groups">Grupos</a>
+    <a href="#vacantes" class="mm-link" data-es="Vacantes" data-en="Openings">Vacantes</a>
+    <a href="#ayuda" class="mm-link" data-es="3-K y vales" data-en="3-K & vouchers">3-K y vales</a>
+    <a href="#equipo" class="mm-link" data-es="Equipo" data-en="Team">Equipo</a>
+    <a href="#visita" class="mm-link" data-es="Inscripción" data-en="Enroll">Inscripción</a>
+  </nav>
+  <div class="mm-foot">
+    <a class="btn btn-1" href="tel:+13473690961" data-es="📞 Llamar (347) 369-0961" data-en="📞 Call (347) 369-0961">📞 Llamar (347) 369-0961</a>
+    <div class="mm-lang" role="group" aria-label="Idioma / Language">
+      <button type="button" onclick="setLang('es')" aria-pressed="true" id="b3-es">Español</button>
+      <button type="button" onclick="setLang('en')" aria-pressed="false" id="b3-en">English</button>
+    </div>
+  </div>
+</div>
+
+<style>
+  .mm{
+    position:fixed;inset:0;z-index:200;
+    background:linear-gradient(160deg,#F6F2E9 0%,#e9f3fd 55%,#e8f6f3 100%);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    padding:60px 24px 32px;
+    opacity:0;pointer-events:none;
+    transform:translateY(-10px);
+    transition:opacity .28s ease, transform .28s ease;
+    overflow:hidden;
+  }
+  .mm.open{opacity:1;pointer-events:auto;transform:none}
+  .mm[aria-hidden="false"]{opacity:1;pointer-events:auto;transform:none}
+
+  .mm-bg{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+  .mm-blob{position:absolute;border-radius:50%;filter:blur(60px);opacity:.55}
+  .mm-blob.b1{width:340px;height:340px;background:#8EC5F6;top:-90px;left:-90px}
+  .mm-blob.b2{width:280px;height:280px;background:#FFB5A7;bottom:-70px;right:-70px}
+  .mm-blob.b3{width:220px;height:220px;background:#FFD166;top:40%;right:-40px;opacity:.4}
+
+  .mm-close{
+    position:absolute;top:18px;right:18px;
+    width:44px;height:44px;border-radius:50%;
+    border:1.5px solid rgba(37,64,92,.14);background:rgba(255,255,255,.85);
+    display:flex;align-items:center;justify-content:center;cursor:pointer;
+    color:#25405c;transition:transform .2s ease;
+    backdrop-filter:blur(8px);
+  }
+  .mm-close:hover{transform:rotate(90deg) scale(1.05)}
+
+  .mm-nav{
+    display:flex;flex-direction:column;gap:6px;position:relative;z-index:2;
+    text-align:center;
+  }
+  .mm-link{
+    font-family:"Baloo 2","Nunito",system-ui,sans-serif;
+    font-size:clamp(28px,7vw,42px);font-weight:800;
+    color:#25405c;text-decoration:none;
+    padding:8px 14px;letter-spacing:-.01em;line-height:1.05;
+    opacity:0;transform:translateY(14px);
+    transition:opacity .35s ease, transform .35s ease, color .18s ease;
+  }
+  .mm-link:hover{color:#2f73b5}
+  .mm.open .mm-link{opacity:1;transform:none}
+  .mm.open .mm-link:nth-child(1){transition-delay:.08s}
+  .mm.open .mm-link:nth-child(2){transition-delay:.14s}
+  .mm.open .mm-link:nth-child(3){transition-delay:.2s}
+  .mm.open .mm-link:nth-child(4){transition-delay:.26s}
+  .mm.open .mm-link:nth-child(5){transition-delay:.32s}
+  .mm.open .mm-link:nth-child(6){transition-delay:.38s}
+
+  .mm-foot{
+    position:relative;z-index:2;
+    margin-top:34px;display:flex;flex-direction:column;gap:14px;align-items:center;
+    opacity:0;transform:translateY(14px);transition:opacity .4s ease .5s, transform .4s ease .5s;
+  }
+  .mm.open .mm-foot{opacity:1;transform:none}
+  .mm-foot .btn{padding:14px 28px;font-size:16px}
+  .mm-lang{
+    display:inline-flex;background:rgba(255,255,255,.75);border:1.5px solid rgba(37,64,92,.1);
+    border-radius:99px;padding:4px;backdrop-filter:blur(8px);
+  }
+  .mm-lang button{
+    border:none;background:none;color:#556b83;font:inherit;font-weight:800;
+    padding:8px 18px;border-radius:99px;cursor:pointer;font-size:14px;
+  }
+  .mm-lang button[aria-pressed="true"]{background:#2f73b5;color:#fff}
+
+  body.mm-open{overflow:hidden}
+
+  @media(min-width:941px){ .mm{display:none} }
+  @media(prefers-reduced-motion:reduce){
+    .mm,.mm-link,.mm-foot,.mm-close{transition:none}
+  }
+</style>
+
+<script is:inline>
+  (function(){
+    var mm = document.getElementById('mobile-menu');
+    var close = document.getElementById('mm-close');
+    if (!mm) return;
+    function open(){
+      mm.classList.add('open');
+      mm.setAttribute('aria-hidden','false');
+      document.body.classList.add('mm-open');
+    }
+    function shut(){
+      mm.classList.remove('open');
+      mm.setAttribute('aria-hidden','true');
+      document.body.classList.remove('mm-open');
+    }
+    window.__openMobileMenu = open;
+    window.__closeMobileMenu = shut;
+    if (close) close.addEventListener('click', shut);
+    mm.querySelectorAll('.mm-link').forEach(function(a){
+      a.addEventListener('click', shut);
+    });
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape' && mm.classList.contains('open')) shut();
+    });
+  })();
+</script>

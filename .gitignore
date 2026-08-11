@@ -1,2 +1,9 @@
 .DS_Store
 .env
+.env.local
+.env.*.local
+node_modules/
+npm-debug.log*
+dist/
+.astro/
+fotos/

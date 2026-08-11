@@ -2,3 +2,11 @@
 .gitignore
 .DS_Store
 README.md
+node_modules
+dist
+.astro
+.env
+.env.local
+.env.*.local
+npm-debug.log*
+fotos
