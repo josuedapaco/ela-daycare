@@ -18,8 +18,7 @@
   "dependencies": {
     "astro": "^5.15.0",
     "express": "^4.19.2",
-    "resend": "^4.0.1",
-    "three": "^0.169.0"
+    "resend": "^4.0.1"
   },
   "devDependencies": {
     "@astrojs/sitemap": "^3.5.1"
