@@ -8,7 +8,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const {
   RESEND_API_KEY,
   MAIL_FROM = 'ELA Daycare <onboarding@resend.dev>',
-  MAIL_TO = 'josueriera23@gmail.com',
+  MAIL_TO = 'fannytorres1979@gmail.com',
   MAIL_REPLY_TO,
   PORT = 3000,
 } = process.env;
@@ -46,7 +46,7 @@ const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => (
 // Layout base tipo email-safe (tables + inline styles, compat Outlook/Gmail/Apple Mail)
 function emailShell({ preheader, bannerTitle, bannerSub, bannerAccent = '#2f73b5', bodyHtml, langCode }) {
   const isEn = langCode === 'en';
-  const footL = isEn ? 'Jackson Heights, Queens NY 11372' : 'Jackson Heights, Queens NY 11372';
+  const footL = '74-18 87 Ave · Woodhaven, Queens NY 11421';
   const footL2 = isEn ? 'NY OCFS Group Family Daycare License #948701' : 'Licencia de Group Family Daycare NY OCFS #948701';
   const hours = isEn ? 'Mon–Fri · 7:30am – 5:30pm' : 'Lun–Vie · 7:30am – 5:30pm';
 
@@ -234,8 +234,8 @@ function confirmationEmail({ firstName, phone, email, childAge, langCode }) {
   const html = emailShell({ preheader, bannerTitle, bannerSub, bannerAccent: '#2f73b5', bodyHtml, langCode });
 
   const text = isEn
-    ? `Hi ${firstName}, we received your inquiry.\n\nPhone: ${phone}\nEmail: ${email}\nChild age: ${childAge}\n\nWhat happens next:\n1) We read your inquiry today.\n2) We call or email you back the same day.\n3) If we sound like a fit, we schedule a visit.\n\nCall or text (347) 369-0961.\n\n— ELA Daycare · Jackson Heights, Queens NY`
-    : `Hola ${firstName}, recibimos tu solicitud.\n\nTeléfono: ${phone}\nCorreo: ${email}\nEdad del niño: ${childAge}\n\nQué sigue:\n1) Hoy leemos tu solicitud.\n2) Te llamamos o escribimos el mismo día.\n3) Si te acomoda, agendamos una visita.\n\nLlámanos al (347) 369-0961.\n\n— ELA Daycare · Jackson Heights, Queens NY`;
+    ? `Hi ${firstName}, we received your inquiry.\n\nPhone: ${phone}\nEmail: ${email}\nChild age: ${childAge}\n\nWhat happens next:\n1) We read your inquiry today.\n2) We call or email you back the same day.\n3) If we sound like a fit, we schedule a visit.\n\nCall or text (347) 369-0961.\n\n— ELA Daycare · 74-18 87 Ave, Woodhaven, Queens NY 11421`
+    : `Hola ${firstName}, recibimos tu solicitud.\n\nTeléfono: ${phone}\nCorreo: ${email}\nEdad del niño: ${childAge}\n\nQué sigue:\n1) Hoy leemos tu solicitud.\n2) Te llamamos o escribimos el mismo día.\n3) Si te acomoda, agendamos una visita.\n\nLlámanos al (347) 369-0961.\n\n— ELA Daycare · 74-18 87 Ave, Woodhaven, Queens NY 11421`;
 
   return { subject, html, text };
 }

@@ -466,7 +466,6 @@ nav.main .btn{flex:none}
   .stat-n{font-size:30px}
   .stat-l{font-size:12.5px}
   .disc{padding:20px 18px}
-  .magnet{padding:22px 20px;flex-direction:column;text-align:center;align-items:center;gap:14px}
   .formbox{padding:22px 20px}
   .foodicons{gap:6px}
   .foodicons span{padding:6px 11px;font-size:12.5px}
@@ -476,3 +475,92 @@ nav.main .btn{flex:none}
   .fbot{flex-direction:column;text-align:center}
   .badges{justify-content:center}
 }
+
+/* Teléfono estándar (iPhone 12–15, Pixel, Galaxy) */
+@media(max-width:430px){
+  .wrap{padding:0 16px}
+  .hero h1{font-size:clamp(28px,8vw,36px)}
+  .hero p.lede{font-size:15.5px}
+  h2{font-size:clamp(22px,7.5vw,26px)}
+  .brandname{font-size:19px}
+  .brandname small{font-size:9px;letter-spacing:.13em}
+  .util{font-size:11.5px}
+  .util .wrap{padding:6px 14px;gap:8px}
+  .util a{white-space:nowrap}
+  .util .langsw button{padding:3px 10px;font-size:11.5px}
+  section{padding:38px 0}
+  .sec-head p{font-size:15px}
+  .wcard,.stat,.vcard,.ncard,.tst,.step{padding:18px 16px}
+  .wcard p,.tst p{font-size:14.5px}
+  .panel .txt{padding:24px 20px}
+  .owner{padding:22px 18px}
+  .owner .frame{max-width:180px}
+  .tcard .frame{aspect-ratio:4/3}
+  .creds-grid{gap:10px}
+  .cred b{font-size:12px;line-height:1.2}
+  .cred .cred-ico{width:34px;height:34px;border-radius:12px}
+  .cred .cred-ico svg{width:20px;height:20px}
+  .avatars .av{width:38px;height:38px;font-size:14px;margin-left:-12px;border-width:2.5px}
+  .social-row{padding:0 14px}
+  .social-txt cite{font-size:12px}
+  .foodicons span{padding:5px 10px;font-size:12px}
+}
+
+/* Teléfono pequeño (iPhone SE, Galaxy S8, viewport <=380px) */
+@media(max-width:380px){
+  .wrap{padding:0 14px}
+  .hero h1{font-size:clamp(26px,8.5vw,32px);line-height:1.1}
+  .hero p.lede{font-size:15px;line-height:1.55}
+  .eyebrow{font-size:10.5px;padding:5px 11px}
+  h2{font-size:clamp(20px,8vw,24px)}
+  .btn{padding:12px 18px;font-size:14px}
+  .cta-row .btn{padding:14px 18px}
+  .util .lic{display:none}
+  .util .wrap{padding:5px 12px;gap:6px}
+  .util a{font-size:11.5px}
+  .brandname{font-size:17px}
+  .brandname small{display:none}
+  section{padding:34px 0}
+  .creds-grid{grid-template-columns:repeat(2,1fr);gap:8px}
+  .stat-n{font-size:26px}
+  .stat-l{font-size:11.5px}
+  .frame,.hero-art{border-radius:16px}
+  .frame{border-radius:18px}
+  .avatars{margin-right:0}
+  .avatars .av{width:34px;height:34px;font-size:13px;margin-left:-10px}
+  .foodicons span{font-size:11.5px;padding:5px 9px}
+  footer .fgrid{gap:20px}
+  footer h4{font-size:12.5px}
+  .disc h3{font-size:17px}
+  .disc li{font-size:14px}
+  .step-n{width:34px;height:34px;font-size:17px}
+  .panel .txt{padding:20px 16px}
+  .panel h3{font-size:21px}
+}
+
+/* Teléfono muy chico (iPhone SE 1ra gen, Android antiguos ≤340px) */
+@media(max-width:340px){
+  .wrap{padding:0 12px}
+  .hero h1{font-size:24px}
+  .cta-row .btn{font-size:13px;padding:12px 14px}
+  .util .wrap{flex-direction:column;gap:3px;padding:6px 10px}
+  .brand{gap:8px}
+  .brand svg{width:38px;height:34px}
+  .brandname{font-size:16px}
+  .creds-grid{grid-template-columns:1fr}
+  .cred:nth-child(n+4){display:none}
+}
+
+/* landscape corto (evita hero enorme cuando el teléfono está en horizontal) */
+@media(max-height:500px) and (orientation:landscape){
+  .hero{padding:24px 0 12px}
+  .hero h1{font-size:26px;line-height:1.1}
+  .hero p.lede{font-size:14.5px;margin-bottom:14px}
+  section{padding:32px 0}
+}
+
+/* Fix universal: nada de imágenes desbordando */
+img{max-width:100%;height:auto}
+
+/* Fix: prevenir overflow horizontal en cualquier página */
+html,body{max-width:100vw;overflow-x:hidden}

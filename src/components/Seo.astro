@@ -7,8 +7,8 @@ interface Props {
 }
 
 const {
-  title = "ELA Daycare — Emanuel's Little Angels Family Group Daycare en Queens NY",
-  description = "Emanuel's Little Angels: group family daycare licenciado en Jackson Heights, Queens. Máximo 12 niños, de 6 semanas a 12 años. Aceptamos 3-K y vales de ACS/HRA. Bilingüe español e inglés.",
+  title = "ELA Daycare — Emanuel's Little Angels Family Group Daycare en Woodhaven, Queens NY",
+  description = "Emanuel's Little Angels: group family daycare licenciado en Woodhaven, Queens. Máximo 12 niños, de 6 semanas a 12 años. Aceptamos 3-K y vales de ACS/HRA. Bilingüe español e inglés.",
   image = "/img/hero/sala-principal.webp",
   canonical,
 } = Astro.props;
@@ -23,24 +23,26 @@ const jsonLd = {
   name: "Emanuel's Little Angels Family Group Daycare",
   alternateName: "ELA Daycare",
   description:
-    "Group family daycare bilingüe con licencia OCFS en Jackson Heights, Queens. 6 semanas a 12 años. Acepta 3-K, ACS y HRA.",
+    "Group family daycare bilingüe con licencia OCFS en Woodhaven, Queens. 6 semanas a 12 años. Acepta 3-K, ACS y HRA.",
   url: site,
   image: imageURL,
   telephone: "+1-347-369-0961",
-  email: "hola@eladaycare.com",
+  email: "fannytorres1979@gmail.com",
   priceRange: "$$",
+  founder: { "@type": "Person", name: "Fanny" },
   address: {
     "@type": "PostalAddress",
-    addressLocality: "Jackson Heights",
+    streetAddress: "74-18 87 Ave",
+    addressLocality: "Woodhaven",
     addressRegion: "NY",
-    postalCode: "11372",
+    postalCode: "11421",
     addressCountry: "US",
   },
   areaServed: [
-    { "@type": "City", name: "Jackson Heights" },
-    { "@type": "City", name: "Elmhurst" },
-    { "@type": "City", name: "Corona" },
-    { "@type": "City", name: "Woodside" },
+    { "@type": "City", name: "Woodhaven" },
+    { "@type": "City", name: "Ozone Park" },
+    { "@type": "City", name: "Richmond Hill" },
+    { "@type": "City", name: "Glendale" },
   ],
   openingHoursSpecification: {
     "@type": "OpeningHoursSpecification",
@@ -85,7 +87,9 @@ const jsonLd = {
 <meta name="format-detection" content="telephone=no" />
 <meta name="robots" content="index,follow,max-image-preview:large" />
 <meta name="geo.region" content="US-NY" />
-<meta name="geo.placename" content="Jackson Heights, Queens, New York" />
+<meta name="geo.placename" content="Woodhaven, Queens, New York" />
+<meta name="geo.position" content="40.6905;-73.8590" />
+<meta name="ICBM" content="40.6905, -73.8590" />
 
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
