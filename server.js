@@ -1,6 +1,8 @@
 import express from 'express';
 import path from 'node:path';
+import fs from 'node:fs';
 import { fileURLToPath } from 'node:url';
+import { randomBytes, timingSafeEqual } from 'node:crypto';
 import { Resend } from 'resend';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -10,12 +12,19 @@ const {
   MAIL_FROM = 'ELA Daycare <onboarding@resend.dev>',
   MAIL_TO = 'fannytorres1979@gmail.com',
   MAIL_REPLY_TO,
+  PUBLIC_SITE_URL = 'https://eladaycare.com',
+  DATA_DIR = path.join(__dirname, 'data'),
   PORT = 3000,
 } = process.env;
 
 if (!RESEND_API_KEY) {
   console.warn('[WARN] RESEND_API_KEY no está definida — los envíos fallarán hasta que se configure.');
 }
+
+// Token del panel de cupos. Si no viene por env se genera uno temporal
+// (sirve hasta que el server se reinicie) y se imprime en los logs.
+const ADMIN_TOKEN = (process.env.ADMIN_TOKEN || '').trim() || randomBytes(24).toString('base64url');
+const ADMIN_TOKEN_IS_TEMP = !(process.env.ADMIN_TOKEN || '').trim();
 
 const resend = RESEND_API_KEY ? new Resend(RESEND_API_KEY) : null;
 const app = express();
@@ -40,6 +49,104 @@ function rateLimit(ip) {
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => (
   { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]
 ));
+
+// =========================================================
+// Cupos (vacantes) — se editan desde /panel?t=TOKEN
+// =========================================================
+
+const VACANCIES_FILE = path.join(DATA_DIR, 'vacancies.json');
+
+// Estado inicial = lo que estaba escrito a mano en el sitio.
+const DEFAULT_VACANCIES = {
+  updatedAt: '2026-08-03T12:00:00.000Z',
+  groups: {
+    babies:      { filled: 2, capacity: 2, waitlist: 2 },
+    toddlers:    { filled: 2, capacity: 3, waitlist: 0 },
+    angels:      { filled: 1, capacity: 4, waitlist: 0 },
+    afterschool: { filled: 0, capacity: 4, waitlist: 0 },
+  },
+};
+const GROUP_KEYS = Object.keys(DEFAULT_VACANCIES.groups);
+const MAX_CAPACITY = 16;   // tope duro por grupo (la licencia son 12 + 4 escolares)
+const MAX_WAITLIST = 99;
+
+function toInt(value, fallback) {
+  const n = Number.parseInt(value, 10);
+  return Number.isFinite(n) ? n : fallback;
+}
+const clamp = (n, min, max) => Math.min(max, Math.max(min, n));
+
+// Nunca confía en lo que llega: recorta a rangos válidos y descarta claves raras.
+// Lo que no venga en `raw` se queda como está en `previous` (así un envío parcial
+// no borra los otros grupos).
+function sanitizeVacancies(raw, previous = DEFAULT_VACANCIES) {
+  const groups = {};
+  for (const key of GROUP_KEYS) {
+    const incoming = (raw && raw.groups && raw.groups[key]) || {};
+    const base = (previous.groups && previous.groups[key]) || DEFAULT_VACANCIES.groups[key];
+    const capacity = clamp(toInt(incoming.capacity, base.capacity), 0, MAX_CAPACITY);
+    const filled = clamp(toInt(incoming.filled, base.filled), 0, capacity);
+    const waitlist = clamp(toInt(incoming.waitlist, base.waitlist), 0, MAX_WAITLIST);
+    groups[key] = { filled, capacity, waitlist };
+  }
+  const stamp = Date.parse(raw && raw.updatedAt);
+  return {
+    updatedAt: Number.isFinite(stamp) ? new Date(stamp).toISOString() : DEFAULT_VACANCIES.updatedAt,
+    groups,
+  };
+}
+
+function loadVacancies() {
+  try {
+    return sanitizeVacancies(JSON.parse(fs.readFileSync(VACANCIES_FILE, 'utf8')));
+  } catch (err) {
+    if (err.code !== 'ENOENT') console.warn('[vacancies] no se pudo leer el archivo, uso los valores por defecto:', err.message);
+    return sanitizeVacancies(DEFAULT_VACANCIES);
+  }
+}
+
+// Escritura atómica: si el disco falla a medias no se corrompe el archivo bueno.
+function saveVacancies(data) {
+  fs.mkdirSync(DATA_DIR, { recursive: true });
+  const tmp = `${VACANCIES_FILE}.tmp`;
+  fs.writeFileSync(tmp, `${JSON.stringify(data, null, 2)}\n`, 'utf8');
+  fs.renameSync(tmp, VACANCIES_FILE);
+}
+
+let vacancies = loadVacancies();
+
+function readToken(req) {
+  const header = req.get('x-admin-token');
+  if (header) return header.trim();
+  const auth = req.get('authorization') || '';
+  const bearer = auth.match(/^Bearer\s+(.+)$/i);
+  if (bearer) return bearer[1].trim();
+  return '';
+}
+
+function tokenOk(given) {
+  const a = Buffer.from(String(given || ''));
+  const b = Buffer.from(ADMIN_TOKEN);
+  if (a.length !== b.length) return false;
+  return timingSafeEqual(a, b);
+}
+
+// rate-limit aparte para el panel: 30 intentos / 10 min por IP
+const adminBuckets = new Map();
+function adminRateLimit(ip) {
+  const now = Date.now();
+  const arr = (adminBuckets.get(ip) || []).filter((t) => now - t < 10 * 60 * 1000);
+  if (arr.length >= 30) return false;
+  arr.push(now);
+  adminBuckets.set(ip, arr);
+  return true;
+}
+
+function requireToken(req, res, next) {
+  if (!adminRateLimit(req.ip || 'unknown')) return res.status(429).json({ error: 'rate_limited' });
+  if (!tokenOk(readToken(req))) return res.status(401).json({ error: 'unauthorized' });
+  return next();
+}
 
 // ---- plantillas de correo ----
 
@@ -306,6 +413,51 @@ app.post('/api/enroll', async (req, res) => {
   return res.json({ ok: true, confirmationSent: confirmOk });
 });
 
+// ---- cupos ----
+
+// Público: el sitio lee esto para pintar la sección de vacantes.
+app.get('/api/vacancies', (_req, res) => {
+  res.set('Cache-Control', 'no-store');
+  res.json(vacancies);
+});
+
+// Sirve para que el panel avise "link inválido" antes de mostrar el formulario.
+app.get('/api/vacancies/session', requireToken, (_req, res) => {
+  res.set('Cache-Control', 'no-store');
+  res.json({ ok: true });
+});
+
+// Privado: guarda los cupos nuevos.
+app.put('/api/vacancies', requireToken, (req, res) => {
+  const body = req.body || {};
+  if (!body.groups || typeof body.groups !== 'object') {
+    return res.status(400).json({ error: 'invalid_input' });
+  }
+
+  const next = sanitizeVacancies({ groups: body.groups, updatedAt: new Date().toISOString() }, vacancies);
+
+  try {
+    saveVacancies(next);
+  } catch (err) {
+    console.error('[vacancies] no se pudo guardar', err);
+    return res.status(500).json({ error: 'save_failed' });
+  }
+
+  vacancies = next;
+  console.log('[vacancies] actualizado', JSON.stringify(next.groups));
+  res.set('Cache-Control', 'no-store');
+  return res.json(next);
+});
+
+// Panel de la dueña. El token va en la URL (?t=...), fuera del build de Astro
+// y fuera de los buscadores.
+app.get(['/panel', '/panel/'], (_req, res) => {
+  res.set('X-Robots-Tag', 'noindex, nofollow');
+  res.set('Cache-Control', 'no-store');
+  res.set('Referrer-Policy', 'no-referrer');
+  res.sendFile(path.join(__dirname, 'admin.html'));
+});
+
 app.get('/api/health', (_req, res) => res.json({ ok: true, mailer: !!resend }));
 
 // estáticos: build de Astro (dist/)
@@ -321,4 +473,10 @@ app.use(express.static(STATIC_ROOT, {
 
 app.listen(PORT, () => {
   console.log(`ELA Daycare listening on http://0.0.0.0:${PORT}`);
+  const panelUrl = `${PUBLIC_SITE_URL.replace(/\/+$/, '')}/panel?t=${ADMIN_TOKEN}`;
+  if (ADMIN_TOKEN_IS_TEMP) {
+    console.warn('[panel] ADMIN_TOKEN no está en el .env — generé uno TEMPORAL que se pierde al reiniciar.');
+    console.warn(`[panel] Ponlo fijo en el .env:  ADMIN_TOKEN=${ADMIN_TOKEN}`);
+  }
+  console.log(`[panel] Link para ajustar cupos: ${panelUrl}`);
 });

@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#2f73b5">
+<title>Cupos — ELA Daycare</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sky:#8EC5F6; --sky-dk:#2f73b5; --sky-sf:#e9f3fd;
+    --teal:#7CCDBE; --teal-dk:#3a8f7e; --teal-sf:#e8f6f3;
+    --yellow:#FFD166; --yellow-dk:#a87b16; --yellow-sf:#fff6e2;
+    --coral:#FFB5A7; --coral-dk:#cf5d47; --coral-sf:#ffeeea;
+    --cream:#F6F2E9; --cream-2:#fbf8f1; --card:#fff;
+    --ink:#25405c; --ink-2:#556b83; --ink-3:#8b9cad;
+    --line:#e4e8ee;
+    --shadow:0 2px 4px rgba(37,64,92,.04), 0 12px 32px rgba(37,64,92,.07);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--cream);color:var(--ink);
+    font:16.5px/1.6 "Nunito",ui-rounded,"Segoe UI",system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%}
+  h1,h2,h3{font-family:"Baloo 2","Nunito",ui-rounded,system-ui,sans-serif;font-weight:800;margin:0}
+  .wrap{max-width:680px;margin:0 auto;padding:0 18px}
+
+  header{background:linear-gradient(135deg,var(--sky-dk) 0%,var(--teal) 100%);color:#fff;padding:26px 0 30px}
+  .hbrand{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+  .hmark{width:46px;height:46px;flex:0 0 46px;background:rgba(255,255,255,.22);
+    border:2px solid rgba(255,255,255,.55);border-radius:15px;display:flex;align-items:center;
+    justify-content:center;font-size:22px}
+  .hbrand b{display:block;font-size:17px;font-weight:800;line-height:1.1}
+  .hbrand small{display:block;font-size:10.5px;font-weight:800;letter-spacing:.14em;
+    text-transform:uppercase;color:rgba(255,255,255,.85);margin-top:2px}
+  header h1{font-size:26px;letter-spacing:-.015em;line-height:1.2}
+  header p{margin:8px 0 0;font-size:14.5px;color:rgba(255,255,255,.92);line-height:1.5}
+
+  main{padding:22px 0 150px}
+
+  .state{background:var(--card);border-radius:18px;padding:26px 22px;box-shadow:var(--shadow);
+    text-align:center;margin-top:22px}
+  .state h2{font-size:20px;margin-bottom:8px}
+  .state p{color:var(--ink-2);font-size:14.5px;margin:0}
+
+  .card{background:var(--card);border-radius:18px;padding:18px;box-shadow:var(--shadow);margin-bottom:14px}
+  .card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+  .card h3{font-size:19px;letter-spacing:-.01em}
+  .age{font-size:12.5px;font-weight:700;color:var(--ink-3);margin-top:1px}
+
+  .pill{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;
+    padding:6px 12px;border-radius:99px;white-space:nowrap;flex:0 0 auto}
+  .pill .dot{width:7px;height:7px;border-radius:50%;background:currentColor;flex:0 0 7px}
+  .pill.open{background:var(--teal-sf);color:var(--teal-dk)}
+  .pill.few{background:var(--yellow-sf);color:var(--yellow-dk)}
+  .pill.full{background:var(--coral-sf);color:var(--coral-dk)}
+
+  .bar{position:relative;height:8px;background:var(--line);border-radius:99px;overflow:hidden;margin:14px 0 4px}
+  .bar > i{position:absolute;left:0;top:0;bottom:0;border-radius:99px;transition:width .25s ease}
+  .bar > i.open{background:linear-gradient(90deg,var(--teal),var(--teal-dk))}
+  .bar > i.few{background:linear-gradient(90deg,var(--yellow),var(--yellow-dk))}
+  .bar > i.full{background:linear-gradient(90deg,var(--coral),var(--coral-dk))}
+  .bar-txt{display:flex;justify-content:space-between;font-size:11.5px;font-weight:800;
+    color:var(--ink-3);letter-spacing:.03em}
+
+  .row{display:flex;align-items:center;justify-content:space-between;gap:12px;
+    padding:13px 0;border-top:1px solid var(--line)}
+  .row:first-of-type{margin-top:14px}
+  .row-lb{min-width:0}
+  .row-lb b{display:block;font-size:14.5px;font-weight:800;color:var(--ink)}
+  .row-lb small{display:block;font-size:11.5px;color:var(--ink-3);line-height:1.35;margin-top:1px}
+
+  .step{display:flex;align-items:center;gap:6px;flex:0 0 auto}
+  .step button{width:42px;height:42px;border-radius:13px;border:1.5px solid var(--line);
+    background:#fff;color:var(--sky-dk);font-size:22px;font-weight:800;line-height:1;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;padding:0;
+    -webkit-tap-highlight-color:transparent;transition:background .15s ease,border-color .15s ease}
+  .step button:active{background:var(--sky-sf);border-color:var(--sky)}
+  .step button:disabled{opacity:.35;cursor:not-allowed}
+  .step .num{min-width:44px;text-align:center;font-size:20px;font-weight:800;
+    font-variant-numeric:tabular-nums;color:var(--ink)}
+
+  .note{font-size:12.5px;color:var(--ink-3);line-height:1.55;text-align:center;margin:16px 0 0}
+
+  .savebar{position:fixed;left:0;right:0;bottom:0;background:rgba(246,242,233,.92);
+    backdrop-filter:blur(10px);border-top:1px solid var(--line);
+    padding:14px 18px calc(14px + env(safe-area-inset-bottom));z-index:20}
+  .savebar .wrap{padding:0}
+  .btn{display:flex;width:100%;align-items:center;justify-content:center;gap:8px;border:none;
+    cursor:pointer;font:inherit;font-weight:800;font-size:16px;padding:16px 24px;border-radius:99px;
+    background:var(--sky-dk);color:#fff;box-shadow:0 8px 22px rgba(47,115,181,.28);
+    transition:background .18s ease,opacity .18s ease}
+  .btn:disabled{opacity:.5;cursor:default;box-shadow:none}
+  .msg{font-size:13.5px;font-weight:700;text-align:center;margin:0 0 10px;line-height:1.45}
+  .msg.ok{color:var(--teal-dk)}
+  .msg.err{color:var(--coral-dk)}
+  .msg[hidden]{display:none}
+
+  @media (max-width:400px){
+    .step button{width:38px;height:38px;border-radius:12px}
+    .step .num{min-width:38px;font-size:18px}
+    header h1{font-size:23px}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="hbrand">
+      <div class="hmark">💛</div>
+      <div><b>ELA Daycare</b><small>Emanuel's Little Angels</small></div>
+    </div>
+    <h1>Cupos disponibles</h1>
+    <p>Cambia los números y dale a guardar. El sitio se actualiza al instante, sin llamar a nadie.</p>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <div class="state" id="loading">
+      <h2>Cargando…</h2>
+      <p>Un segundito.</p>
+    </div>
+
+    <div class="state" id="denied" hidden>
+      <h2>Este link no sirve</h2>
+      <p>El link está incompleto o ya no es válido. Pídele a GOZSYL el link correcto para ajustar los cupos.</p>
+    </div>
+
+    <div id="panel" hidden>
+      <div id="cards"></div>
+      <p class="note">
+        Guarda este link en tus favoritos — es tu llave.<br>
+        No lo compartas: quien lo tenga puede cambiar los cupos.
+      </p>
+    </div>
+
+  </div>
+</main>
+
+<div class="savebar" id="savebar" hidden>
+  <div class="wrap">
+    <p class="msg" id="msg" hidden></p>
+    <button class="btn" id="save" type="button">Guardar cambios</button>
+  </div>
+</div>
+
+<script>
+(function () {
+  var GROUPS = [
+    { key: 'babies',      name: 'Bebés',              age: '6 semanas – 18 meses' },
+    { key: 'toddlers',    name: 'Caminadores',        age: '18 meses – 3 años' },
+    { key: 'angels',      name: 'Angelitos',          age: '3 – 5 años · 3-K' },
+    { key: 'afterschool', name: 'Después de escuela', age: '5 – 12 años' }
+  ];
+  var FIELDS = [
+    { key: 'filled',   label: 'Niños inscritos',  hint: 'Cuántos lugares ya están ocupados' },
+    { key: 'capacity', label: 'Lugares en total', hint: 'Cuántos caben en este grupo' },
+    { key: 'waitlist', label: 'Lista de espera',  hint: 'Familias esperando un cupo' }
+  ];
+  var MAX_CAPACITY = 16, MAX_WAITLIST = 99;
+
+  var $ = function (id) { return document.getElementById(id); };
+  var state = null;
+
+  // El token viaja en la URL; lo guardamos en la sesión y lo sacamos de la barra
+  // de direcciones para que no se filtre en capturas de pantalla.
+  var params = new URLSearchParams(location.search);
+  var token = (params.get('t') || '').trim() || sessionStorage.getItem('ela_panel_token') || '';
+  if (params.get('t')) {
+    sessionStorage.setItem('ela_panel_token', token);
+    history.replaceState(null, '', location.pathname);
+  }
+
+  function statusOf(g) {
+    var free = Math.max(0, g.capacity - g.filled);
+    if (free === 0) return 'full';
+    if (free === 1) return 'few';
+    return 'open';
+  }
+
+  function pillText(g) {
+    var free = Math.max(0, g.capacity - g.filled);
+    if (free === 0) return g.waitlist > 0 ? 'Lleno · ' + g.waitlist + ' en espera' : 'Lleno';
+    return free === 1 ? '1 cupo' : free + ' cupos';
+  }
+
+  function render() {
+    $('cards').innerHTML = GROUPS.map(function (meta) {
+      var g = state.groups[meta.key];
+      var free = Math.max(0, g.capacity - g.filled);
+      var st = statusOf(g);
+      var pct = g.capacity > 0 ? Math.round((g.filled / g.capacity) * 100) : 0;
+      var right = free === 0
+        ? (g.waitlist > 0 ? 'lista +' + g.waitlist : 'sin cupo')
+        : free + (free === 1 ? ' disponible' : ' disponibles');
+
+      var rows = FIELDS.map(function (f) {
+        var value = g[f.key];
+        var min = 0;
+        var max = f.key === 'filled' ? g.capacity : (f.key === 'capacity' ? MAX_CAPACITY : MAX_WAITLIST);
+        return '<div class="row">' +
+            '<div class="row-lb"><b>' + f.label + '</b><small>' + f.hint + '</small></div>' +
+            '<div class="step">' +
+              '<button type="button" aria-label="Menos ' + f.label + ' en ' + meta.name + '"' +
+                ' data-g="' + meta.key + '" data-f="' + f.key + '" data-d="-1"' +
+                (value <= min ? ' disabled' : '') + '>−</button>' +
+              '<span class="num">' + value + '</span>' +
+              '<button type="button" aria-label="Más ' + f.label + ' en ' + meta.name + '"' +
+                ' data-g="' + meta.key + '" data-f="' + f.key + '" data-d="1"' +
+                (value >= max ? ' disabled' : '') + '>+</button>' +
+            '</div>' +
+          '</div>';
+      }).join('');
+
+      return '<section class="card">' +
+          '<div class="card-top">' +
+            '<div><h3>' + meta.name + '</h3><div class="age">' + meta.age + '</div></div>' +
+            '<span class="pill ' + st + '"><i class="dot"></i>' + pillText(g) + '</span>' +
+          '</div>' +
+          '<div class="bar"><i class="' + st + '" style="width:' + pct + '%"></i></div>' +
+          '<div class="bar-txt"><span>' + g.filled + ' / ' + g.capacity + ' llenos</span><span>' + right + '</span></div>' +
+          rows +
+        '</section>';
+    }).join('');
+  }
+
+  $('cards').addEventListener('click', function (e) {
+    var btn = e.target.closest('button[data-g]');
+    if (!btn || btn.disabled) return;
+    var g = state.groups[btn.dataset.g];
+    var field = btn.dataset.f;
+    var delta = Number(btn.dataset.d);
+
+    if (field === 'capacity') {
+      g.capacity = Math.min(MAX_CAPACITY, Math.max(0, g.capacity + delta));
+      if (g.filled > g.capacity) g.filled = g.capacity;   // no puede haber más niños que lugares
+    } else if (field === 'filled') {
+      g.filled = Math.min(g.capacity, Math.max(0, g.filled + delta));
+    } else {
+      g.waitlist = Math.min(MAX_WAITLIST, Math.max(0, g.waitlist + delta));
+    }
+
+    render();
+    hideMsg();
+  });
+
+  function showMsg(text, kind) {
+    var el = $('msg');
+    el.textContent = text;
+    el.className = 'msg ' + kind;
+    el.hidden = false;
+  }
+  function hideMsg() { $('msg').hidden = true; }
+
+  function deny() {
+    $('loading').hidden = true;
+    $('panel').hidden = true;
+    $('savebar').hidden = true;
+    $('denied').hidden = false;
+  }
+
+  $('save').addEventListener('click', async function () {
+    var btn = $('save');
+    btn.disabled = true;
+    btn.textContent = 'Guardando…';
+    hideMsg();
+    try {
+      var r = await fetch('/api/vacancies', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json', 'X-Admin-Token': token },
+        body: JSON.stringify({ groups: state.groups })
+      });
+      if (r.status === 401) return deny();
+      if (!r.ok) throw new Error('status ' + r.status);
+      state = await r.json();
+      render();
+      showMsg('✓ Guardado. El sitio ya muestra los cupos nuevos.', 'ok');
+    } catch (ex) {
+      showMsg('No se pudo guardar. Revisa tu internet e inténtalo otra vez.', 'err');
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Guardar cambios';
+    }
+  });
+
+  (async function init() {
+    if (!token) return deny();
+    try {
+      var check = await fetch('/api/vacancies/session', { headers: { 'X-Admin-Token': token } });
+      if (!check.ok) return deny();
+      state = await (await fetch('/api/vacancies', { cache: 'no-store' })).json();
+    } catch (ex) {
+      $('loading').innerHTML = '<h2>No se pudo cargar</h2><p>Revisa tu internet y recarga la página.</p>';
+      return;
+    }
+    $('loading').hidden = true;
+    $('panel').hidden = false;
+    $('savebar').hidden = false;
+    render();
+  })();
+})();
+</script>
+</body>
+</html>

@@ -10,3 +10,4 @@ dist
 .env.*.local
 npm-debug.log*
 fotos
+data

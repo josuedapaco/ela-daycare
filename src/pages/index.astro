@@ -244,29 +244,31 @@ import ConfirmDialog from '../components/ConfirmDialog.astro';
       <h2><span data-es="Cupos reales," data-en="Real openings,">Cupos reales,</span> <em data-es="sin llamar a nadie" data-en="without calling anyone">sin llamar a nadie</em></h2>
       <p data-es="Con doce lugares, cada cupo cuenta. Aquí ves exactamente cuáles están libres hoy, y si hay lista de espera te decimos cuántas familias van antes que tú." data-en="With twelve spots, every one counts. Here you see exactly which are open today, and if there's a waitlist we tell you how many families are ahead of you.">Con doce lugares, cada cupo cuenta. Aquí ves exactamente cuáles están libres hoy, y si hay lista de espera te decimos cuántas familias van antes que tú.</p>
     </div>
+    <!-- Los números se rellenan solos desde /api/vacancies (panel de la dueña).
+         Lo que está escrito aquí es el respaldo si la API no contesta. -->
     <div class="vac">
-      <div class="vcard"><h3 data-es="Bebés" data-en="Babies">Bebés</h3>
+      <div class="vcard" data-vac="babies"><h3 data-es="Bebés" data-en="Babies">Bebés</h3>
         <div class="age" data-es="6 semanas – 18 meses" data-en="6 weeks – 18 months">6 semanas – 18 meses</div>
-        <span class="pill wait"><i class="dot"></i><span class="fill" data-es="Lleno · 2 en espera" data-en="Full · 2 waiting">Lleno · 2 en espera</span></span>
-        <div class="cap"><div class="cap-bar"><div class="cap-fill f-full" style="width:100%"></div></div>
-          <div class="cap-txt"><span data-es="2 / 2 llenos" data-en="2 / 2 filled">2 / 2 llenos</span><span data-es="lista +2" data-en="waitlist +2">lista +2</span></div></div></div>
-      <div class="vcard"><h3 data-es="Caminadores" data-en="Toddlers">Caminadores</h3>
+        <span class="pill wait" data-vac-pill><i class="dot"></i><span class="fill" data-vac-pill-text data-es="Lleno · 2 en espera" data-en="Full · 2 waiting">Lleno · 2 en espera</span></span>
+        <div class="cap"><div class="cap-bar"><div class="cap-fill f-full" data-vac-bar style="width:100%"></div></div>
+          <div class="cap-txt"><span data-vac-left data-es="2 / 2 llenos" data-en="2 / 2 filled">2 / 2 llenos</span><span data-vac-right data-es="lista +2" data-en="waitlist +2">lista +2</span></div></div></div>
+      <div class="vcard" data-vac="toddlers"><h3 data-es="Caminadores" data-en="Toddlers">Caminadores</h3>
         <div class="age" data-es="18 meses – 3 años" data-en="18 months – 3 years">18 meses – 3 años</div>
-        <span class="pill few"><i class="dot"></i><span class="fill" data-es="1 cupo" data-en="1 spot left">1 cupo</span></span>
-        <div class="cap"><div class="cap-bar"><div class="cap-fill f-few" style="width:66%"></div></div>
-          <div class="cap-txt"><span data-es="2 / 3 llenos" data-en="2 / 3 filled">2 / 3 llenos</span><span data-es="1 disponible" data-en="1 available">1 disponible</span></div></div></div>
-      <div class="vcard"><h3 data-es="Angelitos" data-en="Little Angels">Angelitos</h3>
+        <span class="pill few" data-vac-pill><i class="dot"></i><span class="fill" data-vac-pill-text data-es="1 cupo" data-en="1 spot left">1 cupo</span></span>
+        <div class="cap"><div class="cap-bar"><div class="cap-fill f-few" data-vac-bar style="width:66%"></div></div>
+          <div class="cap-txt"><span data-vac-left data-es="2 / 3 llenos" data-en="2 / 3 filled">2 / 3 llenos</span><span data-vac-right data-es="1 disponible" data-en="1 available">1 disponible</span></div></div></div>
+      <div class="vcard" data-vac="angels"><h3 data-es="Angelitos" data-en="Little Angels">Angelitos</h3>
         <div class="age" data-es="3 – 5 años · 3-K" data-en="3 – 5 years · 3-K">3 – 5 años · 3-K</div>
-        <span class="pill open"><i class="dot"></i><span class="fill" data-es="3 cupos" data-en="3 spots open">3 cupos</span></span>
-        <div class="cap"><div class="cap-bar"><div class="cap-fill f-open" style="width:25%"></div></div>
-          <div class="cap-txt"><span data-es="1 / 4 lleno" data-en="1 / 4 filled">1 / 4 lleno</span><span data-es="3 disponibles" data-en="3 available">3 disponibles</span></div></div></div>
-      <div class="vcard"><h3 data-es="Después de escuela" data-en="After school">Después de escuela</h3>
+        <span class="pill open" data-vac-pill><i class="dot"></i><span class="fill" data-vac-pill-text data-es="3 cupos" data-en="3 spots open">3 cupos</span></span>
+        <div class="cap"><div class="cap-bar"><div class="cap-fill f-open" data-vac-bar style="width:25%"></div></div>
+          <div class="cap-txt"><span data-vac-left data-es="1 / 4 lleno" data-en="1 / 4 filled">1 / 4 lleno</span><span data-vac-right data-es="3 disponibles" data-en="3 available">3 disponibles</span></div></div></div>
+      <div class="vcard" data-vac="afterschool"><h3 data-es="Después de escuela" data-en="After school">Después de escuela</h3>
         <div class="age" data-es="5 – 12 años" data-en="5 – 12 years">5 – 12 años</div>
-        <span class="pill open"><i class="dot"></i><span class="fill" data-es="4 cupos" data-en="4 spots open">4 cupos</span></span>
-        <div class="cap"><div class="cap-bar"><div class="cap-fill f-open" style="width:0%"></div></div>
-          <div class="cap-txt"><span data-es="0 / 4 llenos" data-en="0 / 4 filled">0 / 4 llenos</span><span data-es="4 disponibles" data-en="4 available">4 disponibles</span></div></div></div>
+        <span class="pill open" data-vac-pill><i class="dot"></i><span class="fill" data-vac-pill-text data-es="4 cupos" data-en="4 spots open">4 cupos</span></span>
+        <div class="cap"><div class="cap-bar"><div class="cap-fill f-open" data-vac-bar style="width:0%"></div></div>
+          <div class="cap-txt"><span data-vac-left data-es="0 / 4 llenos" data-en="0 / 4 filled">0 / 4 llenos</span><span data-vac-right data-es="4 disponibles" data-en="4 available">4 disponibles</span></div></div></div>
     </div>
-    <p class="vac-note"><span data-es="Última actualización:" data-en="Last updated:">Última actualización:</span> <span class="fill" data-es="lunes 3 de agosto de 2026" data-en="Monday, August 3, 2026">lunes 3 de agosto de 2026</span>. <span data-es="Nuestra licencia permite hasta 12 niños de 6 semanas a 12 años, más cuatro niños de edad escolar." data-en="Our license allows up to 12 children ages 6 weeks to 12 years, plus four additional school-age children.">Nuestra licencia permite hasta 12 niños de 6 semanas a 12 años, más cuatro niños de edad escolar.</span></p>
+    <p class="vac-note"><span data-es="Última actualización:" data-en="Last updated:">Última actualización:</span> <span class="fill" data-vac-date data-es="lunes 3 de agosto de 2026" data-en="Monday, August 3, 2026">lunes 3 de agosto de 2026</span>. <span data-es="Nuestra licencia permite hasta 12 niños de 6 semanas a 12 años, más cuatro niños de edad escolar." data-en="Our license allows up to 12 children ages 6 weeks to 12 years, plus four additional school-age children.">Nuestra licencia permite hasta 12 niños de 6 semanas a 12 años, más cuatro niños de edad escolar.</span></p>
   </div>
 </section>
 

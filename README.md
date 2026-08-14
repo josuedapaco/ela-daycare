@@ -41,6 +41,62 @@ En Namecheap → **Domain List → Manage → Advanced DNS**, agrega:
 
 La propagación puede tardar desde minutos hasta unas horas.
 
+## Panel de cupos (la dueña ajusta las vacantes sola)
+
+La sección **Vacantes** del sitio ya no está escrita a mano: los números salen de
+`GET /api/vacancies` y se editan desde un panel protegido por un token en la URL.
+
+**El link que se le manda a la dueña:**
+
+```
+https://eladaycare.com/panel?t=EL_TOKEN
+```
+
+Ahí ve las cuatro edades y, con botones de − y +, ajusta tres cosas por grupo:
+niños inscritos, lugares en total y lista de espera. Le da a **Guardar cambios** y
+el sitio muestra los cupos nuevos de inmediato (también se actualiza sola la fecha
+de "Última actualización"). Funciona bien desde el celular.
+
+### Configuración
+
+1. Genera el token:
+   ```bash
+   node -e "console.log(require('crypto').randomBytes(24).toString('base64url'))"
+   ```
+2. Ponlo en las variables de entorno del servicio (EasyPanel → Environment):
+   ```
+   ADMIN_TOKEN=el_token_generado
+   DATA_DIR=/app/data
+   ```
+   Si no defines `ADMIN_TOKEN`, el server genera uno temporal al arrancar y lo
+   imprime en los logs — se pierde en cada reinicio, así que en producción hay
+   que ponerlo fijo.
+3. **Monta un volumen en `/app/data`** (EasyPanel → Volumes). Ahí vive
+   `vacancies.json`; sin volumen los cupos vuelven a los valores por defecto en
+   cada deploy.
+4. El link del panel se imprime en los logs cada vez que arranca el server.
+
+Para cambiar el token (por ejemplo si el link se filtró), basta con poner otro
+`ADMIN_TOKEN` y redesplegar: el link viejo deja de servir al instante.
+
+### Notas
+
+- `/panel` va con `noindex` y está bloqueado en `robots.txt`; el token se borra de
+  la barra de direcciones al cargar, para que no se filtre en capturas de pantalla.
+- El servidor recorta lo que llega: los inscritos nunca pasan de los lugares
+  totales, la capacidad tope es 16 y la lista de espera 99.
+- Si la API llegara a fallar, el sitio muestra los números que quedaron escritos
+  en `index.astro` — la página nunca se ve rota.
+
+### Endpoints
+
+| Método | Ruta | Quién |
+|---|---|---|
+| `GET` | `/api/vacancies` | público (lo usa el sitio) |
+| `GET` | `/api/vacancies/session` | token — valida el link |
+| `PUT` | `/api/vacancies` | token — guarda los cupos |
+| `GET` | `/panel` | la dueña, con `?t=TOKEN` |
+
 ## Datos que todavía faltan por confirmar
 
 El sitio ya tiene un botón **"Qué falta llenar"** en la barra superior (izquierda del selector de idioma). Al activarlo, resalta en amarillo cada dato de ejemplo que hay que reemplazar antes de publicar de verdad: teléfono, número de licencia OCFS, dirección, nombre de la dueña, precios, testimonios, estadística de años operando, etc.
