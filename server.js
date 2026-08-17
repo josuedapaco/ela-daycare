@@ -155,7 +155,7 @@ function emailShell({ preheader, bannerTitle, bannerSub, bannerAccent = '#2f73b5
   const isEn = langCode === 'en';
   const footL = '74-18 87 Ave · Woodhaven, Queens NY 11421';
   const footL2 = isEn ? 'NY OCFS Group Family Daycare License #948701' : 'Licencia de Group Family Daycare NY OCFS #948701';
-  const hours = isEn ? 'Mon–Fri · 7:30am – 5:30pm' : 'Lun–Vie · 7:30am – 5:30pm';
+  const hours = isEn ? 'Mon–Fri · 7:00am – 6:00pm' : 'Lun–Vie · 7:00am – 6:00pm';
 
   return `<!DOCTYPE html>
 <html lang="${isEn ? 'en' : 'es'}">

@@ -38,7 +38,7 @@ import ConfirmDialog from '../components/ConfirmDialog.astro';
     <div>
       <a href="tel:+13473690961">📞 <span class="fill">+1 (347) 369-0961</span></a>
       <span class="lic" style="margin-left:14px" data-es="Licencia OCFS de NY #" data-en="NY OCFS License #">Licencia OCFS de NY #</span><span class="lic fill">948701</span>
-      <span class="lic" data-es=" · Lun a Vie 7:30am–5:30pm" data-en=" · Mon–Fri 7:30am–5:30pm"> · Lun a Vie 7:30am–5:30pm</span>
+      <span class="lic" data-es=" · Lun a Vie 7:00am–6:00pm" data-en=" · Mon–Fri 7:00am–6:00pm"> · Lun a Vie 7:00am–6:00pm</span>
     </div>
     <div class="right">
       <div class="langsw" role="group" aria-label="Idioma / Language">
@@ -153,7 +153,7 @@ import ConfirmDialog from '../components/ConfirmDialog.astro';
       <div class="stat"><span class="stat-n">12</span><span class="stat-l" data-es="niños como máximo, nunca más" data-en="children maximum, never more">niños como máximo, nunca más</span></div>
       <div class="stat"><span class="stat-n">2</span><span class="stat-l" data-es="adultos presentes todo el día" data-en="adults present all day">adultos presentes todo el día</span></div>
       <div class="stat"><span class="stat-n">6 <small style="font-size:19px">sem</small></span><span class="stat-l" data-es="la edad más chiquita que recibimos" data-en="the youngest age we take">la edad más chiquita que recibimos</span></div>
-      <div class="stat"><span class="stat-n fill">9</span><span class="stat-l" data-es="años cuidando niños en Queens" data-en="years caring for children in Queens">años cuidando niños en Queens</span></div>
+      <div class="stat"><span class="stat-n">2023</span><span class="stat-l" data-es="el año que abrimos en Woodhaven" data-en="the year we opened in Woodhaven">el año que abrimos en Woodhaven</span></div>
     </div>
     <p style="text-align:center;margin:20px auto 0;max-width:58ch;color:var(--ink-2);font-weight:700" data-es="Un centro grande tiene 60 niños y personal que rota. Aquí son doce, siempre los mismos doce, y tu hijo puede quedarse con nosotros desde bebé hasta la escuela primaria." data-en="A big center has 60 children and staff that rotates. Here there are twelve, always the same twelve, and your child can stay with us from baby all the way through elementary school.">Un centro grande tiene 60 niños y personal que rota. Aquí son doce, siempre los mismos doce, y tu hijo puede quedarse con nosotros desde bebé hasta la escuela primaria.</p>
   </div>
@@ -383,14 +383,22 @@ import ConfirmDialog from '../components/ConfirmDialog.astro';
           <span class="eyebrow" data-es="Un día cualquiera" data-en="An ordinary day">Un día cualquiera</span>
           <h2><span data-es="Así se ve" data-en="This is what">Así se ve</span> <em data-es="un martes aquí" data-en="a Tuesday looks like">un martes aquí</em></h2>
         </div>
+        <!-- Horario real de la casa (rutina diaria que nos pasó Fanny): 7:00am a 6:00pm. -->
         <ul class="sched">
-          <li><time>7:00</time><span data-es="Se abre la puerta. Desayuno en la mesa de la cocina para quien llega temprano." data-en="The door opens. Breakfast at the kitchen table for the early arrivals.">Se abre la puerta. Desayuno en la mesa de la cocina para quien llega temprano.</span></li>
-          <li><time>9:00</time><span data-es="Círculo de la mañana: canciones, el clima y quién vino hoy." data-en="Morning circle: songs, the weather, and who came today.">Círculo de la mañana: canciones, el clima y quién vino hoy.</span></li>
-          <li><time>10:00</time><span data-es="Salimos al patio o caminamos al parque del barrio." data-en="Out to the yard, or a walk to the neighborhood park.">Salimos al patio o caminamos al parque del barrio.</span></li>
+          <li><time>7:00</time><span data-es="Se abre la puerta: bienvenida y juego tranquilo con rompecabezas, libros y bloques." data-en="The door opens: welcome, and quiet play with puzzles, books and blocks.">Se abre la puerta: bienvenida y juego tranquilo con rompecabezas, libros y bloques.</span></li>
+          <li><time>8:00</time><span data-es="Desayuno en la mesa de la cocina." data-en="Breakfast at the kitchen table.">Desayuno en la mesa de la cocina.</span></li>
+          <li><time>8:30</time><span data-es="Círculo de la mañana: saludos, el calendario, el clima, canciones y el tema del día." data-en="Morning circle: greetings, the calendar, the weather, songs and the theme of the day.">Círculo de la mañana: saludos, el calendario, el clima, canciones y el tema del día.</span></li>
+          <li><time>9:00</time><span data-es="Aprendizaje: lectura, arte, los primeros números, ciencias y lenguaje." data-en="Learning time: reading, art, early math, science and language.">Aprendizaje: lectura, arte, los primeros números, ciencias y lenguaje.</span></li>
+          <li><time>10:00</time><span data-es="Merienda de la mañana." data-en="Morning snack.">Merienda de la mañana.</span></li>
+          <li><time>10:15</time><span data-es="Salimos al patio o caminamos al parque del barrio: correr, trepar, moverse." data-en="Out to the yard, or a walk to the neighborhood park: running, climbing, moving.">Salimos al patio o caminamos al parque del barrio: correr, trepar, moverse.</span></li>
           <li><time>11:30</time><span data-es="Almuerzo caliente, cocinado aquí esa misma mañana." data-en="A hot lunch, cooked right here that morning.">Almuerzo caliente, cocinado aquí esa misma mañana.</span></li>
-          <li><time>12:30</time><span data-es="Siesta, con la luz baja y música suave. Los bebés duermen a su hora." data-en="Nap time, lights low and soft music. Babies sleep on their own schedule.">Siesta, con la luz baja y música suave. Los bebés duermen a su hora.</span></li>
-          <li><time>3:00</time><span data-es="Llegan los grandes de la escuela: merienda y tarea acompañada." data-en="The big kids arrive from school: snack and homework with support.">Llegan los grandes de la escuela: merienda y tarea acompañada.</span></li>
-          <li><time>4:30</time><span data-es="Juego libre todos juntos hasta que llegan por ellos." data-en="Free play, everyone together, until pickup.">Juego libre todos juntos hasta que llegan por ellos.</span></li>
+          <li><time>12:00</time><span data-es="Nos preparamos para dormir: lectura tranquila y música suave." data-en="Getting ready to sleep: quiet reading and soft music.">Nos preparamos para dormir: lectura tranquila y música suave.</span></li>
+          <li><time>12:30</time><span data-es="Siesta, con la luz baja. Los bebés duermen a su hora." data-en="Nap time, lights low. Babies sleep on their own schedule.">Siesta, con la luz baja. Los bebés duermen a su hora.</span></li>
+          <li><time>2:30</time><span data-es="Se despiertan poco a poco, sin apurar a nadie." data-en="They wake up slowly, nobody gets rushed.">Se despiertan poco a poco, sin apurar a nadie.</span></li>
+          <li><time>3:00</time><span data-es="Merienda de la tarde, y llegan los grandes de la escuela." data-en="Afternoon snack, and the big kids arrive from school.">Merienda de la tarde, y llegan los grandes de la escuela.</span></li>
+          <li><time>3:30</time><span data-es="Centros: arte, juego dramático, construcción, sensorial y STEM. Los grandes hacen la tarea acompañados." data-en="Centers: art, dramatic play, building, sensory and STEM. The big kids do homework with support.">Centros: arte, juego dramático, construcción, sensorial y STEM. Los grandes hacen la tarea acompañados.</span></li>
+          <li><time>4:30</time><span data-es="Juego libre todos juntos, dentro o en el patio." data-en="Free play, everyone together, inside or in the yard.">Juego libre todos juntos, dentro o en el patio.</span></li>
+          <li><time>5:15</time><span data-es="Despedida: te contamos cómo le fue el día. Cerramos a las 6:00." data-en="Goodbyes: we tell you how the day went. We close at 6:00.">Despedida: te contamos cómo le fue el día. Cerramos a las 6:00.</span></li>
         </ul>
       </div>
       <div>
@@ -475,7 +483,7 @@ import ConfirmDialog from '../components/ConfirmDialog.astro';
       <div class="tst"><span class="stars">★★★★★</span>
         <p class="fill" data-es="«Visité seis guarderías. Fue la única que me dijo el precio de frente, sin que yo preguntara tres veces. Eso me dijo todo lo que necesitaba saber.»" data-en="“I toured six day cares. This was the only one that told me the price straight up, without me asking three times. That told me everything I needed to know.”">«Visité seis guarderías. Fue la única que me dijo el precio de frente, sin que yo preguntara tres veces. Eso me dijo todo lo que necesitaba saber.»</p>
         <div class="who fill">Rocío V.</div>
-        <div class="since" data-es="Familia desde 2022 · Richmond Hill" data-en="Family since 2022 · Richmond Hill">Familia desde 2022 · Richmond Hill</div></div>
+        <div class="since" data-es="Familia desde 2023 · Richmond Hill" data-en="Family since 2023 · Richmond Hill">Familia desde 2023 · Richmond Hill</div></div>
     </div>
   </div>
 </section>
@@ -642,7 +650,7 @@ import ConfirmDialog from '../components/ConfirmDialog.astro';
       </div>
       <div>
         <h4 data-es="Horario" data-en="Hours">Horario</h4>
-        <p style="margin:0 0 12px" class="fill" data-es="Lunes a viernes<br>7:30am – 5:30pm<br>Cerrado fines de semana" data-en="Monday to Friday<br>7:30am – 5:30pm<br>Closed weekends">Lunes a viernes<br>7:30am – 5:30pm<br>Cerrado fines de semana</p>
+        <p style="margin:0 0 12px" data-es="Lunes a viernes<br>7:00am – 6:00pm<br>Cerrado fines de semana" data-en="Monday to Friday<br>7:00am – 6:00pm<br>Closed weekends">Lunes a viernes<br>7:00am – 6:00pm<br>Cerrado fines de semana</p>
         <h4 data-es="Síguenos" data-en="Follow us">Síguenos</h4>
         <a href="#" class="fill">Facebook</a>
         <a href="#" class="fill">Instagram</a>
