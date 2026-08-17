@@ -15,8 +15,8 @@ const { title, description, image } = Astro.props;
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Seo.astro trae también las fuentes, sin bloquear el primer pintado. -->
   <Seo title={title} description={description} image={image} />
-  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
   <slot />

@@ -1,4 +1,6 @@
 ---
+import { faqs } from '../data/faq';
+
 interface Props {
   title?: string;
   description?: string;
@@ -7,60 +9,126 @@ interface Props {
 }
 
 const {
-  title = "ELA Daycare — Emanuel's Little Angels Family Group Daycare en Woodhaven, Queens NY",
-  description = "Emanuel's Little Angels: group family daycare licenciado en Woodhaven, Queens. Máximo 12 niños, de 6 semanas a 12 años. Aceptamos 3-K y vales de ACS/HRA. Bilingüe español e inglés.",
-  image = "/img/hero/sala-principal.webp",
+  // Título con la palabra clave delante y por debajo de los ~65 caracteres que
+  // muestra Google. Busca gente en los dos idiomas: «daycare» y «guardería».
+  title = 'Daycare y guardería bilingüe en Woodhaven, Queens — ELA Daycare',
+  // ~150 caracteres: lo que Google alcanza a mostrar sin cortar.
+  description =
+    'Group family daycare con licencia OCFS en Woodhaven, Queens. Máximo 12 niños de 6 semanas a 12 años. Aceptamos 3-K y vales de ACS/HRA. Abrimos 7am–6pm.',
+  // Imagen social apaisada 1200×630: las fotos del sitio son verticales y en
+  // WhatsApp o Facebook se recortaban mal.
+  image = '/img/og/eladaycare.jpg',
   canonical,
 } = Astro.props;
 
-const site = Astro.site?.origin ?? "https://eladaycare.com";
+const site = Astro.site?.origin ?? 'https://eladaycare.com';
 const canonicalURL = canonical ?? new URL(Astro.url.pathname, site).toString();
-const imageURL = image.startsWith("http") ? image : new URL(image, site).toString();
+const imageURL = image.startsWith('http') ? image : new URL(image, site).toString();
+const url = (ruta: string) => new URL(ruta, site).toString();
 
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "ChildCare",
+const LAT = 40.6905;
+const LON = -73.859;
+
+const negocio = {
+  '@type': 'ChildCare',
+  '@id': `${site}/#daycare`,
   name: "Emanuel's Little Angels Family Group Daycare",
-  alternateName: "ELA Daycare",
+  alternateName: ['ELA Daycare', "Emanuel's Little Angels"],
   description:
-    "Group family daycare bilingüe con licencia OCFS en Woodhaven, Queens. 6 semanas a 12 años. Acepta 3-K, ACS y HRA.",
+    'Group family daycare bilingüe con licencia OCFS en Woodhaven, Queens. 6 semanas a 12 años, máximo 12 niños. Acepta 3-K, ACS y HRA.',
+  slogan: 'Cuidar, proteger, crecer',
   url: site,
-  image: imageURL,
-  telephone: "+1-347-369-0961",
-  email: "fannytorres1979@gmail.com",
-  priceRange: "$$",
-  founder: { "@type": "Person", name: "Fanny" },
+  image: [url('/img/og/eladaycare.jpg'), url('/img/equipo/la-casa.webp'), url('/img/hero/sala-principal.webp')],
+  logo: url('/favicon.svg'),
+  telephone: '+1-347-369-0961',
+  email: 'fannytorres1979@gmail.com',
+  priceRange: '$$',
+  foundingDate: '2023',
+  founder: { '@type': 'Person', name: 'Fanny Torres' },
+  numberOfEmployees: { '@type': 'QuantitativeValue', value: 2 },
   address: {
-    "@type": "PostalAddress",
-    streetAddress: "74-18 87 Ave",
-    addressLocality: "Woodhaven",
-    addressRegion: "NY",
-    postalCode: "11421",
-    addressCountry: "US",
+    '@type': 'PostalAddress',
+    streetAddress: '74-18 87 Ave',
+    addressLocality: 'Woodhaven',
+    addressRegion: 'NY',
+    postalCode: '11421',
+    addressCountry: 'US',
   },
+  geo: { '@type': 'GeoCoordinates', latitude: LAT, longitude: LON },
+  hasMap: `https://www.google.com/maps/search/?api=1&query=${LAT},${LON}`,
   areaServed: [
-    { "@type": "City", name: "Woodhaven" },
-    { "@type": "City", name: "Ozone Park" },
-    { "@type": "City", name: "Richmond Hill" },
-    { "@type": "City", name: "Glendale" },
+    { '@type': 'City', name: 'Woodhaven' },
+    { '@type': 'City', name: 'Ozone Park' },
+    { '@type': 'City', name: 'Richmond Hill' },
+    { '@type': 'City', name: 'Glendale' },
+    { '@type': 'City', name: 'Queens' },
   ],
   openingHoursSpecification: {
-    "@type": "OpeningHoursSpecification",
-    dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-    opens: "07:00",
-    closes: "18:00",
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+    opens: '07:00',
+    closes: '18:00',
   },
-  aggregateRating: {
-    "@type": "AggregateRating",
-    ratingValue: "4.9",
-    reviewCount: "34",
-  },
+  // Sin aggregateRating: las reseñas del sitio son de ejemplo todavía, y marcar
+  // reseñas que no existen es motivo de penalización manual en Google.
   hasCredential: [
-    { "@type": "EducationalOccupationalCredential", name: "NY OCFS License #948701" },
-    { "@type": "EducationalOccupationalCredential", name: "Pediatric CPR & First Aid" },
+    { '@type': 'EducationalOccupationalCredential', name: 'NY OCFS Group Family Day Care License #948701' },
+    { '@type': 'EducationalOccupationalCredential', name: 'Pediatric CPR & First Aid' },
   ],
-  inLanguage: ["es", "en"],
+  knowsLanguage: [
+    { '@type': 'Language', name: 'Spanish', alternateName: 'es' },
+    { '@type': 'Language', name: 'English', alternateName: 'en' },
+  ],
+  availableLanguage: ['es', 'en'],
+  paymentAccepted: 'Efectivo, ACS/HRA voucher, 3-K',
+  currenciesAccepted: 'USD',
+  isAccessibleForFree: false,
+  audience: { '@type': 'PeopleAudience', suggestedMinAge: 0, suggestedMaxAge: 12 },
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Programas por edad',
+    itemListElement: [
+      { nombre: 'Bebés', edad: '6 semanas a 18 meses' },
+      { nombre: 'Caminadores', edad: '18 meses a 3 años' },
+      { nombre: 'Angelitos · 3-K', edad: '3 a 5 años' },
+      { nombre: 'Después de escuela', edad: '5 a 12 años' },
+    ].map(({ nombre, edad }) => ({
+      '@type': 'Offer',
+      itemOffered: {
+        '@type': 'Service',
+        name: `${nombre} — ${edad}`,
+        serviceType: 'Child care',
+        provider: { '@id': `${site}/#daycare` },
+        areaServed: { '@type': 'City', name: 'Woodhaven' },
+      },
+    })),
+  },
 };
+
+const sitio = {
+  '@type': 'WebSite',
+  '@id': `${site}/#website`,
+  url: site,
+  name: 'ELA Daycare',
+  description,
+  publisher: { '@id': `${site}/#daycare` },
+  inLanguage: ['es-US', 'en-US'],
+};
+
+const preguntas = {
+  '@type': 'FAQPage',
+  '@id': `${canonicalURL}#faq`,
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.es.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.es.a },
+  })),
+};
+
+const jsonLd = { '@context': 'https://schema.org', '@graph': [negocio, sitio, preguntas] };
+
+const FUENTES =
+  'https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;700;800&display=swap';
 ---
 
 <title>{title}</title>
@@ -68,12 +136,17 @@ const jsonLd = {
 <link rel="canonical" href={canonicalURL} />
 
 <meta property="og:type" content="website" />
-<meta property="og:site_name" content="ELA Daycare" />
+<meta property="og:site_name" content="ELA Daycare — Emanuel's Little Angels" />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={imageURL} />
-<meta property="og:image:width" content="1300" />
-<meta property="og:image:height" content="975" />
+<meta property="og:image:type" content="image/jpeg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta
+  property="og:image:alt"
+  content="Salón principal de ELA Daycare: alfombra de colores, mesa infantil y área de juegos"
+/>
 <meta property="og:url" content={canonicalURL} />
 <meta property="og:locale" content="es_US" />
 <meta property="og:locale:alternate" content="en_US" />
@@ -82,17 +155,29 @@ const jsonLd = {
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={imageURL} />
+<meta
+  name="twitter:image:alt"
+  content="Salón principal de ELA Daycare: alfombra de colores, mesa infantil y área de juegos"
+/>
 
 <meta name="theme-color" content="#2f73b5" />
 <meta name="format-detection" content="telephone=no" />
-<meta name="robots" content="index,follow,max-image-preview:large" />
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
 <meta name="geo.region" content="US-NY" />
 <meta name="geo.placename" content="Woodhaven, Queens, New York" />
-<meta name="geo.position" content="40.6905;-73.8590" />
-<meta name="ICBM" content="40.6905, -73.8590" />
+<meta name="geo.position" content={`${LAT};${LON}`} />
+<meta name="ICBM" content={`${LAT}, ${LON}`} />
 
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
+
+<!-- Las fuentes no deben bloquear el primer pintado: se piden con `media=print`
+     y se activan al terminar de cargar. Con `display=swap` el texto se ve desde
+     el principio con la tipografía del sistema. -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preload" as="style" href={FUENTES} />
+<link rel="stylesheet" href={FUENTES} media="print" onload="this.media='all';this.onload=null" />
+<noscript><link rel="stylesheet" href={FUENTES} /></noscript>
 
 <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />

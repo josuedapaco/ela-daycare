@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "astro": "^5.15.0",
+    "compression": "^1.8.1",
     "express": "^4.19.2",
     "resend": "^4.0.1"
   },

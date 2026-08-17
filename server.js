@@ -1,4 +1,5 @@
 import express from 'express';
+import compression from 'compression';
 import path from 'node:path';
 import fs from 'node:fs';
 import { fileURLToPath } from 'node:url';
@@ -29,6 +30,10 @@ const ADMIN_TOKEN_IS_TEMP = !(process.env.ADMIN_TOKEN || '').trim();
 const resend = RESEND_API_KEY ? new Resend(RESEND_API_KEY) : null;
 const app = express();
 
+// El HTML, el CSS y el JS son texto: comprimidos bajan cerca del 70%, y la
+// velocidad de carga cuenta para el posicionamiento. Las fotos ya vienen en
+// webp/jpeg, así que compression las deja en paz.
+app.use(compression());
 app.use(express.json({ limit: '32kb' }));
 app.disable('x-powered-by');
 app.set('trust proxy', 1);
