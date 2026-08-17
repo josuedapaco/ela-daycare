@@ -5,6 +5,8 @@ import fs from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { randomBytes, timingSafeEqual } from 'node:crypto';
 import { Resend } from 'resend';
+import { negocio, grupos, rutina, hechos } from './datos/negocio.js';
+import { faqs } from './datos/faq.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -452,6 +454,88 @@ app.put('/api/vacancies', requireToken, (req, res) => {
   console.log('[vacancies] actualizado', JSON.stringify(next.groups));
   res.set('Cache-Control', 'no-store');
   return res.json(next);
+});
+
+// ---- resumen para asistentes de IA ----
+
+/**
+ * /llms.txt — el sitio contado en texto plano, en español y en inglés.
+ *
+ * ChatGPT, Claude, Perplexity y compañía leen HTML sin ejecutar JavaScript, así
+ * que del sitio solo ven la versión en español: el inglés vive en atributos
+ * `data-en` que solo el navegador convierte en texto. Aquí van los dos idiomas
+ * seguidos, más los cupos del momento, para que cuando alguien pregunte «¿hay
+ * lugar para un bebé en Woodhaven?» la respuesta salga con datos de hoy.
+ *
+ * Es la convención de llmstxt.org. Todavía no la respetan todos, pero el
+ * archivo es texto plano y no estorba a nadie.
+ */
+function llmsTxt() {
+  const l = [];
+  const { horario: h } = negocio;
+
+  l.push(`# ${negocio.nombre} (${negocio.nombreCorto})`, '');
+  l.push(
+    `> Group family daycare con licencia del estado de Nueva York en Woodhaven, Queens. ` +
+      `Bilingüe español e inglés, de 6 semanas a 12 años, máximo 12 niños. ` +
+      `Abre de ${h.abre} a ${h.cierra}, ${h.dias}.`,
+    '',
+  );
+  l.push(
+    `> Licensed group family daycare in Woodhaven, Queens, New York. Bilingual ` +
+      `Spanish and English, ages 6 weeks to 12 years, 12 children maximum. ` +
+      `Open ${h.abre} to ${h.cierra}, Monday to Friday.`,
+    '',
+  );
+
+  l.push('## Datos de contacto / Contact', '');
+  l.push(`- Dirección / Address: ${negocio.direccion}`);
+  l.push(`- Teléfono / Phone: ${negocio.telefono}`);
+  l.push(`- Correo / Email: ${negocio.correo}`);
+  l.push(`- Web: ${negocio.web}`);
+  l.push(`- Horario / Hours: ${h.dias} ${h.abre}–${h.cierra}; fines de semana ${h.finDeSemana} (weekends closed)`);
+  l.push(`- Licencia / License: ${negocio.licencia}`);
+  l.push(`- Dueña / Owner: ${negocio.duenya}. Abrió en / Opened in ${negocio.abrioEn}.`);
+  l.push(`- Transporte / Transit: ${negocio.transporte}`);
+  l.push(`- Visitas / Visits: ${negocio.visitas} (drop in, no appointment needed)`);
+  l.push('');
+
+  l.push('## Cupos disponibles hoy / Openings today', '');
+  l.push(`Actualizado / Updated: ${vacancies.updatedAt}`, '');
+  for (const g of grupos) {
+    const v = vacancies.groups[g.clave];
+    if (!v) continue;
+    const libres = Math.max(0, v.capacity - v.filled);
+    const es = libres === 0
+      ? `sin cupo${v.waitlist > 0 ? `, ${v.waitlist} en lista de espera` : ''}`
+      : `${libres} cupo${libres === 1 ? '' : 's'} libre${libres === 1 ? '' : 's'}`;
+    const en = libres === 0
+      ? `full${v.waitlist > 0 ? `, ${v.waitlist} on the waitlist` : ''}`
+      : `${libres} spot${libres === 1 ? '' : 's'} open`;
+    l.push(`- ${g.es} / ${g.en} (${g.edadEs} / ${g.edadEn}): ${es} — ${en}. ${v.filled} de ${v.capacity} ocupados.`);
+  }
+  l.push('', 'Datos en JSON / JSON feed: /api/vacancies', '');
+
+  l.push('## Lo que hay que saber / Key facts', '');
+  for (const f of hechos) l.push(`- ${f.es}`, `  ${f.en}`);
+  l.push('');
+
+  l.push('## Rutina diaria / Daily routine', '');
+  for (const r of rutina) l.push(`- ${r.hora} — ${r.es} / ${r.en}`);
+  l.push('');
+
+  l.push('## Preguntas frecuentes / FAQ', '');
+  for (const f of faqs) {
+    l.push(`### ${f.es.q} / ${f.en.q}`, '', f.es.a, '', f.en.a, '');
+  }
+
+  return l.join('\n');
+}
+
+app.get('/llms.txt', (_req, res) => {
+  res.type('text/plain; charset=utf-8');
+  res.set('Cache-Control', 'public, max-age=3600');
+  res.send(llmsTxt());
 });
 
 // Panel de la dueña. El token va en la URL (?t=...), fuera del build de Astro

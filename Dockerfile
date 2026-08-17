@@ -8,6 +8,7 @@ RUN npm ci --no-audit --no-fund
 COPY astro.config.mjs ./
 COPY src ./src
 COPY public ./public
+COPY datos ./datos
 
 RUN npm run build
 
@@ -19,7 +20,9 @@ WORKDIR /app
 COPY package.json package-lock.json* ./
 RUN npm ci --omit=dev --no-audit --no-fund && npm cache clean --force
 
+# `datos/` también en runtime: server.js lo importa para generar /llms.txt.
 COPY server.js admin.html ./
+COPY datos ./datos
 COPY --from=build /app/dist ./dist
 
 # Cupos persistentes: monta un volumen aquí (EasyPanel → Volumes → /app/data),

@@ -2,7 +2,8 @@
 import Base from '../layouts/Base.astro';
 import MobileMenu from '../components/MobileMenu.astro';
 import ConfirmDialog from '../components/ConfirmDialog.astro';
-import { faqs } from '../data/faq';
+import { faqs } from '../../datos/faq.js';
+import { rutina } from '../../datos/negocio.js';
 ---
 <Base>
 
@@ -384,22 +385,12 @@ import { faqs } from '../data/faq';
           <span class="eyebrow" data-es="Un día cualquiera" data-en="An ordinary day">Un día cualquiera</span>
           <h2><span data-es="Así se ve" data-en="This is what">Así se ve</span> <em data-es="un martes aquí" data-en="a Tuesday looks like">un martes aquí</em></h2>
         </div>
-        <!-- Horario real de la casa (rutina diaria que nos pasó Fanny): 7:00am a 6:00pm. -->
+        <!-- La rutina vive en datos/negocio.js, que es también de donde sale el
+             resumen de /llms.txt para los asistentes de IA. -->
         <ul class="sched">
-          <li><time>7:00</time><span data-es="Se abre la puerta: bienvenida y juego tranquilo con rompecabezas, libros y bloques." data-en="The door opens: welcome, and quiet play with puzzles, books and blocks.">Se abre la puerta: bienvenida y juego tranquilo con rompecabezas, libros y bloques.</span></li>
-          <li><time>8:00</time><span data-es="Desayuno en la mesa de la cocina." data-en="Breakfast at the kitchen table.">Desayuno en la mesa de la cocina.</span></li>
-          <li><time>8:30</time><span data-es="Círculo de la mañana: saludos, el calendario, el clima, canciones y el tema del día." data-en="Morning circle: greetings, the calendar, the weather, songs and the theme of the day.">Círculo de la mañana: saludos, el calendario, el clima, canciones y el tema del día.</span></li>
-          <li><time>9:00</time><span data-es="Aprendizaje: lectura, arte, los primeros números, ciencias y lenguaje." data-en="Learning time: reading, art, early math, science and language.">Aprendizaje: lectura, arte, los primeros números, ciencias y lenguaje.</span></li>
-          <li><time>10:00</time><span data-es="Merienda de la mañana." data-en="Morning snack.">Merienda de la mañana.</span></li>
-          <li><time>10:15</time><span data-es="Salimos al patio o caminamos al parque del barrio: correr, trepar, moverse." data-en="Out to the yard, or a walk to the neighborhood park: running, climbing, moving.">Salimos al patio o caminamos al parque del barrio: correr, trepar, moverse.</span></li>
-          <li><time>11:30</time><span data-es="Almuerzo caliente, cocinado aquí esa misma mañana." data-en="A hot lunch, cooked right here that morning.">Almuerzo caliente, cocinado aquí esa misma mañana.</span></li>
-          <li><time>12:00</time><span data-es="Nos preparamos para dormir: lectura tranquila y música suave." data-en="Getting ready to sleep: quiet reading and soft music.">Nos preparamos para dormir: lectura tranquila y música suave.</span></li>
-          <li><time>12:30</time><span data-es="Siesta, con la luz baja. Los bebés duermen a su hora." data-en="Nap time, lights low. Babies sleep on their own schedule.">Siesta, con la luz baja. Los bebés duermen a su hora.</span></li>
-          <li><time>2:30</time><span data-es="Se despiertan poco a poco, sin apurar a nadie." data-en="They wake up slowly, nobody gets rushed.">Se despiertan poco a poco, sin apurar a nadie.</span></li>
-          <li><time>3:00</time><span data-es="Merienda de la tarde, y llegan los grandes de la escuela." data-en="Afternoon snack, and the big kids arrive from school.">Merienda de la tarde, y llegan los grandes de la escuela.</span></li>
-          <li><time>3:30</time><span data-es="Centros: arte, juego dramático, construcción, sensorial y STEM. Los grandes hacen la tarea acompañados." data-en="Centers: art, dramatic play, building, sensory and STEM. The big kids do homework with support.">Centros: arte, juego dramático, construcción, sensorial y STEM. Los grandes hacen la tarea acompañados.</span></li>
-          <li><time>4:30</time><span data-es="Juego libre todos juntos, dentro o en el patio." data-en="Free play, everyone together, inside or in the yard.">Juego libre todos juntos, dentro o en el patio.</span></li>
-          <li><time>5:15</time><span data-es="Despedida: te contamos cómo le fue el día. Cerramos a las 6:00." data-en="Goodbyes: we tell you how the day went. We close at 6:00.">Despedida: te contamos cómo le fue el día. Cerramos a las 6:00.</span></li>
+          {rutina.map((r) => (
+            <li><time>{r.hora}</time><span data-es={r.es} data-en={r.en}>{r.es}</span></li>
+          ))}
         </ul>
       </div>
       <div>
