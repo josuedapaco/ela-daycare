@@ -65,12 +65,12 @@ const VACANCIES_FILE = path.join(DATA_DIR, 'vacancies.json');
 
 // Estado inicial = lo que estaba escrito a mano en el sitio.
 const DEFAULT_VACANCIES = {
-  updatedAt: '2026-08-03T12:00:00.000Z',
+  updatedAt: '2026-11-04T17:00:00.000Z',
   groups: {
-    babies:      { filled: 2, capacity: 2, waitlist: 2 },
+    babies:      { filled: 1, capacity: 2, waitlist: 0 },
     toddlers:    { filled: 2, capacity: 3, waitlist: 0 },
-    angels:      { filled: 1, capacity: 4, waitlist: 0 },
-    afterschool: { filled: 0, capacity: 4, waitlist: 0 },
+    angels:      { filled: 2, capacity: 4, waitlist: 0 },
+    afterschool: { filled: 1, capacity: 4, waitlist: 0 },
   },
 };
 const GROUP_KEYS = Object.keys(DEFAULT_VACANCIES.groups);
