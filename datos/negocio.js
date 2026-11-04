@@ -19,7 +19,7 @@ export const negocio = {
   telefono: '+1 (347) 369-0961',
   correo: 'fannytorres1979@gmail.com',
   web: 'https://eladaycare.com',
-  horario: { abre: '7:00am', cierra: '6:00pm', dias: 'lunes a viernes', finDeSemana: 'cerrado' },
+  horario: { abre: '7:30am', cierra: '5:30pm', dias: 'lunes a viernes', finDeSemana: 'cerrado' },
   idiomas: ['español', 'inglés'],
   transporte: 'Líneas J y Z del metro en Woodhaven Blvd',
   visitas: 'Sin cita, de lunes a viernes entre 9:30 y 11:00 de la mañana',
@@ -39,7 +39,7 @@ export const grupos = [
  * justo como el sitio acabó anunciando un horario que no era el real.
  */
 export const rutina = [
-  { hora: '7:00', es: 'Se abre la puerta: bienvenida y juego tranquilo con rompecabezas, libros y bloques.', en: 'The door opens: welcome, and quiet play with puzzles, books and blocks.' },
+  { hora: '7:30', es: 'Se abre la puerta: bienvenida y juego tranquilo con rompecabezas, libros y bloques.', en: 'The door opens: welcome, and quiet play with puzzles, books and blocks.' },
   { hora: '8:00', es: 'Desayuno en la mesa de la cocina.', en: 'Breakfast at the kitchen table.' },
   { hora: '8:30', es: 'Círculo de la mañana: saludos, el calendario, el clima, canciones y el tema del día.', en: 'Morning circle: greetings, the calendar, the weather, songs and the theme of the day.' },
   { hora: '9:00', es: 'Aprendizaje: lectura, arte, los primeros números, ciencias y lenguaje.', en: 'Learning time: reading, art, early math, science and language.' },
@@ -52,7 +52,7 @@ export const rutina = [
   { hora: '3:00', es: 'Merienda de la tarde, y llegan los grandes de la escuela.', en: 'Afternoon snack, and the big kids arrive from school.' },
   { hora: '3:30', es: 'Centros: arte, juego dramático, construcción, sensorial y STEM. Los grandes hacen la tarea acompañados.', en: 'Centers: art, dramatic play, building, sensory and STEM. The big kids do homework with support.' },
   { hora: '4:30', es: 'Juego libre todos juntos, dentro o en el patio.', en: 'Free play, everyone together, inside or in the yard.' },
-  { hora: '5:15', es: 'Despedida: te contamos cómo le fue el día. Cerramos a las 6:00.', en: 'Goodbyes: we tell you how the day went. We close at 6:00.' },
+  { hora: '5:15', es: 'Despedida: te contamos cómo le fue el día. Cerramos a las 5:30.', en: 'Goodbyes: we tell you how the day went. We close at 5:30.' },
 ];
 
 /** Datos que las familias preguntan y que conviene que una IA pueda citar. */
@@ -62,8 +62,8 @@ export const hechos = [
     en: 'Licensed group family day care by New York State (OCFS), license #948701. The home is inspected and the caregivers are certified.',
   },
   {
-    es: 'Hasta 12 niños de 6 semanas a 12 años, más hasta cuatro niños de edad escolar adicionales. Dos adultos certificados presentes todo el día; para menores de 2 años, un adulto por cada dos niños.',
-    en: 'Up to 12 children ages 6 weeks to 12 years, plus up to four additional school-age children. Two certified adults present all day; for children under 2, one adult per two children.',
+    es: 'Hasta 12 niños en total, de 6 semanas a 12 años. Atención cercana de nuestra fundadora. Consulta disponibilidad según la edad de tu hijo.',
+    en: 'Up to 12 children in total, ages 6 weeks to 12 years. Personal care from our founder. Ask about availability for your child’s age.',
   },
   {
     es: 'Bilingüe: se habla español e inglés desde la primera semana.',
@@ -86,8 +86,8 @@ export const hechos = [
     en: 'Parents can walk in whenever they want, unannounced, any time. We text a photo and the daily report.',
   },
   {
-    es: 'Recogida tarde: $1 por minuto después de las 6:00. La primera vez no se cobra.',
-    en: 'Late pickup: $1 per minute after 6:00. The first time is free.',
+    es: 'Recogida tarde: $1 por minuto después de las 5:30. La primera vez no se cobra.',
+    en: 'Late pickup: $1 per minute after 5:30. The first time is free.',
   },
   {
     es: 'Días sin clases, medio día y vacaciones escolares: abrimos igual.',

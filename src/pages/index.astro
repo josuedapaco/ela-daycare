@@ -1,9 +1,12 @@
 ---
 import Base from '../layouts/Base.astro';
+import HeroCarousel from '../components/HeroCarousel.astro';
 import MobileMenu from '../components/MobileMenu.astro';
 import ConfirmDialog from '../components/ConfirmDialog.astro';
 import { faqs } from '../../datos/faq.js';
 import { rutina } from '../../datos/negocio.js';
+import galeria from '../../datos/galeria.json';
+import resenas from '../../datos/resenas.json';
 ---
 <Base>
 
@@ -40,7 +43,7 @@ import { rutina } from '../../datos/negocio.js';
     <div>
       <a href="tel:+13473690961">📞 <span class="fill">+1 (347) 369-0961</span></a>
       <span class="lic" style="margin-left:14px" data-es="Licencia OCFS de NY #" data-en="NY OCFS License #">Licencia OCFS de NY #</span><span class="lic fill">948701</span>
-      <span class="lic" data-es=" · Lun a Vie 7:00am–6:00pm" data-en=" · Mon–Fri 7:00am–6:00pm"> · Lun a Vie 7:00am–6:00pm</span>
+      <span class="lic" data-es=" · Lun a Vie 7:30am–5:30pm" data-en=" · Mon–Fri 7:30am–5:30pm"> · Lun a Vie 7:30am–5:30pm</span>
     </div>
     <div class="right">
       <div class="langsw" role="group" aria-label="Idioma / Language">
@@ -55,7 +58,7 @@ import { rutina } from '../../datos/negocio.js';
 <nav class="main">
   <div class="wrap">
     <a class="brand" href="#top">
-      <svg width="46" height="41" viewBox="0 0 200 178" aria-hidden="true"><use href="#ela"/></svg>
+      <img class="brand-logo" src="/img/logo.webp" width="64" height="64" alt="" />
       <span class="brandname"><b>ELA</b> <i>Daycare</i>
         <small data-es="Emanuel's Little Angels" data-en="Emanuel's Little Angels">Emanuel's Little Angels</small>
       </span>
@@ -85,13 +88,13 @@ import { rutina } from '../../datos/negocio.js';
       <div>
         <span class="eyebrow" data-es="✦ Cupos abiertos para otoño 2026" data-en="✦ Now enrolling for Fall 2026">✦ Cupos abiertos para otoño 2026</span>
         <h1>
-          <span data-es="Los cuidamos" data-en="We care for them">Los cuidamos</span>
-          <span class="hi"><span data-es="como en casa" data-en="like family">como en casa</span>
+          <span data-es="Guardería bilingüe" data-en="Bilingual daycare">Guardería bilingüe</span>
+          <span class="hi"><span data-es="en Woodhaven, Queens" data-en="in Woodhaven, Queens">en Woodhaven, Queens</span>
             <svg viewBox="0 0 200 13" preserveAspectRatio="none" aria-hidden="true"><path d="M2 8c40-6 90-7 196-3" stroke="#FFD166" stroke-width="5" fill="none" stroke-linecap="round"/></svg>
           </span>
-          <span data-es="— porque es una casa." data-en="— because it is a home.">— porque es una casa.</span>
+          <span data-es="Los cuidamos como en casa." data-en="We care for them like family.">Los cuidamos como en casa.</span>
         </h1>
-        <p class="lede"><span data-es="Emanuel's Little Angels es un group family daycare con licencia del estado en" data-en="Emanuel's Little Angels is a state-licensed group family daycare in">Emanuel's Little Angels es un group family daycare con licencia del estado en</span> <b>Woodhaven</b><span data-es=", Queens. Máximo 12 niños, de 6 semanas a 12 años, con las mismas dos personas cada día. Bilingüe, y sí, publicamos nuestros precios." data-en=", Queens. A maximum of 12 children, ages 6 weeks to 12 years, with the same two people every day. Bilingual, and yes, we publish our prices.">, Queens. Máximo 12 niños, de 6 semanas a 12 años, con las mismas dos personas cada día. Bilingüe, y sí, publicamos nuestros precios.</span></p>
+        <p class="lede"><span data-es="Emanuel's Little Angels es un group family daycare con licencia del estado en" data-en="Emanuel's Little Angels is a state-licensed group family daycare in">Emanuel's Little Angels es un group family daycare con licencia del estado en</span> <b>Woodhaven</b><span data-es=", Queens. Máximo 12 niños, de 6 semanas a 12 años, con atención cercana de nuestra fundadora. Bilingüe, y sí, publicamos nuestros precios." data-en=", Queens. A maximum of 12 children, ages 6 weeks to 12 years, with personal care from our founder. Bilingual, and yes, we publish our prices.">, Queens. Máximo 12 niños, de 6 semanas a 12 años, con atención cercana de nuestra fundadora. Bilingüe, y sí, publicamos nuestros precios.</span></p>
         <div class="cta-row">
           <a class="btn btn-1" href="#visita" data-es="Ver vacantes y precios" data-en="See openings &amp; pricing">Ver vacantes y precios</a>
           <a class="btn btn-2" href="#dia" data-es="Mira un día con nosotros" data-en="See a day with us">Mira un día con nosotros</a>
@@ -101,15 +104,10 @@ import { rutina } from '../../datos/negocio.js';
           <span class="b" data-es="Proteger" data-en="Protect">Proteger</span><i class="d"></i>
           <span class="c" data-es="Crecer" data-en="Grow">Crecer</span>
         </div>
-        <div class="trust">
-          <span class="stars">★★★★★</span>
-          <span data-es="4.9 en Google · 34 reseñas de familias del barrio" data-en="4.9 on Google · 34 reviews from local families"><span class="fill">4.9 en Google · 34 reseñas</span> de familias del barrio</span>
-        </div>
+        <div class="trust"><span data-es="Español e inglés · Bebés, preescolar y después de escuela" data-en="Spanish & English · Infants, preschool & after school">Español e inglés · Bebés, preescolar y después de escuela</span></div>
       </div>
       <div class="hero-art">
-        <div class="frame">
-          <img src="/img/hero/sala-principal.webp" alt="La casa vista desde el patio trasero, con el porche de madera y el área de juegos infantiles" fetchpriority="high" width="1300" height="2312">
-        </div>
+        <HeroCarousel />
         <div class="badge">
           <svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true">
             <circle cx="17" cy="17" r="17" fill="#e8f6f3"/>
@@ -125,24 +123,7 @@ import { rutina } from '../../datos/negocio.js';
   </div>
 </header>
 
-<!-- ====== FRANJA PRUEBA SOCIAL ====== -->
-<section class="social">
-  <div class="social-row">
-    <div class="avatars">
-      <div class="av">M</div>
-      <div class="av">R</div>
-      <div class="av">D</div>
-      <div class="av">+</div>
-    </div>
-    <div class="social-txt">
-      <div class="line1">
-        <span class="stars">★★★★★</span>
-        <b class="fill" data-es="4.9 en Google · 34 familias reseñando" data-en="4.9 on Google · 34 families reviewing">4.9 en Google · 34 familias reseñando</b>
-      </div>
-      <cite data-es="&laquo;Mi hija llegó de 8 meses y salió leyendo. Nos sentimos parte de otra familia.&raquo; — Mariana, mamá en Woodhaven" data-en="&laquo;My daughter arrived at 8 months and left reading. We felt like part of another family.&raquo; — Mariana, mom in Woodhaven">«Mi hija llegó de 8 meses y salió leyendo. Nos sentimos parte de otra familia.» — Mariana, mamá en Woodhaven</cite>
-    </div>
-  </div>
-</section>
+
 
 <svg class="sep" viewBox="0 0 1440 50" preserveAspectRatio="none" aria-hidden="true">
   <path fill="#fbf8f1" d="M0 30a70 25 0 0 1 120 0a70 25 0 0 1 120 0a70 25 0 0 1 120 0a70 25 0 0 1 120 0a70 25 0 0 1 120 0a70 25 0 0 1 120 0a70 25 0 0 1 120 0a70 25 0 0 1 120 0a70 25 0 0 1 120 0a70 25 0 0 1 120 0a70 25 0 0 1 120 0a70 25 0 0 1 120 0V50H0Z"/>
@@ -157,7 +138,7 @@ import { rutina } from '../../datos/negocio.js';
       <div class="stat"><span class="stat-n">6 <small style="font-size:19px">sem</small></span><span class="stat-l" data-es="la edad más chiquita que recibimos" data-en="the youngest age we take">la edad más chiquita que recibimos</span></div>
       <div class="stat"><span class="stat-n">2023</span><span class="stat-l" data-es="el año que abrimos en Woodhaven" data-en="the year we opened in Woodhaven">el año que abrimos en Woodhaven</span></div>
     </div>
-    <p style="text-align:center;margin:20px auto 0;max-width:58ch;color:var(--ink-2);font-weight:700" data-es="Un centro grande tiene 60 niños y personal que rota. Aquí son doce, siempre los mismos doce, y tu hijo puede quedarse con nosotros desde bebé hasta la escuela primaria." data-en="A big center has 60 children and staff that rotates. Here there are twelve, always the same twelve, and your child can stay with us from baby all the way through elementary school.">Un centro grande tiene 60 niños y personal que rota. Aquí son doce, siempre los mismos doce, y tu hijo puede quedarse con nosotros desde bebé hasta la escuela primaria.</p>
+    <p style="text-align:center;margin:20px auto 0;max-width:58ch;color:var(--ink-2);font-weight:700" data-es="Somos un daycare familiar de hasta 12 niños. Un grupo pequeño donde acompañamos a tu hijo desde bebé hasta la escuela primaria." data-en="We are a family daycare for up to 12 children. A small group where we care for your child from infancy through elementary school.">Somos un daycare familiar de hasta 12 niños. Un grupo pequeño donde acompañamos a tu hijo desde bebé hasta la escuela primaria.</p>
   </div>
 </section>
 
@@ -270,7 +251,7 @@ import { rutina } from '../../datos/negocio.js';
         <div class="cap"><div class="cap-bar"><div class="cap-fill f-open" data-vac-bar style="width:0%"></div></div>
           <div class="cap-txt"><span data-vac-left data-es="0 / 4 llenos" data-en="0 / 4 filled">0 / 4 llenos</span><span data-vac-right data-es="4 disponibles" data-en="4 available">4 disponibles</span></div></div></div>
     </div>
-    <p class="vac-note"><span data-es="Última actualización:" data-en="Last updated:">Última actualización:</span> <span class="fill" data-vac-date data-es="lunes 3 de agosto de 2026" data-en="Monday, August 3, 2026">lunes 3 de agosto de 2026</span>. <span data-es="Nuestra licencia permite hasta 12 niños de 6 semanas a 12 años, más cuatro niños de edad escolar." data-en="Our license allows up to 12 children ages 6 weeks to 12 years, plus four additional school-age children.">Nuestra licencia permite hasta 12 niños de 6 semanas a 12 años, más cuatro niños de edad escolar.</span></p>
+    <p class="vac-note"><span data-es="Última actualización:" data-en="Last updated:">Última actualización:</span> <span class="fill" data-vac-date data-es="lunes 3 de agosto de 2026" data-en="Monday, August 3, 2026">lunes 3 de agosto de 2026</span>. <span data-es="Recibimos hasta 12 niños en total, de 6 semanas a 12 años. Consulta disponibilidad según la edad." data-en="We welcome up to 12 children in total, ages 6 weeks to 12 years. Ask about availability for your child’s age.">Recibimos hasta 12 niños en total, de 6 semanas a 12 años. Consulta disponibilidad según la edad.</span></p>
   </div>
 </section>
 
@@ -300,7 +281,7 @@ import { rutina } from '../../datos/negocio.js';
           <li data-es="Canciones y arrullos en español e inglés desde la primera semana." data-en="Songs and lullabies in Spanish and English from the very first week.">Canciones y arrullos en español e inglés desde la primera semana.</li>
         </ul>
       </div>
-      <div class="frame"><img src="/img/grupos/bebes.webp" alt="Rincón de bebés: cambiador con letrero 'Baby's'" loading="lazy" width="1000" height="1778"></div>
+      <div class="frame"><img src="/img/nuevas/actividad-09.webp" alt="Juego con bloques de colores" loading="lazy" width="1200" height="1600"></div>
     </div>
 
     <div class="panel">
@@ -314,7 +295,7 @@ import { rutina } from '../../datos/negocio.js';
           <li data-es="Salimos al parque del barrio dos veces al día cuando el clima ayuda." data-en="We walk to the neighborhood park twice a day when the weather allows.">Salimos al parque del barrio dos veces al día cuando el clima ayuda.</li>
         </ul>
       </div>
-      <div class="frame"><img src="/img/grupos/caminadores.webp" alt="Cuidadora jugando en el suelo con una caminadora sobre alfombra didáctica" loading="lazy" width="1000" height="563"></div>
+      <div class="frame"><img src="/img/nuevas/actividad-07.webp" alt="Juego de agua en el patio" loading="lazy" width="1200" height="1600"></div>
     </div>
 
     <div class="panel">
@@ -328,13 +309,13 @@ import { rutina } from '../../datos/negocio.js';
           <li data-es="Preparación real para kínder y te acompañamos con la solicitud de MySchools, en español." data-en="Real kindergarten readiness, and we walk you through the MySchools application in Spanish.">Preparación real para kínder y te acompañamos con la solicitud de MySchools, en español.</li>
         </ul>
       </div>
-      <div class="frame"><img src="/img/grupos/angelitos.webp" alt="Mesa amarilla con sillas de colores y pared con abecedario, área de 3-K" loading="lazy" width="1000" height="1778"></div>
+      <div class="frame"><img src="/img/nuevas/actividad-15.webp" alt="Niña mostrando su dibujo" loading="lazy" width="1200" height="1600"></div>
     </div>
 
     <div class="panel">
       <div class="txt">
         <h3 data-es="Después de escuela · 5 a 12 años" data-en="After school · 5 to 12 years">Después de escuela · 5 a 12 años</h3>
-        <span class="ratio" data-es="Hasta 4 niños de edad escolar adicionales" data-en="Up to 4 additional school-age children">Hasta 4 niños de edad escolar adicionales</span>
+        <span class="ratio" data-es="Cuidado después de escuela dentro de nuestro grupo de hasta 12 niños" data-en="After-school care within our group of up to 12 children">Cuidado después de escuela dentro de nuestro grupo de hasta 12 niños</span>
         <ul>
           <li data-es="Los recogemos caminando de la escuela si queda cerca. Pregúntanos por tu escuela." data-en="We walk over to pick them up from school if it's nearby. Ask us about your school.">Los recogemos caminando de la escuela si queda cerca. Pregúntanos por tu escuela.</li>
           <li data-es="Merienda, tarea acompañada y después juego libre. La tarea se hace aquí, no en la noche en casa." data-en="Snack, homework with support, then free play. Homework gets done here, not at night at home.">Merienda, tarea acompañada y después juego libre. La tarea se hace aquí, no en la noche en casa.</li>
@@ -342,7 +323,7 @@ import { rutina } from '../../datos/negocio.js';
           <li data-es="Días sin clases, medio día y vacaciones escolares: abrimos igual." data-en="No-school days, half days and school breaks: we're open anyway.">Días sin clases, medio día y vacaciones escolares: abrimos igual.</li>
         </ul>
       </div>
-      <div class="frame"><img src="/img/grupos/despues-escuela.webp" alt="Sala con TV y alfombra de colores para niños en edad escolar" loading="lazy" width="1000" height="1778"></div>
+      <div class="frame"><img src="/img/nuevas/actividad-26.webp" alt="Niños jugando juntos con bloques" loading="lazy" width="1600" height="1200"></div>
     </div>
   </div>
 </section>
@@ -413,13 +394,37 @@ import { rutina } from '../../datos/negocio.js';
   </div>
 </section>
 
+<!-- ====== GALERÍA ====== -->
+<section id="galeria" aria-labelledby="galeria-titulo">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow" data-es="Pequeños momentos, grandes recuerdos" data-en="Little moments, big memories">Pequeños momentos, grandes recuerdos</span>
+      <h2 id="galeria-titulo" data-es="La vida en nuestros angelitos" data-en="Life with our little angels">La vida en nuestros angelitos</h2>
+      <p data-es="Un vistazo a nuestros juegos, actividades y tardes en el patio." data-en="A glimpse of our games, activities and afternoons in the yard.">Un vistazo a nuestros juegos, actividades y tardes en el patio.</p>
+    </div>
+    <div class="photo-collage">
+      {galeria.slice(0, 8).map((foto) => (
+        <figure><a href={foto.src} target="_blank" rel="noopener noreferrer" aria-label={`Ver foto: ${foto.alt}`}><img src={foto.src} width={foto.width} height={foto.height} alt={foto.alt} loading="lazy" decoding="async" /></a></figure>
+      ))}
+    </div>
+    <details class="gallery-more">
+      <summary><span data-es="Ver todas las fotos" data-en="See all photos">Ver todas las fotos</span></summary>
+      <div class="photo-collage">
+        {galeria.slice(8).map((foto) => (
+          <figure><a href={foto.src} target="_blank" rel="noopener noreferrer" aria-label={`Ver foto: ${foto.alt}`}><img src={foto.src} width={foto.width} height={foto.height} alt={foto.alt} loading="lazy" decoding="async" /></a></figure>
+        ))}
+      </div>
+    </details>
+  </div>
+</section>
+
 <!-- ====== EQUIPO ====== -->
 <section class="band" id="equipo">
   <div class="wrap">
     <div class="sec-head">
       <span class="eyebrow" data-es="Quiénes te reciben" data-en="Who greets you">Quiénes te reciben</span>
-      <h2><span data-es="Somos dos," data-en="There are two of us,">Somos dos,</span> <em data-es="y siempre las mismas dos" data-en="and always the same two">y siempre las mismas dos</em></h2>
-      <p data-es="En un centro no sabes quién va a cargar a tu bebé hoy. Aquí sí: somos nosotras dos, todos los días." data-en="At a center you don't know who will be holding your baby today. Here you do: it's the two of us, every single day.">En un centro no sabes quién va a cargar a tu bebé hoy. Aquí sí: somos nosotras dos, todos los días.</p>
+      <h2><span data-es="Un cuidado cercano," data-en="Personal care,">Un cuidado cercano,</span> <em data-es="con un rostro familiar" data-en="with a familiar face">con un rostro familiar</em></h2>
+      <p data-es="Conoce a Fanny, nuestra fundadora: la persona que te recibe y acompaña a tu hijo cada día." data-en="Meet Fanny, our founder: the person who welcomes you and cares for your child each day.">Conoce a Fanny, nuestra fundadora: la persona que te recibe y acompaña a tu hijo cada día.</p>
     </div>
 
     <div class="owner">
@@ -434,15 +439,15 @@ import { rutina } from '../../datos/negocio.js';
 
     <div class="team">
       <div class="tcard">
-        <div class="frame"><img src="/img/equipo/asistente.webp" alt="Retrato profesional de la asistente con uniforme de ELA Daycare" loading="lazy" width="900" height="1200"></div>
-        <div class="tx"><h3 data-es="Nuestra asistente" data-en="Our assistant">Nuestra asistente</h3>
-          <div class="role" data-es="Con Fanny todos los días · en la casa cada mañana" data-en="With Fanny every day · at the house each morning">Con Fanny todos los días · en la casa cada mañana</div>
+        <div class="frame"><img src="/img/fanny.webp" alt="Nuestra fundadora en el daycare" loading="lazy" width="960" height="1280"></div>
+        <div class="tx"><h3 data-es="Nuestra fundadora" data-en="Our founder">Nuestra fundadora</h3>
+          <div class="role" data-es="Fanny Torres · cuidado cercano cada día" data-en="Fanny Torres · caring for children every day">Fanny Torres · cuidado cercano cada día</div>
           <p class="fun" data-es="Es quien recibe a los bebés en la puerta y quien conoce el humor de cada niño antes de que abra los ojos. Los grandes le piden que les cuente cuentos." data-en="She's the one who greets babies at the door and knows each child's mood before they even open their eyes. The older ones ask her to tell them stories.">Es quien recibe a los bebés en la puerta y quien conoce el humor de cada niño antes de que abra los ojos. Los grandes le piden que les cuente cuentos.</p></div>
       </div>
       <div class="tcard">
         <div class="frame"><img src="/img/equipo/certificaciones.webp" alt="Rincón con la cocina de juguete y letrero de First Aid" loading="lazy" width="900" height="507"></div>
         <div class="tx"><h3 data-es="Nuestras certificaciones" data-en="Our certifications">Nuestras certificaciones</h3>
-          <div class="role" data-es="Las dos, al día" data-en="Both of us, current">Las dos, al día</div>
+          <div class="role" data-es="Formación y preparación" data-en="Training and preparation">Formación y preparación</div>
           <p class="fun" data-es="CPR y primeros auxilios pediátricos, entrenamiento de salud y seguridad del estado, y las 30 horas de capacitación cada dos años que exige la licencia. Te mostramos los certificados si los quieres ver." data-en="Pediatric CPR and first aid, state health and safety training, and the 30 hours of training every two years the license requires. We'll show you the certificates if you want to see them.">CPR y primeros auxilios pediátricos, entrenamiento de salud y seguridad del estado, y las 30 horas de capacitación cada dos años que exige la licencia. Te mostramos los certificados si los quieres ver.</p></div>
       </div>
       <div class="tcard">
@@ -455,27 +460,26 @@ import { rutina } from '../../datos/negocio.js';
   </div>
 </section>
 
-<!-- ====== TESTIMONIOS ====== -->
-<section>
+<!-- ====== RESEÑAS EN GOOGLE ====== -->
+<section class="band-white" id="resenas" aria-labelledby="resenas-titulo">
   <div class="wrap">
     <div class="sec-head">
       <span class="eyebrow" data-es="Familias del barrio" data-en="Neighborhood families">Familias del barrio</span>
-      <h2><span data-es="Lo que dicen" data-en="What">Lo que dicen</span> <em data-es="las mamás y los papás" data-en="the moms and dads say">las mamás y los papás</em></h2>
-      <p data-es="Reemplaza estos tres por reseñas reales de Google. Pon el nombre y desde qué año son familia: eso es lo que las hace creíbles." data-en="Replace these three with real Google reviews. Include the name and the year they became a family here: that's what makes them believable.">Reemplaza estos tres por reseñas reales de Google. Pon el nombre y desde qué año son familia: eso es lo que las hace creíbles.</p>
+      <h2 id="resenas-titulo" data-es="Nuestras reseñas en Google" data-en="Our Google reviews">Nuestras reseñas en Google</h2>
+      <p data-es="Una selección de opiniones de Google Maps, en el idioma original." data-en="Selected Google Maps reviews, in their original language.">Una selección de opiniones de Google Maps, en el idioma original.</p>
+      <a class="btn btn-1" href="https://www.google.com/maps?cid=15456748669851814902" target="_blank" rel="noopener noreferrer" data-es="Ver reseñas en Google Maps ↗" data-en="Read reviews on Google Maps ↗">Ver reseñas en Google Maps ↗</a>
     </div>
     <div class="tests">
-      <div class="tst"><span class="stars">★★★★★</span>
-        <p class="fill" data-es="«Mi hijo llegó de 10 meses sin hablar y ahora canta en inglés y me cuenta el cuento en español. Y me ayudaron con el papeleo del vale sin cobrarme nada.»" data-en="“My son came at 10 months without speaking and now he sings in English and retells the story to me in Spanish. And they helped me with the voucher paperwork at no charge.”">«Mi hijo llegó de 10 meses sin hablar y ahora canta en inglés y me cuenta el cuento en español. Y me ayudaron con el papeleo del vale sin cobrarme nada.»</p>
-        <div class="who fill">Yesenia M.</div>
-        <div class="since" data-es="Familia desde 2023 · Woodhaven" data-en="Family since 2023 · Woodhaven">Familia desde 2023 · Woodhaven</div></div>
-      <div class="tst"><span class="stars">★★★★★</span>
-        <p class="fill" data-es="«Tengo dos: la bebé y el de siete años. Es el único lugar donde los dos están juntos y solo hago una parada en la mañana. Eso me cambió la vida.»" data-en="“I have two: the baby and my seven-year-old. It's the only place where both are together and I make one single stop in the morning. That changed my life.”">«Tengo dos: la bebé y el de siete años. Es el único lugar donde los dos están juntos y solo hago una parada en la mañana. Eso me cambió la vida.»</p>
-        <div class="who fill">Daniel R.</div>
-        <div class="since" data-es="Familia desde 2024 · Ozone Park" data-en="Family since 2024 · Ozone Park">Familia desde 2024 · Ozone Park</div></div>
-      <div class="tst"><span class="stars">★★★★★</span>
-        <p class="fill" data-es="«Visité seis guarderías. Fue la única que me dijo el precio de frente, sin que yo preguntara tres veces. Eso me dijo todo lo que necesitaba saber.»" data-en="“I toured six day cares. This was the only one that told me the price straight up, without me asking three times. That told me everything I needed to know.”">«Visité seis guarderías. Fue la única que me dijo el precio de frente, sin que yo preguntara tres veces. Eso me dijo todo lo que necesitaba saber.»</p>
-        <div class="who fill">Rocío V.</div>
-        <div class="since" data-es="Familia desde 2023 · Richmond Hill" data-en="Family since 2023 · Richmond Hill">Familia desde 2023 · Richmond Hill</div></div>
+      {resenas.map((resena) => (
+        <article class="tst">
+          <span class="stars" role="img" aria-label="5 / 5">★★★★★</span>
+          <blockquote class="review-quote" lang={resena.idioma}>
+            <p>{resena.texto}{resena.fragmento && '…'}</p>
+          </blockquote>
+          <div class="who">{resena.autor}</div>
+          <a class="review-source" href="https://www.google.com/maps?cid=15456748669851814902" target="_blank" rel="noopener noreferrer" data-es="Ver en Google Maps ↗" data-en="View on Google Maps ↗">Ver en Google Maps ↗</a>
+        </article>
+      ))}
     </div>
   </div>
 </section>
@@ -588,7 +592,7 @@ import { rutina } from '../../datos/negocio.js';
     <div class="fgrid">
       <div>
         <div class="brand" style="margin-bottom:12px">
-          <svg width="44" height="39" viewBox="0 0 200 178" aria-hidden="true"><use href="#ela"/></svg>
+          <img class="brand-logo" src="/img/logo.webp" width="64" height="64" alt="" loading="lazy" />
           <span class="brandname" style="color:#fff"><b style="color:#8EC5F6">ELA</b> <i style="color:#7CCDBE">Daycare</i>
             <small style="color:#8b9cad">Emanuel's Little Angels</small></span>
         </div>
@@ -622,7 +626,7 @@ import { rutina } from '../../datos/negocio.js';
       </div>
       <div>
         <h4 data-es="Horario" data-en="Hours">Horario</h4>
-        <p style="margin:0 0 12px" data-es="Lunes a viernes<br>7:00am – 6:00pm<br>Cerrado fines de semana" data-en="Monday to Friday<br>7:00am – 6:00pm<br>Closed weekends">Lunes a viernes<br>7:00am – 6:00pm<br>Cerrado fines de semana</p>
+        <p style="margin:0 0 12px" data-es="Lunes a viernes<br>7:30am – 5:30pm<br>Cerrado fines de semana" data-en="Monday to Friday<br>7:30am – 5:30pm<br>Closed weekends">Lunes a viernes<br>7:30am – 5:30pm<br>Cerrado fines de semana</p>
         <h4 data-es="Síguenos" data-en="Follow us">Síguenos</h4>
         <a href="#" class="fill">Facebook</a>
         <a href="#" class="fill">Instagram</a>

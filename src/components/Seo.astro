@@ -14,13 +14,14 @@ const {
   title = 'Daycare y guardería bilingüe en Woodhaven, Queens — ELA Daycare',
   // ~150 caracteres: lo que Google alcanza a mostrar sin cortar.
   description =
-    'Group family daycare con licencia OCFS en Woodhaven, Queens. Máximo 12 niños de 6 semanas a 12 años. Aceptamos 3-K y vales de ACS/HRA. Abrimos 7am–6pm.',
+    'Group family daycare con licencia OCFS en Woodhaven, Queens. Máximo 12 niños de 6 semanas a 12 años. Aceptamos 3-K y vales de ACS/HRA. Abrimos 7:30am–5:30pm.',
   // Imagen social apaisada 1200×630: las fotos del sitio son verticales y en
   // WhatsApp o Facebook se recortaban mal.
-  image = '/img/og/eladaycare.jpg',
+  image = '/img/og/eladaycare.webp',
   canonical,
 } = Astro.props;
 
+const verification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
 const site = Astro.site?.origin ?? 'https://eladaycare.com';
 const canonicalURL = canonical ?? new URL(Astro.url.pathname, site).toString();
 const imageURL = image.startsWith('http') ? image : new URL(image, site).toString();
@@ -38,14 +39,14 @@ const negocio = {
     'Group family daycare bilingüe con licencia OCFS en Woodhaven, Queens. 6 semanas a 12 años, máximo 12 niños. Acepta 3-K, ACS y HRA.',
   slogan: 'Cuidar, proteger, crecer',
   url: site,
-  image: [url('/img/og/eladaycare.jpg'), url('/img/equipo/la-casa.webp'), url('/img/hero/sala-principal.webp')],
-  logo: url('/favicon.svg'),
+  image: [url('/img/og/eladaycare.webp'), url('/img/equipo/la-casa.webp'), url('/img/hero/sala-principal.webp')],
+  logo: url('/img/logo.webp'),
   telephone: '+1-347-369-0961',
   email: 'fannytorres1979@gmail.com',
   priceRange: '$$',
   foundingDate: '2023',
   founder: { '@type': 'Person', name: 'Fanny Torres' },
-  numberOfEmployees: { '@type': 'QuantitativeValue', value: 2 },
+  numberOfEmployees: { '@type': 'QuantitativeValue', value: 1 },
   address: {
     '@type': 'PostalAddress',
     streetAddress: '74-18 87 Ave',
@@ -55,7 +56,8 @@ const negocio = {
     addressCountry: 'US',
   },
   geo: { '@type': 'GeoCoordinates', latitude: LAT, longitude: LON },
-  hasMap: `https://www.google.com/maps/search/?api=1&query=${LAT},${LON}`,
+  hasMap: 'https://www.google.com/maps?cid=15456748669851814902',
+  sameAs: ['https://www.google.com/maps?cid=15456748669851814902'],
   areaServed: [
     { '@type': 'City', name: 'Woodhaven' },
     { '@type': 'City', name: 'Ozone Park' },
@@ -66,8 +68,8 @@ const negocio = {
   openingHoursSpecification: {
     '@type': 'OpeningHoursSpecification',
     dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-    opens: '07:00',
-    closes: '18:00',
+    opens: '07:30',
+    closes: '17:30',
   },
   // Sin aggregateRating: las reseñas del sitio son de ejemplo todavía, y marcar
   // reseñas que no existen es motivo de penalización manual en Google.
@@ -125,7 +127,18 @@ const preguntas = {
   })),
 };
 
-const jsonLd = { '@context': 'https://schema.org', '@graph': [negocio, sitio, preguntas] };
+const pagina = {
+  '@type': 'WebPage',
+  '@id': `${canonicalURL}#webpage`,
+  url: canonicalURL,
+  name: title,
+  description,
+  isPartOf: { '@id': `${site}/#website` },
+  about: { '@id': `${site}/#daycare` },
+  mainEntity: { '@id': `${site}/#daycare` },
+  inLanguage: ['es-US', 'en-US'],
+};
+const jsonLd = { '@context': 'https://schema.org', '@graph': [negocio, sitio, pagina, preguntas] };
 
 const FUENTES =
   'https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;700;800&display=swap';
@@ -134,13 +147,14 @@ const FUENTES =
 <title>{title}</title>
 <meta name="description" content={description} />
 <link rel="canonical" href={canonicalURL} />
+{verification && <meta name="google-site-verification" content={verification} />}
 
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="ELA Daycare — Emanuel's Little Angels" />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={imageURL} />
-<meta property="og:image:type" content="image/jpeg" />
+<meta property="og:image:type" content="image/webp" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 <meta
@@ -168,7 +182,8 @@ const FUENTES =
 <meta name="geo.position" content={`${LAT};${LON}`} />
 <meta name="ICBM" content={`${LAT}, ${LON}`} />
 
-<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="icon" type="image/webp" href="/img/logo.webp" />
+<link rel="apple-touch-icon" href="/img/logo.webp" />
 <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
 
 <!-- Las fuentes no deben bloquear el primer pintado: se piden con `media=print`

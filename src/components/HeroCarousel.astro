@@ -1,0 +1,51 @@
+---
+const slides = [
+  { src: '/img/hero/sala-principal.webp', alt: 'Vista de la casa y su patio de juegos' },
+  { src: '/img/lugar/fachada.webp', alt: 'Patio del daycare con césped y juegos al aire libre' },
+  { src: '/img/equipo/la-casa.webp', alt: 'Interior del daycare: salón y espacios de juego' },
+  { src: '/img/grupos/angelitos.webp', alt: 'Mesa infantil y rincón de aprendizaje' },
+  { src: '/img/equipo/certificaciones.webp', alt: 'Rincón de juego con cocina infantil' },
+  { src: '/img/grupos/bebes.webp', alt: 'Rincón de cuidado de los bebés' },
+];
+---
+<div class="hero-carousel" role="region" aria-roledescription="carrusel" aria-label="Fotos del daycare">
+  <div class="frame carousel-frame">
+    {slides.map((slide, i) => <img src={slide.src} alt={slide.alt} width="1200" height="900" class:list={['carousel-slide', { active: i === 0 }]} loading={i === 0 ? 'eager' : 'lazy'} fetchpriority={i === 0 ? 'high' : 'auto'} aria-hidden={i !== 0 ? 'true' : 'false'} />)}
+  </div>
+  <div class="carousel-controls">
+    <button type="button" data-prev aria-label="Foto anterior">←</button>
+    <button type="button" data-toggle aria-pressed="false"><span data-es="Pausar fotos" data-en="Pause photos">Pausar fotos</span></button>
+    <button type="button" data-next aria-label="Foto siguiente">→</button>
+  </div>
+</div>
+<script>
+  document.querySelectorAll<HTMLElement>('.hero-carousel').forEach((root) => {
+    const slides = Array.from(root.querySelectorAll<HTMLImageElement>('.carousel-slide'));
+    const toggle = root.querySelector<HTMLButtonElement>('[data-toggle]')!;
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let index = 0;
+    let paused = reduced.matches;
+    const show = (next: number) => {
+      index = (next + slides.length) % slides.length;
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === index);
+        slide.setAttribute('aria-hidden', String(i !== index));
+      });
+    };
+    const label = () => {
+      toggle.setAttribute('aria-pressed', String(paused));
+      const span = toggle.querySelector('span')!;
+      span.dataset.es = paused ? 'Reanudar fotos' : 'Pausar fotos';
+      span.dataset.en = paused ? 'Resume photos' : 'Pause photos';
+      span.textContent = document.documentElement.lang === 'en' ? span.dataset.en : span.dataset.es;
+    };
+    root.querySelector('[data-prev]')!.addEventListener('click', () => show(index - 1));
+    root.querySelector('[data-next]')!.addEventListener('click', () => show(index + 1));
+    toggle.addEventListener('click', () => { paused = !paused; label(); });
+    reduced.addEventListener('change', () => { paused = reduced.matches; label(); });
+    label();
+    window.setInterval(() => {
+      if (!paused && !document.hidden && !root.matches(':hover') && !root.contains(document.activeElement)) show(index + 1);
+    }, 5000);
+  });
+</script>

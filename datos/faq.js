@@ -31,11 +31,11 @@ export const faqs = [
   {
     es: {
       q: '¿Cuántos niños hay y de qué edades?',
-      a: 'Nuestra licencia de group family day care permite hasta 12 niños de 6 semanas a 12 años, más hasta cuatro niños de edad escolar adicionales, con una cuidadora principal y al menos una asistente. Para los menores de 2 años la regla es un adulto por cada dos niños. Nunca recibimos más de lo permitido, ni por un día.',
+      a: 'Somos un daycare familiar para niños de 6 semanas a 12 años, con un máximo de 12 niños en total. Consulta con Fanny los cupos disponibles según la edad de tu hijo y la capacidad autorizada.',
     },
     en: {
       q: 'How many children are there, and what ages?',
-      a: 'Our group family day care license allows up to 12 children ages 6 weeks to 12 years, plus up to four additional school-age children, with a primary caregiver and at least one assistant. For children under 2 the rule is one adult per two children. We never take more than allowed, not even for a day.',
+      a: 'We are a family daycare for children ages 6 weeks to 12 years, with a maximum of 12 children in total. Ask Fanny about openings for your child’s age and authorized capacity.',
     },
   },
   {
@@ -51,11 +51,11 @@ export const faqs = [
   {
     es: {
       q: '¿Qué pasa si te enfermas o cierras un día?',
-      a: 'Es la pregunta más justa que le puedes hacer a una guardería en casa, y casi nadie la contesta. Somos dos personas certificadas, así que si una falta la casa abre igual. Te avisamos por mensaje la noche anterior y te decimos los días de cierre del año por adelantado, en enero.',
+      a: 'Fanny es quien está a cargo del cuidado diario. Consúltale directamente cómo se organizan las ausencias y los días de cierre antes de inscribir a tu hijo.',
     },
     en: {
       q: 'What if you get sick or close for a day?',
-      a: "It's the fairest question you can ask a home-based provider, and almost nobody answers it. There are two certified people, so if one is out the house still opens. We text you the night before, and we give you the year's closing days up front, in January.",
+      a: "Fanny is responsible for daily care. Ask her directly about arrangements for absences and closing days before enrolling your child.",
     },
   },
   {
@@ -71,11 +71,11 @@ export const faqs = [
   {
     es: {
       q: '¿Qué pasa si llego tarde a recoger?',
-      a: 'Cobramos $1 por minuto después de las 6:00, y lo decimos claro para que nadie se lleve una sorpresa. Pero si se te complicó el tren, llámanos: ningún niño se queda solo y la primera vez no se cobra.',
+      a: 'Cobramos $1 por minuto después de las 5:30, y lo decimos claro para que nadie se lleve una sorpresa. Pero si se te complicó el tren, llámanos: ningún niño se queda solo y la primera vez no se cobra.',
     },
     en: {
       q: "What if I'm late for pickup?",
-      a: 'We charge $1 per minute after 6:00, and we say it plainly so nobody is surprised. But if the train held you up, call us: no child is ever left alone, and the first time is free.',
+      a: 'We charge $1 per minute after 5:30, and we say it plainly so nobody is surprised. But if the train held you up, call us: no child is ever left alone, and the first time is free.',
     },
   },
 ];
