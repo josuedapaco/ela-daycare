@@ -105,7 +105,21 @@ function sanitizeVacancies(raw, previous = DEFAULT_VACANCIES) {
 
 function loadVacancies() {
   try {
-    return sanitizeVacancies(JSON.parse(fs.readFileSync(VACANCIES_FILE, 'utf8')));
+    const saved = sanitizeVacancies(JSON.parse(fs.readFileSync(VACANCIES_FILE, 'utf8')));
+    // Corrige una sola vez el registro inicial observado en producción.
+    // No reemplazar datos modificados posteriormente desde el panel.
+    const legacyEmpty = saved.updatedAt === '2026-08-14T19:09:51.698Z'
+      && GROUP_KEYS.every((key) => saved.groups[key].filled === 0);
+    if (legacyEmpty) {
+      const filled = { babies: 1, toddlers: 2, angels: 2, afterschool: 1 };
+      for (const key of GROUP_KEYS) {
+        saved.groups[key].filled = Math.min(filled[key], saved.groups[key].capacity);
+      }
+      saved.updatedAt = DEFAULT_VACANCIES.updatedAt;
+      saveVacancies(saved);
+      console.log('[vacancies] actualizado registro inicial de inscritos');
+    }
+    return saved;
   } catch (err) {
     if (err.code !== 'ENOENT') console.warn('[vacancies] no se pudo leer el archivo, uso los valores por defecto:', err.message);
     return sanitizeVacancies(DEFAULT_VACANCIES);
