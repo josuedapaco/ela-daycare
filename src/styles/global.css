@@ -611,3 +611,36 @@ html,body{max-width:100vw;overflow-x:hidden}
   .hero-carousel .carousel-frame::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,var(--cream),transparent 22%,transparent 80%,var(--cream));z-index:1}
   .carousel-controls{position:absolute;bottom:18px;left:0;right:0;z-index:2}
 }
+
+/* Contacto constante, sin barras que ocupen el ancho de la pantalla. */
+.floating-contact{position:fixed;right:max(18px,env(safe-area-inset-right));bottom:calc(18px + env(safe-area-inset-bottom));z-index:90;display:flex;align-items:center;gap:9px;min-height:48px;padding:12px 18px;border-radius:99px;background:#146c43;color:#fff;box-shadow:0 4px 18px rgba(0,0,0,.18);text-decoration:none;font-weight:800;font-size:14px}
+.floating-contact:hover{background:#105636}
+.floating-contact:focus-visible{outline:3px solid var(--sky-dk);outline-offset:4px}
+body.mm-open .floating-contact{visibility:hidden}
+footer{padding-bottom:100px}
+.mobile-lede{display:none}
+.mobile-details{padding:0;margin:0;border:0;border-radius:0;background:transparent}
+.mobile-details>summary{display:none}
+@media(max-width:600px){
+  .floating-contact{min-height:46px;padding:10px 14px;right:max(12px,env(safe-area-inset-right));bottom:calc(12px + env(safe-area-inset-bottom));font-size:12px;gap:7px}
+  .hero .grid{display:flex;flex-direction:column;gap:18px}
+  .hero .grid>div:first-child{width:100%}
+  .hero .hero-art{order:-1}
+  .hero{padding-top:0}
+  .hero-carousel .carousel-frame{aspect-ratio:5/4}
+  .hero-art .badge{display:none}
+  .hero p.lede{display:none}
+  .mobile-lede{display:block;color:var(--ink-2);font-size:15px;line-height:1.5;margin:12px 0 18px}
+  .hero .motto,.hero .trust{display:none}
+  .hero h1{font-size:28px}
+  .hero h1 .hi{white-space:normal}
+  .panel[data-on="1"]{display:flex;flex-direction:column}
+  .panel>.frame{order:-1;aspect-ratio:4/3}
+  .panel .txt{padding:18px 16px}
+  .mobile-details{margin-top:10px}
+  .mobile-details>summary{display:list-item;cursor:pointer;color:var(--sky-dk);font-weight:800;font-size:14px;padding:10px 0;min-height:44px}
+  .mobile-details[open]>summary{margin-bottom:8px}
+  .owner .frame{max-width:none;width:100%;aspect-ratio:4/3}
+  .tcard .frame{aspect-ratio:1/1}
+  #galeria .photo-collage{column-gap:8px}
+}

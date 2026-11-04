@@ -1,0 +1,22 @@
+---
+const message = 'Hola, me gustaría conocer los cupos y agendar una visita en Emanuel’s Little Angels Daycare.';
+---
+<a class="floating-contact" href={`https://wa.me/13473690961?text=${encodeURIComponent(message)}`} target="_blank" rel="noopener noreferrer" aria-label="Contáctanos por WhatsApp" title="WhatsApp">
+  <svg viewBox="0 0 24 24" width="25" height="25" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a9 9 0 0 1-13.3 7.9L3 21l1.6-4.7A9 9 0 1 1 21 11.5Z"/><path d="M8 7.5c-.7 0-1 1-1 1.6 0 2.8 4.2 6.8 7 6.8.7 0 1.8-.5 1.8-1.2l-2-1.3-.9.8c-1.7-.7-2.8-1.8-3.5-3.4l.8-.8L9 7.5Z"/></svg>
+  <span data-es="Contáctanos" data-en="Contact us">Contáctanos</span>
+</a>
+<script>
+  const contact = document.querySelector<HTMLAnchorElement>('.floating-contact');
+  if (contact) {
+    const update = () => {
+      const english = document.documentElement.lang.startsWith('en');
+      const message = english
+        ? 'Hi, I would like to ask about openings and book a tour at Emanuel’s Little Angels Daycare.'
+        : 'Hola, me gustaría conocer los cupos y agendar una visita en Emanuel’s Little Angels Daycare.';
+      contact.href = `https://wa.me/13473690961?text=${encodeURIComponent(message)}`;
+      contact.setAttribute('aria-label', english ? 'Contact us on WhatsApp' : 'Contáctanos por WhatsApp');
+    };
+    update();
+    new MutationObserver(update).observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
+  }
+</script>

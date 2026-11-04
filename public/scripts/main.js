@@ -139,3 +139,13 @@ document.querySelectorAll('.navlinks a').forEach(function(a){
     }
   });
 })();
+
+// Textos completos en escritorio; desplegables opcionales en móvil.
+(function(){
+  var mobile = window.matchMedia('(max-width: 600px)');
+  function sync(){
+    document.querySelectorAll('.mobile-details').forEach(function(detail){ detail.open = !mobile.matches; });
+  }
+  sync();
+  mobile.addEventListener('change', sync);
+})();
