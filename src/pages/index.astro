@@ -405,14 +405,14 @@ import resenas from '../../datos/resenas.json';
     </div>
     <div class="photo-collage">
       {galeria.slice(0, 8).map((foto) => (
-        <figure><a href={foto.src} target="_blank" rel="noopener noreferrer" aria-label={`Ver foto: ${foto.alt}`}><img src={foto.src} width={foto.width} height={foto.height} alt={foto.alt} loading="lazy" decoding="async" /></a></figure>
+        <figure><a href={foto.src} aria-label={`Ver foto: ${foto.alt}`}><img src={foto.src} width={foto.width} height={foto.height} alt={foto.alt} loading="lazy" decoding="async" /></a></figure>
       ))}
     </div>
     <details class="gallery-more">
       <summary><span data-es="Ver todas las fotos" data-en="See all photos">Ver todas las fotos</span></summary>
       <div class="photo-collage">
         {galeria.slice(8).map((foto) => (
-          <figure><a href={foto.src} target="_blank" rel="noopener noreferrer" aria-label={`Ver foto: ${foto.alt}`}><img src={foto.src} width={foto.width} height={foto.height} alt={foto.alt} loading="lazy" decoding="async" /></a></figure>
+          <figure><a href={foto.src} aria-label={`Ver foto: ${foto.alt}`}><img src={foto.src} width={foto.width} height={foto.height} alt={foto.alt} loading="lazy" decoding="async" /></a></figure>
         ))}
       </div>
     </details>
