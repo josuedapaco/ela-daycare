@@ -218,7 +218,7 @@ body[data-lang="en"] .pcard.hl::before{content:"Most chosen"}
 .owner{background:var(--card);border:2px solid var(--line);border-radius:var(--r-lg);
   padding:30px;display:grid;grid-template-columns:190px 1fr;gap:28px;align-items:center;margin-bottom:18px}
 .owner .sig{font-size:21px;color:var(--coral-dk);margin-top:10px}
-.team{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.team{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
 .tcard{background:var(--card);border:2px solid var(--line);border-radius:var(--r);overflow:hidden;padding-bottom:18px}
 .tcard .frame{border-radius:0;aspect-ratio:1/1;box-shadow:none;transform:none!important}
 .tcard .frame::after{display:none}
@@ -644,3 +644,5 @@ footer{padding-bottom:100px}
   .tcard .frame{aspect-ratio:1/1}
   #galeria .photo-collage{column-gap:8px}
 }
+
+.frame img[src="/img/acsa.webp"]{object-position:center 25%}
